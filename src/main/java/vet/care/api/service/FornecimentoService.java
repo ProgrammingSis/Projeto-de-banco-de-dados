@@ -29,7 +29,7 @@ public class FornecimentoService {
         return fornecimentoRepository.update(fornecimento);
     }
 
-    public int deleteFornecimento(String fornecedorCnpj, String cdInsumo) {
-        return fornecimentoRepository.deleteById(fornecedorCnpj, cdInsumo);
+   public int deleteFornecimento(Long id, String fornecedorCnpj, String cdInsumo) {
+        return fornecimentoRepository.deleteById(id, fornecedorCnpj, cdInsumo);
     }
 }
