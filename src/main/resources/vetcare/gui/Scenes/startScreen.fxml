@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox id="telaInicio" alignment="CENTER" spacing="30" xmlns:fx="http://javafx.com/fxml"  fx:controller="vetcare.gui.StartSceneController" stylesheets="@../styles.css">
+
+	<!-- Imagem do ícone -->
+	<ImageView id="myImageView" preserveRatio="true" fitHeight="500" fitWidth="600">
+		<Image url="@../Images/telaInicial.jpeg"/>
+	</ImageView>
+
+	<Button fx:id="iniciarSessaoButton" text="Iniciar sessão" />
+</VBox>

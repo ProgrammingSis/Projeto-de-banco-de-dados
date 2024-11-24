@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class HelloController {
+public class StartSceneController {
     @FXML
     private Button iniciarSessaoButton;
 
@@ -17,6 +17,6 @@ public class HelloController {
     public void switchToAnotherScene(){
         Stage stage = (Stage) iniciarSessaoButton.getScene().getWindow();
         ScreenManager screenManager = new ScreenManager(stage);
-        screenManager.switchScreen("/vetcare/gui/mainMenu.fxml");
+        screenManager.switchScreen("/vetcare/gui/Scenes/mainMenu.fxml");
     }
 }

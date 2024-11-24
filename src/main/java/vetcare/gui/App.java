@@ -3,15 +3,16 @@ package vetcare.gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class HelloApplication extends Application {
+public class App extends Application {
 
 	//Creates the scene using the screen manager
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage stage) {
 		ScreenManager screenManager = new ScreenManager(stage);
-		screenManager.switchScreen("/vetcare/gui/initialScene.fxml");
+		screenManager.switchScreen("/vetcare/gui/Scenes/startScreen.fxml");
 	}
-//starts the gui application
+
+	// Starts the gui application
 	public static void init(String[] args) {
 		launch(args);
 	}

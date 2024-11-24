@@ -1,12 +1,10 @@
 /* General styles  */
-*{
+* {
     -fx-font-size: 20px;
     -fx-font-family: "Arial";
 }
 
-/*The size of the scenes is defined on ScreenManager to avoid
-inconsistencies*/
-
+/*The size of the scenes is defined on ScreenManager to avoid inconsistencies*/
 .root {
     -fx-background-color: #badab1;
 }
@@ -19,6 +17,7 @@ inconsistencies*/
     -fx-font-family :"Arial Black";
     -fx-font-size: 20.0;
 }
+
 /* Styles for button in the initialScreen are right below */
 .button{
     -fx-background-color: #4CAF50;
@@ -38,12 +37,10 @@ inconsistencies*/
 }
 
 /* Styles for the main menu   */
-
 .mainMenu{
     -fx-background-color: #badab1;
     -fx-pref-height: 600px;
     -fx-pref-width: 900px;
-    -fx-pref-fill: ;
     -fx-font-family :"Arial Black";
     -fx-font-size: 20.0;
 }

@@ -5,9 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
 
-<VBox id="mainMenu" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" stylesheets="styles.css">
-<!--      fx:controller="example.demo1.HelloController" stylesheets="@styles.css"-->
-
+<VBox id="mainMenu" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" stylesheets="@../styles.css">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>

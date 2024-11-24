@@ -21,14 +21,11 @@ public class ScreenManager {
             Parent root = loader.load();
             stage.setScene(new Scene(root, 1200, 650));
             stage.show();
-
         } catch (IOException e) {
             System.err.println("Erro ao carregar a tela: " + fxmlFile);
-            e.printStackTrace();
             throw new RuntimeException("Erro ao carregar a tela: " + fxmlFile, e);
         } catch (NullPointerException e) {
             System.err.println("Arquivo FXML não encontrado: " + fxmlFile);
-            e.printStackTrace();
             throw new RuntimeException("Arquivo FXML não encontrado: " + fxmlFile, e);
         }
     }
