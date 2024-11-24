@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.PacientesController" styleClass="user-screen" >
+	<Pane styleClass="decorated-background"/>
+	<BorderPane>
+		<top>
+			<TextField fx:id="searchField" styleClass="text-field" onKeyTyped="#autoSearch">fuck</TextField>
+		</top>
+		<center>
+			<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+				<ScrollPane>
+					<VBox>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+						<Button>oi1</Button>
+					</VBox>
+				</ScrollPane>
+			</HBox>
+		</center>
+	</BorderPane>
+</StackPane>

@@ -1,42 +1,36 @@
-/* General styles  */
-*{
-    -fx-font-size: 20px;
-    -fx-font-family: "Arial";
-}
-
-/*The size of the scenes is defined on ScreenManager to avoid
-inconsistencies*/
-
-.root {
-    -fx-background-color: #badab1;
+* {
+	-fx-focus-color: transparent;
 }
 
 /* Styles for the initialScreen  */
-.telaInicio {
-    -fx-background-size: cover;
-    -fx-font-size: 20px;
-    -fx-text-fill: #98e48c;
-    -fx-font-family :"Arial Black";
-    -fx-font-size: 20.0;
+#telaInicio {
+	-fx-background-color: #badab1;
 }
+
+#mainMenu {
+	-fx-background-color: #badab1;
+}
+
 /* Styles for button in the initialScreen are right below */
 .button{
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-text-fill: white;
+    -fx-font-family: "Arial";
     -fx-font-size: 22px;
     -fx-font-weight: bold;
 }
+
 .button:pressed{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 0);
- }
+}
 
 .button:hover{
     -fx-background-color: #388E3C;
 }
 
-.buttonStart{
+.buttonStart {
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-pref-height: 60;
@@ -46,18 +40,7 @@ inconsistencies*/
     -fx-font-weight: bold;
 }
 
-/* Styles for the main menu   */
-
-.mainMenu{
-    -fx-background-color: #badab1;
-    -fx-pref-height: 600px;
-    -fx-pref-width: 900px;
-    -fx-pref-fill: white;
-    -fx-font-family :"Arial Black";
-    -fx-font-size: 20.0;
-}
-
-.buttonMenu{
+.menuButton {
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-pref-height: 150;
@@ -67,3 +50,33 @@ inconsistencies*/
     -fx-font-weight: bold;
 }
 
+.decorated-background {
+	-fx-background-image: url('Images/fundo.png'), url('Images/footer_loop.png');
+	-fx-background-repeat: no-repeat no-repeat, repeat no-repeat;
+	-fx-background-position: center center, center bottom;
+	-fx-background-size: 20% auto, auto 48px;
+	-fx-opacity: 0.3;
+}
+
+.alt-footer {
+	-fx-background-image: url('Images/patinhas.png');
+	-fx-background-repeat: repeat no-repeat;
+	-fx-background-position: center bottom;
+}
+
+.text-field {
+	-fx-border-color: #BBB;
+	-fx-border-width: 3px;
+	-fx-border-radius: 8px;
+	-fx-font-size: 14pt;
+	-fx-focus-color: transparent;
+}
+
+.text-field:focused {
+	-fx-border-color: #666;
+	-fx-focus-color: transparent;
+}
+
+.user-screen {
+	-fx-padding: 4px;
+}
