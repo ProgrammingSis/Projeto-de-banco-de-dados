@@ -15,6 +15,7 @@ public class InsumoRowMapper implements RowMapper<Insumo> {
         insumo.setValorInsumo(rs.getDouble("preco"));
         insumo.setTipoInsumo(rs.getString("fk_tipo"));
         insumo.setQuantInsumo(rs.getLong("quantidade"));
+        insumo.setDate(rs.getDate("data"));
 
         return insumo;
     }

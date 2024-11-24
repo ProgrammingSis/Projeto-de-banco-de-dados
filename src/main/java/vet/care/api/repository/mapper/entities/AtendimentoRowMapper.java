@@ -13,6 +13,7 @@ public class AtendimentoRowMapper implements RowMapper<Atendimento> {
         atendimento.setDate(rs.getDate("date"));
         atendimento.setTipoAtendimento(rs.getString("fk_tipo"));
         atendimento.setIdAtendimento(rs.getLong("id"));
+        atendimento.setHorario(rs.getTime("horario"));
 
         return atendimento;
     }

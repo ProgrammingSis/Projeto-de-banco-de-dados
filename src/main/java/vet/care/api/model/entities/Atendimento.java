@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Time;
 
 @Data
 @NoArgsConstructor
@@ -14,4 +15,5 @@ public class Atendimento {
     Date date;
     String tipoAtendimento;
     Long idAtendimento;
+    Time horario;
 }

@@ -12,7 +12,7 @@ public class FaturaRowMapper implements RowMapper<Fatura> {
         Fatura fatura = new Fatura();
         fatura.setValorTotal(rs.getDouble("valor"));
         fatura.setDate(rs.getDate("data"));
-        fatura.setFormaPagamento(rs.getString("formaPagamento"));
+        fatura.setFormaPagamento(rs.getString("fk_formaPagamento"));
         fatura.setIdFatura(rs.getLong("id"));
         fatura.setClienteCpf(rs.getString("fk_cliente_cpf"));
 

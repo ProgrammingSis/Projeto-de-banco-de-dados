@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AtendimentosFaturas {
 
-    Long idItemFatura;
     Long idAtendimento;
     Long idFatura;
 }
