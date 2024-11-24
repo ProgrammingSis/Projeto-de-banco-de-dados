@@ -12,7 +12,8 @@ public class VeterinarioRowMapper implements RowMapper<Veterinario> {
         Veterinario veterinario = new Veterinario();
         veterinario.setCrmvVet(rs.getString("crmv"));
         veterinario.setNomeVet(rs.getString("nome"));
-        veterinario.setTipoVet(rs.getString("especialidade"));
+        veterinario.setTipoVet(rs.getString("fk_especialidade"));
+        veterinario.setContato(rs.getString("contato"));
 
         return veterinario;
     }

@@ -12,4 +12,5 @@ public class Veterinario {
     String crmvVet;
     String nomeVet;
     String tipoVet;
+    String contato;
 }
