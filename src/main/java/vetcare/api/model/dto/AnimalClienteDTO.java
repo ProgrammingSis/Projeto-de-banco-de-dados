@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AnimalClienteDTO {
 
-    Long idPet;
+    Integer idPet;
     String nomePet;
     String racaPet;
     Double pesoPet;

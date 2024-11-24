@@ -48,21 +48,21 @@ public class AnimalRepository {
         return jdbcTemplate.query(sql, new AnimalRowMapper(), namePattern);
     }
 
-    public AnimalClienteDTO findAnimalClienteById(Long id) {
+    public AnimalClienteDTO findAnimalClienteById(Integer id) {
         String sql = """
         SELECT 
-            a.id AS idPet,
-            a.nome AS nomePet,
-            a.raca AS racaPet,
-            a.peso AS pesoPet,
-            c.cpf AS cpfDonoPet,
-            c.nome AS nomeCliente,
-            c.endereco AS endCliente,
-            c.contato AS contatoCliente
+            a.id,
+            a.nome,
+            a.raca,
+            a.peso,
+            c.cpf,
+            c.nome,
+            c.endereco,
+            c.contato
         FROM 
             Animal a
         JOIN 
-            Cliente c ON a.cpfDono = c.cpf
+            Cliente c ON a.fk_cliente_cpf = c.cpf
         WHERE 
             a.id = ?
     """;
@@ -97,7 +97,7 @@ public class AnimalRepository {
         return jdbcTemplate.update(sql, id);
     }
 
-    public List<VacinaPet> findVacinasByAnimalId(Long animalId) {
+    public List<VacinaPet> findVacinasByAnimalId(Integer animalId) {
         String sql = """
             SELECT 
                 vp.fk_idVacina AS idVacina,
@@ -119,23 +119,25 @@ public class AnimalRepository {
 
     public List<VacinaPet> findVacinasPendentesByAnimalId(Integer animalId) {
         String sql = """
-            SELECT 
-                tv.nome AS vacinaNome,
-                vp.fk_Atendimento_id AS idAtendimento,
-                a.data AS dataVacina,
-                a.data + INTERVAL '1 year' AS dataReforco
-            FROM 
-                TipoVacina tv
-            LEFT JOIN 
-                VacinaPet vp ON tv.id = vp.fk_idVacina
-            LEFT JOIN 
-                Atendimento a ON vp.fk_Atendimento_id = a.id
-            LEFT JOIN 
-                AtendidoEm ae ON ae.fk_Atendimento_id = a.id
-            WHERE 
-                ae.fk_Animal_id = ? AND vp.fk_Atendimento_id IS NULL;
-        """;
+        SELECT
+            tv.nome,
+            vp.fk_Atendimento_id,
+            a.data
+        FROM
+            TipoVacina tv
+        LEFT JOIN
+            VacinaPet vp ON tv.nome = vp.fk_idVacina
+        LEFT JOIN
+            Atendimento a ON vp.fk_Atendimento_id = a.id
+        LEFT JOIN
+            AtendidoEm ae ON ae.fk_Atendimento_id = a.id
+        WHERE
+            ae.fk_Animal_id = ?
+            AND a.data <= CURRENT_DATE - INTERVAL '1 year';
+    """;
 
         return jdbcTemplate.query(sql, new VacinaPetRowMapper(), animalId);
+
     }
+
 }
