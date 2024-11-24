@@ -10,7 +10,7 @@
 	<Pane styleClass="decorated-background"/>
 	<BorderPane>
 		<top>
-			<TextField fx:id="searchField" styleClass="text-field" onKeyTyped="#autoSearch">fuck</TextField>
+			<TextField fx:id="searchField" styleClass="text-field" onKeyTyped="#autoSearch">oi pacientes</TextField>
 		</top>
 		<center>
 			<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
