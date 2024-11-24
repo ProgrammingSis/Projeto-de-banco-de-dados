@@ -55,6 +55,8 @@ public class VeterinarioRepository {
 
     // DELETE
     public int deleteByCrmv(String crmv) {
+        String sqlAtendidoEm = "DELETE FROM AtendidoEm WHERE fk_Veterinario_crmv = ?";
+        jdbcTemplate.update(sqlAtendidoEm, crmv);
         String sql = "DELETE FROM Veterinario WHERE crmv = ?";
         return jdbcTemplate.update(sql, crmv);
     }

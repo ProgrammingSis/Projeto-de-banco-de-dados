@@ -2,8 +2,6 @@ package vetcare.api.repository.entities;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import vetcare.api.config.MailConfig;
 import vetcare.api.model.dto.ConsultaDTO;
@@ -68,7 +66,6 @@ public class AtendimentoRepository {
     public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento) {
         String sqlAtendimento = "INSERT INTO Atendimento (data, id, fk_tipo, horario) VALUES (?, ?, ?, ?)";
         String sqlAtendidoEm = "INSERT INTO AtendidoEm (fk_Veterinario_crmv, fk_Atendimento_id, fk_Animal_id) VALUES (?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
 
         try {
             // Inserir na tabela Atendimento
@@ -187,7 +184,7 @@ public class AtendimentoRepository {
                 notificacao.getHorario() + ".\n\n" +
                 "Atenciosamente,\nClínica Veterinária";
 
-        String corpoMensagemVeterinario = "Olá Dr. " + notificacao.getNomeVeterinario() + ",\n\n" +
+        String corpoMensagemVeterinario = "Olá " + notificacao.getNomeVeterinario() + ",\n\n" +
                 "Lembrete: você tem uma consulta agendada para o animal " + notificacao.getNomeAnimal() +
                 " amanhã, às " + notificacao.getHorario() + ".\n\n" +
                 "Atenciosamente,\nClínica Veterinária";
