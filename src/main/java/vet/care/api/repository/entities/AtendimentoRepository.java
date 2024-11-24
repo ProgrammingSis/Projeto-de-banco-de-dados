@@ -1,18 +1,15 @@
 package vet.care.api.repository.entities;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 import vet.care.api.config.MailConfig;
 import vet.care.api.model.dto.ConsultaDTO;
 import vet.care.api.model.dto.NotificacaoDTO;
 import vet.care.api.model.entities.Atendimento;
 import vet.care.api.repository.mapper.entities.AtendimentoRowMapper;
-import vet.care.api.service.AtendimentoService;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -26,7 +23,6 @@ import java.util.List;
 public class AtendimentoRepository {
 
     private final JdbcTemplate jdbcTemplate;
-    private final AtendimentoService atendimentoService;
     private final MailConfig mailConfig;
 
     /*
