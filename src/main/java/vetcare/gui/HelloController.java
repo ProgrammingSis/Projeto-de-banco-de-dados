@@ -15,7 +15,8 @@ public class HelloController {
     //Switches the scene as soon as the button "Iniciar Sessão" is clicked
     @FXML
     public void switchToAnotherScene(){
-        ScreenManager screenManager = new ScreenManager(new Stage());
-        screenManager.switchScreen("/vetcare/gui/hello-view.fxml");
+        Stage stage = (Stage) iniciarSessaoButton.getScene().getWindow();
+        ScreenManager screenManager = new ScreenManager(stage);
+        screenManager.switchScreen("/vetcare/gui/mainMenu.fxml");
     }
 }
