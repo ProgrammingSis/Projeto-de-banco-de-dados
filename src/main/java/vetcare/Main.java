@@ -1,7 +1,7 @@
 package vetcare;
 
 import vetcare.api.ApiApplication;
-import vetcare.gui.HelloApplication;
+import vetcare.gui.VetCareApp;
 
 public class Main {
 
@@ -19,6 +19,6 @@ public class Main {
 		}
 
 		// Inicialização da interface
-		HelloApplication.init(args);
+		VetCareApp.init(args);
 	}
 }

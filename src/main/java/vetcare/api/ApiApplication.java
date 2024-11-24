@@ -4,10 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import vetcare.api.controller.ConsultasController;
+import vetcare.api.controller.PacientesController;
 
 @SpringBootApplication
 public class ApiApplication {
 	public static ConsultasController consultas;
+	public static PacientesController pacientes;
 
 	public static void initApi(String[] args) {
 		// Inicializar o contexto Spring
@@ -15,5 +17,6 @@ public class ApiApplication {
 
 		// Obter o bean PacientesController
 		consultas = context.getBean(ConsultasController.class);
+		pacientes = context.getBean(PacientesController.class);
 	}
 }
