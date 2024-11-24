@@ -24,7 +24,7 @@ inconsistencies*/
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-pref-height: 70;
+    -fx-pref-height: 60;
     -fx-pref-width: 180;
     -fx-text-fill: white;
     -fx-font-size: 22px;
@@ -33,7 +33,7 @@ inconsistencies*/
 
 .button:pressed {
     -fx-background-color: #388E3C;
-    -fx-pref-height: 85;
+    -fx-pref-height: 65;
     -fx-pref-width: 185;
 }
 
@@ -43,7 +43,7 @@ inconsistencies*/
     -fx-background-color: #badab1;
     -fx-pref-height: 600px;
     -fx-pref-width: 900px;
-    -fx-pref-fill: ;
+    -fx-pref-fill: white;
     -fx-font-family :"Arial Black";
     -fx-font-size: 20.0;
 }
