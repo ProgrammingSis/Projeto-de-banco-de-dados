@@ -43,7 +43,7 @@ public class AnimalRepository {
     }
 
     public List<Animal> findByNameContaining(String nomePet) {
-        String sql = "SELECT * FROM Animal WHERE name LIKE ?";
+        String sql = "SELECT * FROM Animal WHERE nome LIKE ?";
         String namePattern = "%" + nomePet + "%"; // Adiciona os curingas para busca parcial
         return jdbcTemplate.query(sql, new AnimalRowMapper(), namePattern);
     }
