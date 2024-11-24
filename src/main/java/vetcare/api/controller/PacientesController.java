@@ -27,6 +27,10 @@ public class PacientesController {
         return animalService.getAnimalClienteDTO(id);
     }
 
+    public List<Animal> buscaPetNome(String nomePet){
+        return animalService.getAnimalPorNome(nomePet);
+    }
+
     public List<Animal> listaPets(int pageNumber, int pageSize) {
         return animalService.getAllAnimals(pageNumber, pageSize);
     }

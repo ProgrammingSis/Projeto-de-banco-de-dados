@@ -18,6 +18,7 @@ public class MailConfig {
     public String enviarNotificacao(String toEmail, String subject, String text) {
         try{
             SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(remetente);
             message.setTo(toEmail);
             message.setSubject(subject);
             message.setText(text);

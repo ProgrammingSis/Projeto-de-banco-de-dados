@@ -24,6 +24,11 @@ public class AnimalService {
     public Animal getAnimalById(Long id) {
         return animalRepository.findById(id);
     }
+
+    public List<Animal> getAnimalPorNome(String nomePet){
+        return animalRepository.findByNameContaining(nomePet);
+    }
+
     public AnimalClienteDTO getAnimalClienteDTO(Long id) {
         return animalRepository.findAnimalClienteById(id);
     }

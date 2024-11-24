@@ -42,6 +42,12 @@ public class AnimalRepository {
         return jdbcTemplate.queryForObject(sql, new AnimalRowMapper(), id);
     }
 
+    public List<Animal> findByNameContaining(String nomePet) {
+        String sql = "SELECT * FROM Animal WHERE name LIKE ?";
+        String namePattern = "%" + nomePet + "%"; // Adiciona os curingas para busca parcial
+        return jdbcTemplate.query(sql, new AnimalRowMapper(), namePattern);
+    }
+
     public AnimalClienteDTO findAnimalClienteById(Long id) {
         String sql = """
         SELECT 
