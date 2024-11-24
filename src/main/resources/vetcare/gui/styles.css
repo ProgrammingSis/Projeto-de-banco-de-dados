@@ -1,9 +1,17 @@
-.root {
-    -fx-background-color: #badab1;
-    -fx-pref-height: 600;
-    -fx-pref-width: 800;
+/* General styles  */
+*{
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
 }
 
+/*The size of the scenes is defined on ScreenManager to avoid
+inconsistencies*/
+
+.root {
+    -fx-background-color: #badab1;
+}
+
+/* Styles for the initialScreen  */
 .telaInicio {
     -fx-background-size: cover;
     -fx-font-size: 20px;
@@ -11,12 +19,12 @@
     -fx-font-family :"Arial Black";
     -fx-font-size: 20.0;
 }
-
+/* Styles for button in the initialScreen are right below */
 .button{
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-pref-height: 80;
+    -fx-pref-height: 70;
     -fx-pref-width: 180;
     -fx-text-fill: white;
     -fx-font-size: 22px;
@@ -27,4 +35,15 @@
     -fx-background-color: #388E3C;
     -fx-pref-height: 85;
     -fx-pref-width: 185;
+}
+
+/* Styles for the main menu   */
+
+.mainMenu{
+    -fx-background-color: #badab1;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 900px;
+    -fx-pref-fill: ;
+    -fx-font-family :"Arial Black";
+    -fx-font-size: 20.0;
 }

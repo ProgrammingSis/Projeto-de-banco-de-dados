@@ -18,8 +18,8 @@ public class ScreenManager {
     public void switchScreen(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent aux = loader.load();
-            stage.setScene(new Scene(aux));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root, 1200, 650));
             stage.show();
 
         } catch (IOException e) {
