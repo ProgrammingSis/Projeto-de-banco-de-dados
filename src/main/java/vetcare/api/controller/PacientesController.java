@@ -45,7 +45,7 @@ public class PacientesController {
         return result > 0 ?  "Pet atualizado com sucesso!" : "Falha ao atualizar pet.";
     }
 
-    public String deletaPet(Long id) {
+    public String deletaPet(Integer id) {
         int result = animalService.deleteAnimal(id);
         return result > 0 ?  "Pet deletado com sucesso!" : "Falha ao deletar pet.";
     }
@@ -54,7 +54,7 @@ public class PacientesController {
         return animalService.getVacinasByAnimalId(animalId);
     }
 
-    public void notificarVacinas(Long animalId) {
+    public void notificarVacinas(Integer animalId) {
         animalService.notificarVacinasPendentes(animalId);
     }
 }

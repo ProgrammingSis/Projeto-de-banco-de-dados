@@ -58,7 +58,7 @@ public class ClienteRepository {
         return jdbcTemplate.update(sql, cpf);
     }
 
-    public String buscarEmailClientePorAnimalId(Long animalId) {
+    public String buscarEmailClientePorAnimalId(Integer animalId) {
 
         String sql = "SELECT c.contato FROM Cliente c " +
                 "JOIN Animal a ON a.fk_Cliente_cpf = c.cpf " +

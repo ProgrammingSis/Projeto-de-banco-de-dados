@@ -11,8 +11,8 @@ import java.sql.Date;
 @AllArgsConstructor
 public class VacinaPet {
 
-    Long idVacina;
-    Long idAtendimento;
+    String vacinaNome;
+    Integer idAtendimento;
     Date dataVacina;
     Date dataReforco;
 }

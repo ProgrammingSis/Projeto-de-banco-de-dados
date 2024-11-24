@@ -10,7 +10,7 @@ public class AnimalRowMapper implements RowMapper<Animal> {
     @Override
     public Animal mapRow(ResultSet rs, int rowNum) throws SQLException {
         Animal animal = new Animal();
-        animal.setIdPet(rs.getLong("id"));
+        animal.setIdPet(rs.getInt("id"));
         animal.setNomePet(rs.getString("nome"));
         animal.setRacaPet(rs.getString("raca"));
         animal.setPesoPet(rs.getDouble("peso"));

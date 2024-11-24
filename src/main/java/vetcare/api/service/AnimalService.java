@@ -49,11 +49,11 @@ public class AnimalService {
         return animalRepository.update(animal);
     }
 
-    public int deleteAnimal(Long id) {
+    public int deleteAnimal(Integer id) {
         return animalRepository.deleteById(id);
     }
 
-    public void notificarVacinasPendentes(Long animalId) {
+    public void notificarVacinasPendentes(Integer animalId) {
         List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
 
         if (vacinasPendentes.isEmpty()) {
@@ -67,7 +67,7 @@ public class AnimalService {
                 .append("O seu pet possui vacinas pendentes a serem aplicadas:\n");
 
         for (VacinaPet vacina : vacinasPendentes) {
-            conteudoEmail.append("Vacina: ").append(vacina.getIdVacina())
+            conteudoEmail.append("Vacina: ").append(vacina.getVacinaNome())
                     .append("\nData Vacina: ").append(vacina.getDataVacina())
                     .append("\nData de Reforço: ").append(vacina.getDataReforco())
                     .append("\n\n");

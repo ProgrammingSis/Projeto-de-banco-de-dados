@@ -43,7 +43,7 @@ public class AnimalRepository {
     }
 
     public List<Animal> findByNameContaining(String nomePet) {
-        String sql = "SELECT * FROM Animal WHERE nome LIKE ?";
+        String sql = "SELECT * FROM Animal WHERE nome ILIKE ?";
         String namePattern = "%" + nomePet + "%"; // Adiciona os curingas para busca parcial
         return jdbcTemplate.query(sql, new AnimalRowMapper(), namePattern);
     }
@@ -80,19 +80,19 @@ public class AnimalRepository {
 
     // UPDATE
     public int update(Animal animal) {
-        String sql = "UPDATE Animal SET nome = ?, raca = ?, peso = ?, fk_cliente_cpf = ?, fk_tipo = ?, WHERE id = ?";
+        String sql = "UPDATE Animal SET nome = ?, raca = ?, peso = ?, fk_cliente_cpf = ?, fk_tipo = ? WHERE id = ?";
         return jdbcTemplate.update(sql,
                 animal.getNomePet(),
                 animal.getRacaPet(),
                 animal.getPesoPet(),
                 animal.getCpfDonoPet(),
-                animal.getIdPet(),
-                animal.getTipoPet()
+                animal.getTipoPet(),
+                animal.getIdPet()
         );
     }
 
     // DELETE
-    public int deleteById(Long id) {
+    public int deleteById(Integer id) {
         String sql = "DELETE FROM Animal WHERE id = ?";
         return jdbcTemplate.update(sql, id);
     }
@@ -103,7 +103,7 @@ public class AnimalRepository {
                 vp.fk_idVacina AS idVacina,
                 vp.fk_Atendimento_id AS idAtendimento,
                 a.data AS dataVacina,
-                DATE_ADD(a.data, INTERVAL 1 YEAR) AS dataReforco
+                 a.data + INTERVAL '1 year' AS dataReforco
             FROM 
                 VacinaPet vp
             JOIN 
@@ -117,13 +117,13 @@ public class AnimalRepository {
         return jdbcTemplate.query(sql, new VacinaPetRowMapper(), animalId);
     }
 
-    public List<VacinaPet> findVacinasPendentesByAnimalId(Long animalId) {
+    public List<VacinaPet> findVacinasPendentesByAnimalId(Integer animalId) {
         String sql = """
             SELECT 
                 tv.nome AS vacinaNome,
                 vp.fk_Atendimento_id AS idAtendimento,
                 a.data AS dataVacina,
-                DATE_ADD(a.data, INTERVAL 1 YEAR) AS dataReforco
+                a.data + INTERVAL '1 year' AS dataReforco
             FROM 
                 TipoVacina tv
             LEFT JOIN 
