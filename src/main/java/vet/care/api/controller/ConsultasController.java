@@ -2,12 +2,9 @@ package vet.care.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.backoff.BackOff;
 import vet.care.api.model.dto.ConsultaDTO;
-import vet.care.api.model.entities.Atendimento;
 import vet.care.api.model.entities.Veterinario;
 import vet.care.api.service.AtendimentoService;
-import vet.care.api.service.AtendidoEmService;
 import vet.care.api.service.VeterinarioService;
 
 import java.time.LocalDate;
@@ -103,8 +100,8 @@ public class ConsultasController {
        return atendimentoService.deletarConsulta(id);
     }
 
-    public boolean criarConsulta(LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
-        return atendimentoService.agendarConsulta(data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
+    public boolean criarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
+        return atendimentoService.agendarConsulta(idAtendimento, data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
     }
 
     public List<ConsultaDTO> mostrarCalendarioVeterinario(String crmv, String dataInicioStr, String dataFimStr) {

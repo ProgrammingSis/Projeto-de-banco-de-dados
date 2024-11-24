@@ -12,8 +12,6 @@ import vet.care.api.model.entities.Atendimento;
 import vet.care.api.repository.mapper.entities.AtendimentoRowMapper;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -67,22 +65,14 @@ public class AtendimentoRepository {
     }
 
     // CRIAR NOVA CONSULTA
-    public boolean agendarConsulta(LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento) {
-        String sqlAtendimento = "INSERT INTO Atendimento (data, horario, fk_tipo) VALUES (?, ?, ?)";
+    public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento) {
+        String sqlAtendimento = "INSERT INTO Atendimento (data, id, fk_tipo, horario) VALUES (?, ?, ?, ?)";
         String sqlAtendidoEm = "INSERT INTO AtendidoEm (fk_Veterinario_crmv, fk_Atendimento_id, fk_Animal_id) VALUES (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         try {
             // Inserir na tabela Atendimento
-            jdbcTemplate.update(connection -> {
-                PreparedStatement ps = connection.prepareStatement(sqlAtendimento, new String[]{"id"});
-                ps.setDate(1, Date.valueOf(data));
-                ps.setTime(2, Time.valueOf(horario));
-                ps.setString(3, tipoAtendimento);
-                return ps;
-            }, keyHolder);
-
-            int idAtendimento = keyHolder.getKey().intValue();
+            jdbcTemplate.update(sqlAtendimento, data, idAtendimento, tipoAtendimento, horario);
 
             // Inserir na tabela AtendidoEm
             jdbcTemplate.update(sqlAtendidoEm, crmvVeterinario, idAtendimento, idAnimal);
@@ -96,10 +86,14 @@ public class AtendimentoRepository {
     }
 
     public boolean deletarConsulta(Long idAtendimento) {
+        String deleteDependentesSql = "DELETE FROM AtendimentosFaturas WHERE fk_Atendimento_id = ?";
         String sqlAtendidoEm = "DELETE FROM AtendidoEm WHERE fk_Atendimento_id = ?";
         String sqlAtendimento = "DELETE FROM Atendimento WHERE id = ?";
 
         try {
+
+            jdbcTemplate.update(deleteDependentesSql, idAtendimento);
+
             // Deletar da tabela AtendidoEm
             jdbcTemplate.update(sqlAtendidoEm, idAtendimento);
 

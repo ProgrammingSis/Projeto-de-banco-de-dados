@@ -23,7 +23,6 @@ public class AtendimentosFaturasRepository {
     public int save(AtendimentosFaturas atendimentosFaturas) {
         String sql = "INSERT INTO AtendimentosFaturas (fk_Item_Fatura_id, fk_Atendimento_id, fk_Fatura_id) VALUES (?, ?, ?)";
         return jdbcTemplate.update(sql,
-                atendimentosFaturas.getIdItemFatura(),
                 atendimentosFaturas.getIdAtendimento(),
                 atendimentosFaturas.getIdFatura()
         );
@@ -45,8 +44,7 @@ public class AtendimentosFaturasRepository {
         String sql = "UPDATE AtendimentosFaturas SET fk_Atendimento_id = ?, fk_Fatura_id = ? WHERE fk_Item_Fatura_id = ?";
         return jdbcTemplate.update(sql,
                 atendimentosFaturas.getIdAtendimento(),
-                atendimentosFaturas.getIdFatura(),
-                atendimentosFaturas.getIdItemFatura()
+                atendimentosFaturas.getIdFatura()
         );
     }
 

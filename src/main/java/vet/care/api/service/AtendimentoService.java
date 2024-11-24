@@ -3,7 +3,6 @@ package vet.care.api.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import vet.care.api.model.dto.ConsultaDTO;
-import vet.care.api.model.dto.NotificacaoDTO;
 import vet.care.api.model.entities.Atendimento;
 import vet.care.api.repository.entities.AtendimentoRepository;
 
@@ -37,8 +36,8 @@ public class AtendimentoService {
         return atendimentoRepository.deletarConsulta(id);
     }
 
-    public boolean agendarConsulta(LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
-        return atendimentoRepository.agendarConsulta(data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
+    public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
+        return atendimentoRepository.agendarConsulta(idAtendimento, data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
     }
 
     public List<ConsultaDTO> geraCalendarioVeterinario(String crmv, LocalDate dataInicio, LocalDate dataFim) {

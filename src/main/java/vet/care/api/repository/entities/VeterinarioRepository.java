@@ -22,11 +22,12 @@ public class VeterinarioRepository {
 
     // CREATE
     public int save(Veterinario veterinario) {
-        String sql = "INSERT INTO Veterinario (crmv, nome, especialidade) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Veterinario (crmv, nome, fk_especialidade, contato) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
                 veterinario.getCrmvVet(),
                 veterinario.getNomeVet(),
-                veterinario.getTipoVet()
+                veterinario.getTipoVet(),
+                veterinario.getContato()
         );
     }
 
@@ -43,10 +44,11 @@ public class VeterinarioRepository {
 
     // UPDATE
     public int update(Veterinario veterinario) {
-        String sql = "UPDATE Veterinario SET nome = ?, especialidade = ? WHERE crmv = ?";
+        String sql = "UPDATE Veterinario SET nome = ?, fk_especialidade = ?, contato = ? WHERE crmv = ?";
         return jdbcTemplate.update(sql,
                 veterinario.getNomeVet(),
                 veterinario.getTipoVet(),
+                veterinario.getContato(),
                 veterinario.getCrmvVet()
         );
     }

@@ -10,7 +10,6 @@ public class AtendimentosFaturasRowMapper implements RowMapper<AtendimentosFatur
     @Override
     public AtendimentosFaturas mapRow(ResultSet rs, int rowNum) throws SQLException {
         AtendimentosFaturas atendimentosFaturas = new AtendimentosFaturas();
-        atendimentosFaturas.setIdItemFatura(rs.getLong("fk_Item_Fatura_id"));
         atendimentosFaturas.setIdAtendimento(rs.getLong("fk_Atendimento_id"));
         atendimentosFaturas.setIdFatura(rs.getLong("fk_Fatura_id"));
 
