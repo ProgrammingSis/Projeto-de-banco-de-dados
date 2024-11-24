@@ -24,17 +24,26 @@ inconsistencies*/
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 0);
+ }
+
+.button:hover{
+    -fx-background-color: #388E3C;
+}
+
+.buttonStart{
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
     -fx-pref-height: 60;
     -fx-pref-width: 180;
     -fx-text-fill: white;
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-}
-
-.button:pressed {
-    -fx-background-color: #388E3C;
-    -fx-pref-height: 65;
-    -fx-pref-width: 185;
 }
 
 /* Styles for the main menu   */
@@ -47,3 +56,14 @@ inconsistencies*/
     -fx-font-family :"Arial Black";
     -fx-font-size: 20.0;
 }
+
+.buttonMenu{
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-pref-height: 150;
+    -fx-pref-width: 250;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+

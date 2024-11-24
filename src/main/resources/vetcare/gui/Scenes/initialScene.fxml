@@ -10,7 +10,7 @@
 
 <VBox id="telaInicio" alignment="CENTER"  spacing="30"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="vetcare.gui.HelloController" stylesheets="@styles.css">
+      fx:controller="vetcare.gui.HelloController" >
 
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
@@ -18,9 +18,9 @@
 
     <!-- initialScene's pet image -->
     <ImageView id="myImageView"
-               preserveRatio="true" fitHeight="500" fitWidth="600">
-        <Image url="@Images/telaInicial.jpeg"/>
+               preserveRatio="true" fitHeight="500" fitWidth="600" >
+        <Image url="@../Images/telaInicial.jpeg"/>
     </ImageView>
 
-    <Button fx:id="iniciarSessaoButton" text="Iniciar sessão" />
+    <Button fx:id="iniciarSessaoButton" text="Iniciar sessão" styleClass="buttonStart" />
 </VBox>

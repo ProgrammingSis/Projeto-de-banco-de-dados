@@ -19,7 +19,9 @@ public class ScreenManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
-            stage.setScene(new Scene(root, 1200, 650));
+            Scene scene = new Scene(root, 1200, 650);
+            scene.getStylesheets().add(getClass().getResource("/vetcare/gui/styles.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {

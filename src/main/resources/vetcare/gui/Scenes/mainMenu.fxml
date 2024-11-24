@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox id="mainMenu" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" >
+<!--      fx:controller="example.demo1.HelloController" stylesheets="@styles.css"-->
+
+    <padding>
+        <Insets />
+    </padding>
+
+    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="70" vgap="70">
+        <Button id="button1menu" text="Pacientes" GridPane.rowIndex="0" GridPane.columnIndex="0"  styleClass="buttonMenu" />
+        <Button id="button2menu" text="Consultas" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="buttonMenu"/>
+        <Button id="button3menu" text="Estoque" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="buttonMenu"/>
+        <Button id="button4menu" text="Financeiro" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="buttonMenu"/>
+    </GridPane>
+
+    <!-- Imagem do ícone -->
+    <ImageView id="myImageView"
+               preserveRatio="true" fitHeight="600" fitWidth="900">
+        <Image url="@../Images/patinhas.png"/>
+    </ImageView>
+</VBox>

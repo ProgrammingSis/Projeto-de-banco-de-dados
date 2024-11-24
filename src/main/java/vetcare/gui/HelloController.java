@@ -17,6 +17,6 @@ public class HelloController {
     public void switchToAnotherScene(){
         Stage stage = (Stage) iniciarSessaoButton.getScene().getWindow();
         ScreenManager screenManager = new ScreenManager(stage);
-        screenManager.switchScreen("/vetcare/gui/mainMenu.fxml");
+        screenManager.switchScreen("/vetcare/gui/Scenes/mainMenu.fxml");
     }
 }

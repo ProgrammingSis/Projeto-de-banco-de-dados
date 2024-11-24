@@ -9,7 +9,7 @@ public class HelloApplication extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		ScreenManager screenManager = new ScreenManager(stage);
-		screenManager.switchScreen("/vetcare/gui/initialScene.fxml");
+		screenManager.switchScreen("/vetcare/gui/Scenes/initialScene.fxml");
 	}
 //starts the gui application
 	public static void init(String[] args) {
