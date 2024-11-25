@@ -1,32 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.PacientesController" styleClass="user-screen" >
 	<Pane styleClass="decorated-background"/>
 	<BorderPane>
 		<top>
-			<TextField fx:id="searchField" styleClass="text-field" onKeyTyped="#autoSearch">oi pacientes</TextField>
+			<ImageView fx:id="logoBtn" fitHeight="64" preserveRatio="true" onMouseClicked="#goHome">
+				<Image url="@../Images/logo.png"/>
+			</ImageView>
 		</top>
 		<center>
-			<HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
-				<ScrollPane>
-					<VBox>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-						<Button>oi1</Button>
-					</VBox>
-				</ScrollPane>
-			</HBox>
+			<BorderPane>
+				<top>
+					<TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome do paciente..."/>
+				</top>
+				<center>
+					<SplitPane>
+						<ScrollPane>
+							<VBox fx:id="pacientes"/>
+						</ScrollPane>
+						<StackPane>
+							<StackPane.margin>
+								<Insets left="8" top="8" right="8" bottom="8"/>
+							</StackPane.margin>
+							<BorderPane>
+								<top>
+									<HBox>
+										<StackPane id="animalPhoto">
+											<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
+
+											<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" >
+												<Image url="@../Images/cat1.png"/>
+											</ImageView>
+										</StackPane>
+										<VBox HBox.hgrow="ALWAYS">
+											<Text fx:id="animalName"/>
+											<Text fx:id="animalKind"/>
+											<TextFlow>
+												<Text>Dono: </Text>
+												<Text fx:id="animalOwner"/>
+											</TextFlow>
+										</VBox>
+										<Button onMouseClicked="#abrirCarteirinha">Carteirinha</Button>
+									</HBox>
+								</top>
+								<center>
+									<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" hgap="10">
+										<columnConstraints>
+											<ColumnConstraints percentWidth="0"/>
+											<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+										</columnConstraints>
+										<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+										<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="petNameField"/>
+
+										<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
+										<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
+
+										<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
+										<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
+									</GridPane>
+								</center>
+								<bottom>
+									<HBox alignment="CENTER_RIGHT" spacing="8">
+										<Button>Salvar Alterações</Button>
+										<Button>Descartar Alterações</Button>
+									</HBox>
+								</bottom>
+							</BorderPane>
+						</StackPane>
+					</SplitPane>
+				</center>
+			</BorderPane>
 		</center>
 	</BorderPane>
 </StackPane>

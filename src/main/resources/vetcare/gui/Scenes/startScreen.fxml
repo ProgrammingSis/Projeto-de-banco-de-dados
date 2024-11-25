@@ -13,8 +13,7 @@
     </padding>
 
     <!-- initialScene's pet image -->
-    <ImageView id="myImageView"
-               preserveRatio="true" fitHeight="500" fitWidth="600" >
+    <ImageView id="myImageView" preserveRatio="true" fitHeight="500" fitWidth="600" >
         <Image url="@../Images/telaInicial.jpeg"/>
     </ImageView>
 

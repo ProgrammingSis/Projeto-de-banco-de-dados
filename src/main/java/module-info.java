@@ -13,6 +13,7 @@ open module vet.care.api {
 	requires spring.beans;
 	requires spring.context.support;
 	requires spring.jdbc;
+	requires java.desktop;
 
 	exports vetcare.api;
 	exports vetcare.gui;

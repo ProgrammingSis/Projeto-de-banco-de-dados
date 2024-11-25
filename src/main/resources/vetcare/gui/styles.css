@@ -2,6 +2,14 @@
 	-fx-focus-color: transparent;
 }
 
+TextField, TextField:focused {
+	-fx-border-width: 0;
+	-fx-border-color: transparent;
+	-fx-text-box-border: transparent;
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
 /* Styles for the initialScreen  */
 #telaInicio {
 	-fx-background-color: #badab1;
@@ -64,19 +72,57 @@
 	-fx-background-position: center bottom;
 }
 
-.text-field {
+.text-fieldx {
 	-fx-border-color: #BBB;
 	-fx-border-width: 3px;
 	-fx-border-radius: 8px;
 	-fx-font-size: 14pt;
-	-fx-focus-color: transparent;
 }
 
-.text-field:focused {
+.text-fieldx:focused {
 	-fx-border-color: #666;
-	-fx-focus-color: transparent;
 }
 
 .user-screen {
 	-fx-padding: 4px;
+}
+
+.paciente {
+	-fx-padding: 0;
+}
+
+.paciente:hover {
+	-fx-background-color: #DDD;
+}
+
+.paciente ImageView {
+	-fx-fit-height: 64px;
+}
+
+.paciente-nome {
+	-fx-font-weight: bold;
+	-fx-font-size: 14pt;
+}
+
+#animalName {
+	-fx-padding: 20px;
+	-fx-font-size: 14pt;
+	-fx-font-weight: bold;
+}
+
+#animalPhoto {
+	-fx-border-width: 2px;
+	-fx-border-radius: 1px;
+	-fx-border-color: #888;
+}
+
+.user-screen TextField {
+	-fx-border-color: #BBB;
+	-fx-border-width: 2px;
+	-fx-border-radius: 6px;
+	-fx-font-size: 11pt;
+}
+
+.user-screen TextField:focused {
+	-fx-border-color: #666;
 }

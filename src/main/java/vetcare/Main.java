@@ -5,17 +5,12 @@ import vetcare.gui.VetCareApp;
 
 public class Main {
 
-	private static final boolean ENABLE_API = false;
+	private static final boolean ENABLE_API = true;
 
 	public static void main(String[] args) {
 		if (ENABLE_API) {
 			// Inicialização da API
 			ApiApplication.initApi(new String[]{});
-
-			// Teste da API
-			System.out.println("\n=== Testando listarTodosVeterinarios ===");
-			var veterinarios = ApiApplication.consultas.listarTodosVeterinarios();
-			System.out.println("Lista de veterinários: " + veterinarios);
 		}
 
 		// Inicialização da interface
