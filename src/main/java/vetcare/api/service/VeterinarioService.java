@@ -32,4 +32,8 @@ public class VeterinarioService {
     public int deleteVeterinario(String crmv) {
         return veterinarioRepository.deleteByCrmv(crmv);
     }
+
+    public List<Veterinario> getVetPorNome(String nomeVet){
+        return veterinarioRepository.findByNameContaining(nomeVet);
+    }
 }

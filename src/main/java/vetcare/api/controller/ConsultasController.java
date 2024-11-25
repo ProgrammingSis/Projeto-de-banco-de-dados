@@ -21,6 +21,9 @@ public class ConsultasController {
     /*
      *   PRINCIPAIS MÉTODOS DO FLUXO DE CONSULTAS
      * */
+    public List<Veterinario> buscaVetNome(String nomeVet){
+        return veterinarioService.getVetPorNome(nomeVet);
+    }
 
     public Veterinario buscarVeterinarioPorCrmv(String crmv) {
         try {
