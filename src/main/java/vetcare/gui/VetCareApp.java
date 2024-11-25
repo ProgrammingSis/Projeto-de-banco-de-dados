@@ -10,6 +10,7 @@ public class VetCareApp extends Application {
 	//Creates the scene using the screen manager
 	@Override
 	public void start(Stage stage) {
+		stage.setTitle("VetCare");
 		screens = new ScreenManager(stage);
 		screens.switchScreen("/vetcare/gui/Scenes/startScreen.fxml");
 	}

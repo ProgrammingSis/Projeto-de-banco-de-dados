@@ -31,7 +31,7 @@
 				<Text fx:id="animalName"/>
 				<Text fx:id="animalKind"/>
 				<TextFlow>
-					<Text>Dono: </Text>
+					<Text text="Dono: "/>
 					<Text fx:id="animalOwner"/>
 				</TextFlow>
 			</VBox>
@@ -40,7 +40,7 @@
 			Esse animal não tem pendências.
 		</Text>
 		<Region VBox.vgrow="ALWAYS"/>
-		<Button>Enviar notificação</Button>
-		<CheckBox>Notificar automaticamente o dono</CheckBox>
+		<Button fx:id="sendNotificationBtn" onAction="#sendNotification">Enviar notificação</Button>
+		<CheckBox>Notificar automaticamente o dono sobre vacinas</CheckBox>
 	</VBox>
 </StackPane>

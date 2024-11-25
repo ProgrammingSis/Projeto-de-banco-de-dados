@@ -18,12 +18,12 @@ public class ScreenManager {
         return new FXMLLoader(getClass().getResource(fxml));
     }
 
-    public Scene getSceneFor(String fxml, int w, int h) {
+    public Scene getSceneFor(String fxml) {
         try {
             FXMLLoader loader = getLoaderFor(fxml);
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, w, h);
+            Scene scene = new Scene(root);
             addGlobalStyles(scene);
             return scene;
         } catch(Exception err) {
@@ -36,8 +36,10 @@ public class ScreenManager {
     }
 
     public void switchScreen(String fxmlFile) {
-        Scene scene = getSceneFor(fxmlFile, 1200, 650);
+        Scene scene = getSceneFor(fxmlFile);
         stage.setScene(scene);
+        stage.setWidth(1200);
+        stage.setHeight(650);
         stage.show();
     }
 }

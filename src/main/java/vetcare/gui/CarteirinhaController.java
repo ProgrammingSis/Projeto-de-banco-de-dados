@@ -1,6 +1,7 @@
 package vetcare.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -14,10 +15,10 @@ public class CarteirinhaController {
 	@FXML private Text animalKind;
 	@FXML private Text animalOwner;
 	@FXML private ImageView petPhotoImage;
-
+	@FXML private Button sendNotificationBtn;
 	@FXML private Text statusText;
 
-	public void setPet(Animal pet) {
+	void setPet(Animal pet) {
 		this.pet = pet;
 
 		animalName.setText(pet.getNomePet());
@@ -26,10 +27,17 @@ public class CarteirinhaController {
 		petPhotoImage.setImage(new Image(PacientesController.getPetPicture(pet)));
 
 		var pendencias = ApiApplication.pacientes.vacinasPendentes(pet.getIdPet());
+		sendNotificationBtn.setDisable(!pendencias);
+
 		if (pendencias) {
 			statusText.setText("Esse animal possui vacinas pendentes!");
 		} else {
 			statusText.setText("Esse animal não possui vacinas pendentes.");
 		}
+	}
+
+	@FXML
+	private void sendNotification() {
+		ApiApplication.pacientes.notificarVacinasPendentes(pet.getIdPet());
 	}
 }

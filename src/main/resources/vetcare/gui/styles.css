@@ -134,3 +134,7 @@ Text {
 .user-screen TextField:focused {
 	-fx-border-color: #666;
 }
+
+#fichaPaciente {
+
+}

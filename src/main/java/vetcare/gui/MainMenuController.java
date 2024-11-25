@@ -8,4 +8,9 @@ public class MainMenuController {
 	public void goPacientes() {
 		VetCareApp.screens.switchScreen("/vetcare/gui/Scenes/pacientes.fxml");
 	}
+
+	@FXML
+	public void goConsultas() {
+		VetCareApp.screens.switchScreen("/vetcare/gui/Scenes/consultas.fxml");
+	}
 }
