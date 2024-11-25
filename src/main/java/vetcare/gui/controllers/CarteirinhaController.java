@@ -1,22 +1,24 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 
 public class CarteirinhaController {
-	private Animal pet;
+	Animal pet;
 
-	@FXML private Text animalName;
-	@FXML private Text animalKind;
-	@FXML private Text animalOwner;
-	@FXML private ImageView petPhotoImage;
-	@FXML private Button sendNotificationBtn;
-	@FXML private Text statusText;
+	@FXML Text animalName;
+	@FXML Text animalKind;
+	@FXML Text animalOwner;
+	@FXML ImageView petPhotoImage;
+	@FXML Button sendNotificationBtn;
+	@FXML Text statusText;
+	@FXML VBox listaVacinas;
 
 	void setPet(Animal pet) {
 		this.pet = pet;
@@ -33,6 +35,13 @@ public class CarteirinhaController {
 			statusText.setText("Esse animal possui vacinas pendentes!");
 		} else {
 			statusText.setText("Esse animal não possui vacinas pendentes.");
+		}
+
+		// Preenche a lista de vacinas
+		var vacinas = ApiApplication.pacientes.buscarVacinasPet(pet.getIdPet());
+		for (var vec : vacinas) {
+			var text = new Text(vec.getIdVacina());
+			listaVacinas.getChildren().add(text);
 		}
 	}
 

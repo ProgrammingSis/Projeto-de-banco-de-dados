@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.Pane?>
 
-<StackPane id="mainMenu" xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.MainMenuController">
+<StackPane id="mainMenu" xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.MainMenuController">
 	<!-- Rodapé -->
 	<Pane styleClass="alt-footer"/>
 

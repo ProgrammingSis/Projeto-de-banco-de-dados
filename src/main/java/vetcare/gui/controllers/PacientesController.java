@@ -1,4 +1,4 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,12 +12,15 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
-import vetcare.api.model.dto.AnimalClienteDTO;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.Cliente;
+import vetcare.gui.BaseUserController;
+import vetcare.gui.CirclePictureFrame;
+import vetcare.gui.ListCard;
+import vetcare.gui.VetCareApp;
 
 
-public class PacientesController {
+public class PacientesController extends BaseUserController {
 	@FXML private TextField searchField;
 	@FXML private VBox pacientes;
 	@FXML private BorderPane fichaPaciente;
@@ -33,7 +36,9 @@ public class PacientesController {
 	private Animal selectedPet;
 	private Cliente selectedPetOwner;
 
-	private static final String[] animalPictures = new String[] {"Images/turtle.jpeg", "Images/cat1.png", "Images/cat2.png", "Images/dog1.png", "Images/dog2.png", "Images/fish.png"};
+	private static final String[] animalPictures = new String[] {
+			"turtle.jpeg",  "cat1.png", "cat2.png", "dog1.png", "dog2.png", "fish.png"
+	};
 
 	public void initialize() {
 		doSearch();
@@ -44,7 +49,7 @@ public class PacientesController {
 		//int index = (int)(Math.random() * animalPictures.length);
 		int index = pet.getIdPet() % animalPictures.length;
 		var pic = animalPictures[index];
-		var resource = PacientesController.class.getResource(pic).toExternalForm();
+		var resource = PacientesController.class.getResource("/vetcare/gui/Images/" + pic).toExternalForm();
 		return resource;
 	}
 
@@ -73,32 +78,17 @@ public class PacientesController {
 	}
 
 	private Node criarPet(Animal pet) {
-		var root = new HBox();
-		root.setOnMouseClicked(ev -> {
+		var imageUrl = getPetPicture(pet);
+		var name = pet.getNomePet();
+		var desc = pet.getTipoPet() + " - " + pet.getRacaPet();
+
+		var card = new ListCard(imageUrl, name, desc);
+		card.setOnMouseClicked(ev -> {
 			this.selecionarPet(pet);
 		});
-		root.getStyleClass().add("paciente");
-		root.setAlignment(Pos.CENTER_LEFT);
+		card.getStyleClass().add("paciente");
 
-		var image = new Image(getPetPicture(pet));
-		var imgRoot = new CirclePictureFrame(image, 64);
-		root.getChildren().add(imgRoot);
-
-		var desc = new VBox();
-		var nome = new Text(pet.getNomePet());
-		nome.getStyleClass().add("paciente-nome");
-
-		var obs = new Text(pet.getTipoPet() + " - " + pet.getRacaPet());
-		obs.getStyleClass().add("paciente-obs");
-		desc.getChildren().addAll(nome, obs);
-
-		root.getChildren().add(desc);
-
-		return root;
-	}
-
-	@FXML void goHome() {
-		VetCareApp.screens.switchScreen("/vetcare/gui/Scenes/mainMenu.fxml");
+		return card;
 	}
 
 	@FXML
@@ -169,5 +159,11 @@ public class PacientesController {
 	@FXML
 	private void resetData() {
 		selecionarPet(this.selectedPet);
+	}
+
+	@FXML
+	void novoPet() {
+		petNameField.setText("");
+		petRaceField.setText("");
 	}
 }

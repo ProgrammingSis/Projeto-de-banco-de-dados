@@ -24,7 +24,7 @@ Text {
 }
 
 /* Styles for button in the initialScreen are right below */
-.button{
+.button {
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
@@ -34,11 +34,11 @@ Text {
     -fx-font-weight: bold;
 }
 
-.button:pressed{
+.button:pressed {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 0);
 }
 
-.button:hover{
+.button:hover {
     -fx-background-color: #388E3C;
 }
 
@@ -95,20 +95,11 @@ Text {
 	-fx-padding: 0;
 }
 
-.paciente:hover {
-	-fx-background-color: #DDD;
-}
-
 .paciente ImageView {
 	-fx-fit-height: 64px;
 }
 
-.paciente-nome {
-	-fx-font-weight: bold;
-	-fx-font-size: 14pt;
-}
-
-#animalName {
+#animalName, .cardName {
 	-fx-padding: 20px;
 	-fx-font-size: 14pt;
 	-fx-font-weight: bold;
@@ -135,6 +126,30 @@ Text {
 	-fx-border-color: #666;
 }
 
-#fichaPaciente {
+/* List cards */
+.list-card:hover {
+	-fx-background-color: #DDD;
+}
 
+.list-card-name {
+	-fx-font-weight: bold;
+	-fx-font-size: 14pt;
+}
+
+.user-screen Button {
+	-fx-font-size: 14pt;
+}
+
+/* Botões */
+.botao-ok {
+	-fx-background-color: #4CAF50;
+}
+
+.botao-aviso {
+	-fx-text-fill: #444;
+	-fx-background-color: #FFC107;
+}
+
+.split-pane {
+	-fx-background-color: transparent;
 }

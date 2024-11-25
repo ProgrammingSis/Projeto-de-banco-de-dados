@@ -1,6 +1,7 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
+import vetcare.gui.VetCareApp;
 
 public class MainMenuController {
 

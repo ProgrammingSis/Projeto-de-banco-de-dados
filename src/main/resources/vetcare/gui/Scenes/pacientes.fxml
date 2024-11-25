@@ -2,18 +2,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.geometry.Insets?>
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.PacientesController" styleClass="user-screen" >
+<?import vetcare.gui.CirclePictureFrame?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.PacientesController" styleClass="user-screen" >
 	<Pane styleClass="decorated-background"/>
 	<BorderPane>
 		<top>
-			<ImageView fx:id="logoBtn" fitHeight="64" preserveRatio="true" onMouseClicked="#goHome">
-				<Image url="@../Images/logo.png"/>
-			</ImageView>
+			<HBox>
+				<CirclePictureFrame imageUrl="@/vetcare/gui/Images/fundo.png" radius="48" onMouseClicked="#abrirMenuLateral"/>
+				<ImageView fitHeight="48" preserveRatio="true" onMouseClicked="#goHome">
+					<Image url="@../Images/logo.png"/>
+				</ImageView>
+			</HBox>
 		</top>
 		<center>
 			<BorderPane>
@@ -22,7 +26,7 @@
 				</top>
 				<center>
 					<SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
-						<ScrollPane>
+						<ScrollPane fitToWidth="true">
 							<VBox fx:id="pacientes"/>
 						</ScrollPane>
 						<StackPane>
@@ -35,8 +39,7 @@
 									<HBox styleClass="petCard">
 										<StackPane id="animalPhoto">
 											<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
-
-											<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" >
+											<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" styleClass="cardPhoto" >
 												<Image url="@../Images/cat1.png"/>
 											</ImageView>
 										</StackPane>
@@ -69,8 +72,9 @@
 								</center>
 								<bottom>
 									<HBox alignment="CENTER_RIGHT" spacing="8">
-										<Button onAction="#saveData">Salvar Alterações</Button>
-										<Button onAction="#resetData">Descartar Alterações</Button>
+										<Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
+										<Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
+										<Button styleClass="botao-ok" onAction="#novoPet">+</Button>
 									</HBox>
 								</bottom>
 							</BorderPane>
@@ -80,4 +84,8 @@
 			</BorderPane>
 		</center>
 	</BorderPane>
+	<HBox fx:id="menuLateral" visible="false">
+		<VBox style="-fx-background-color: white;"/>
+		<Region HBox.hgrow="ALWAYS" onMouseClicked="#fecharMenuLateral"/>
+	</HBox>
 </StackPane>

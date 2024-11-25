@@ -1,8 +1,8 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import vetcare.gui.VetCareApp;
 
 public class StartScreenController {
     @FXML

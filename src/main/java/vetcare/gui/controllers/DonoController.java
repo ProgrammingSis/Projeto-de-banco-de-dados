@@ -1,11 +1,8 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import vetcare.api.ApiApplication;
-import vetcare.api.model.dto.AnimalClienteDTO;
 import vetcare.api.model.entities.Cliente;
 
 public class DonoController {
