@@ -36,7 +36,7 @@ public class FaturaService {
         FaturaClienteDTO fatura = faturaRepository.enviarComprovanteFatura(faturaId);
         // Criar o texto do e-mail
         try {
-        String subject = "Comprovante de Fatura - ID " + faturaId + "VetCare";
+        String subject = "Comprovante de Fatura - ID " + faturaId + " VetCare";
         String text = String.format("""
             Olá %s,
 
