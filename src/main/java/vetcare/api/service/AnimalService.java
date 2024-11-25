@@ -49,6 +49,10 @@ public class AnimalService {
     public int deleteAnimal(Integer id) {
         return animalRepository.deleteById(id);
     }
+    public boolean verificaVacinasPendentes(Integer animalId){
+        List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
+        return !(vacinasPendentes).isEmpty();
+    }
 
     public boolean notificarVacinasPendentes(Integer animalId) {
         List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);

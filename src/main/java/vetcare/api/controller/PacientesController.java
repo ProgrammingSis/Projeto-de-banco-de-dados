@@ -54,6 +54,10 @@ public class PacientesController {
         return animalService.getVacinasByAnimalId(animalId);
     }
 
+    public boolean vacinasPendentes(Integer animalId){
+        return animalService.verificaVacinasPendentes(animalId);
+    }
+
     public boolean notificarVacinasPendentes(Integer animalId){
         return animalService.notificarVacinasPendentes(animalId);
     }
