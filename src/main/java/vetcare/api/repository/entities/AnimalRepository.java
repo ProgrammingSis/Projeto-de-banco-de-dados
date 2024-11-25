@@ -56,7 +56,7 @@ public class AnimalRepository {
             a.raca,
             a.peso,
             c.cpf,
-            c.nome,
+            c.nome AS nomeDono,
             c.endereco,
             c.contato
         FROM 

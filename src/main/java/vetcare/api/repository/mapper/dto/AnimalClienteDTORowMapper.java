@@ -15,7 +15,7 @@ public class AnimalClienteDTORowMapper implements RowMapper<AnimalClienteDTO> {
         animalClienteDTO.setRacaPet(rs.getString("raca"));
         animalClienteDTO.setPesoPet(rs.getDouble("peso"));
         animalClienteDTO.setCpfDonoPet(rs.getString("cpf"));
-        animalClienteDTO.setNomeCliente(rs.getString("nome"));
+        animalClienteDTO.setNomeCliente(rs.getString("nomeDono"));
         animalClienteDTO.setEndCliente(rs.getString("endereco"));
         animalClienteDTO.setContatoCliente(rs.getString("contato"));
 
