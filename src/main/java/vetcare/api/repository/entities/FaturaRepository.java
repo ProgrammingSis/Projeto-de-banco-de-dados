@@ -2,9 +2,11 @@ package vetcare.api.repository.entities;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import vetcare.api.model.dto.FaturaClienteDTO;
 import vetcare.api.model.entities.Fatura;
 import vetcare.api.repository.mapper.entities.FaturaRowMapper;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -23,7 +25,7 @@ public class FaturaRepository {
     // CREATE
     public int save(Fatura fatura) {
         String sql = """
-            INSERT INTO Fatura (valor, data, formaPagamento, id, fk_Cliente_cpf) 
+            INSERT INTO Fatura (valor, data, fk_formaPagamento, id, fk_cliente_cpf) 
             VALUES (?, ?, ?, ?, ?)
         """;
         return jdbcTemplate.update(sql,
@@ -72,4 +74,27 @@ public class FaturaRepository {
         String sql = "DELETE FROM Fatura WHERE id = ?";
         return jdbcTemplate.update(sql, id);
     }
+
+
+    public FaturaClienteDTO enviarComprovanteFatura(int faturaId) {
+            String sqlFatura = """
+            SELECT f.valor, f.data, f.fk_formaPagamento, c.nome, c.contato 
+            FROM Fatura f
+            JOIN Cliente c ON f.fk_Cliente_cpf = c.cpf
+            WHERE f.id = ?
+        """;
+
+            FaturaClienteDTO faturaComCliente = jdbcTemplate.queryForObject(sqlFatura, (rs, rowNum) -> {
+                FaturaClienteDTO fc = new FaturaClienteDTO();
+                fc.setValorTotal(rs.getDouble("valor"));
+                fc.setData(Date.valueOf(rs.getDate("data").toLocalDate()));
+                fc.setFormaPagamento(rs.getString("fk_formaPagamento"));
+                fc.setClienteNome(rs.getString("nome"));
+                fc.setClienteContato(rs.getString("contato"));
+                return fc;
+            }, faturaId);
+
+        return faturaComCliente;
+    }
+
 }

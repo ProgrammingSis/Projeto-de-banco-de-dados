@@ -57,8 +57,6 @@ public class AnimalService {
 
         if (vacinasPendentes.isEmpty()) {
             System.out.println("O animal não possui vacinas pendentes.");
-            // Enviar e-mail informando que o animal não tem vacinas pendentes
-            mailConfig.enviarNotificacao(email, "Vacinas Pendentes", "O animal não possui vacinas pendentes.");
             return false;
         } else {
             StringBuilder corpoMensagemVeterinario = new StringBuilder();
