@@ -10,6 +10,10 @@ TextField, TextField:focused {
 	-fx-faint-focus-color: transparent;
 }
 
+Text {
+	-fx-font-size: 11pt;
+}
+
 /* Styles for the initialScreen  */
 #telaInicio {
 	-fx-background-color: #badab1;
@@ -108,6 +112,10 @@ TextField, TextField:focused {
 	-fx-padding: 20px;
 	-fx-font-size: 14pt;
 	-fx-font-weight: bold;
+}
+
+#animalOwner {
+	-fx-fill: #1B75D0;
 }
 
 #animalPhoto {

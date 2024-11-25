@@ -31,7 +31,7 @@
 							</StackPane.margin>
 							<BorderPane>
 								<top>
-									<HBox>
+									<HBox styleClass="petCard">
 										<StackPane id="animalPhoto">
 											<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
 
@@ -43,8 +43,8 @@
 											<Text fx:id="animalName"/>
 											<Text fx:id="animalKind"/>
 											<TextFlow>
-												<Text>Dono: </Text>
-												<Text fx:id="animalOwner"/>
+												<Text text="Dono: "/>
+												<Text fx:id="animalOwner" onMouseClicked="#abrirDono"/>
 											</TextFlow>
 										</VBox>
 										<Button onMouseClicked="#abrirCarteirinha">Carteirinha</Button>

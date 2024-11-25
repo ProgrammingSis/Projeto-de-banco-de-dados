@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
+		   xmlns:fx="http://javafx.com/fxml"
+		   fx:controller="vetcare.gui.CarteirinhaController"
+		   prefHeight="400.0" prefWidth="600.0">
+	<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="8">
+		<StackPane.margin>
+			<Insets left="8" top="8" right="8" bottom="8"/>
+		</StackPane.margin>
+		<HBox styleClass="petCard">
+			<StackPane id="animalPhoto">
+				<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
+
+				<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" >
+					<Image url="@../Images/cat1.png"/>
+				</ImageView>
+			</StackPane>
+			<VBox HBox.hgrow="ALWAYS">
+				<Text fx:id="animalName"/>
+				<Text fx:id="animalKind"/>
+				<TextFlow>
+					<Text>Dono: </Text>
+					<Text fx:id="animalOwner"/>
+				</TextFlow>
+			</VBox>
+		</HBox>
+		<Text fx:id="statusText" textAlignment="CENTER">
+			Esse animal não tem pendências.
+		</Text>
+		<Region VBox.vgrow="ALWAYS"/>
+		<Button>Enviar notificação</Button>
+		<CheckBox>Notificar automaticamente o dono</CheckBox>
+	</VBox>
+</StackPane>

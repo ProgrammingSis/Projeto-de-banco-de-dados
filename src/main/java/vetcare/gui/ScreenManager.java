@@ -8,26 +8,36 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ScreenManager {
-
     private final Stage stage;
 
     public ScreenManager(Stage stage) {
         this.stage = stage;
     }
 
-    public void switchScreen(String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 1200, 650);
-            scene.getStylesheets().add(getClass().getResource("/vetcare/gui/styles.css").toExternalForm());
-            stage.setScene(scene);
-            stage.show();
+    public FXMLLoader getLoaderFor(String fxml) {
+        return new FXMLLoader(getClass().getResource(fxml));
+    }
 
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar a tela: " + fxmlFile, e);
-        } catch (NullPointerException e) {
-            throw new RuntimeException("Arquivo FXML não encontrado: " + fxmlFile, e);
+    public Scene getSceneFor(String fxml, int w, int h) {
+        try {
+            FXMLLoader loader = getLoaderFor(fxml);
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root, w, h);
+            addGlobalStyles(scene);
+            return scene;
+        } catch(Exception err) {
+            throw new RuntimeException(err);
         }
+    }
+
+    public void addGlobalStyles(Scene scene) {
+        scene.getStylesheets().add(getClass().getResource("/vetcare/gui/styles.css").toExternalForm());
+    }
+
+    public void switchScreen(String fxmlFile) {
+        Scene scene = getSceneFor(fxmlFile, 1200, 650);
+        stage.setScene(scene);
+        stage.show();
     }
 }

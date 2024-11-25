@@ -3,9 +3,11 @@ package vetcare.gui;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,22 +37,26 @@ public class PacientesController {
 	@FXML private TextField petWeightField;
 	@FXML private TextField petRaceField;
 
+	private Animal selectedPet;
+
 	private static final String[] animalPictures = new String[] {"Images/turtle.jpeg", "Images/cat1.png", "Images/cat2.png", "Images/dog1.png", "Images/dog2.png", "Images/fish.png"};
 
 	public void initialize() {
 		doSearch();
 	}
 
-	private String getPetPicture(Animal pet) {
+	public static String getPetPicture(Animal pet) {
 
 		//int index = (int)(Math.random() * animalPictures.length);
 		int index = pet.getIdPet() % animalPictures.length;
 		var pic = animalPictures[index];
-		var resource = getClass().getResource(pic).toExternalForm();
+		var resource = PacientesController.class.getResource(pic).toExternalForm();
 		return resource;
 	}
 
 	private void selecionarPet(Animal pet) {
+		this.selectedPet = pet;
+
 		animalName.setText(pet.getNomePet());
 		animalKind.setText(pet.getTipoPet() + " - " + pet.getRacaPet());
 		animalOwner.setText(pet.getCpfDonoPet());
@@ -106,10 +112,42 @@ public class PacientesController {
 
 	@FXML
 	private void abrirCarteirinha() {
-		StackPane sp = new StackPane();
-		Scene scene = new Scene(sp, 200,200);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		stage.show();
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/carteirinha.fxml");
+
+		try {
+			Parent root = loader.load();
+			CarteirinhaController controller = loader.getController();
+			controller.setPet(selectedPet);
+
+			Stage stage = new Stage();
+			Scene scene = new Scene(root, 300,400);
+			VetCareApp.screens.addGlobalStyles(scene);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@FXML
+	private void abrirDono() {
+		// Obtém o dono desse pet
+		var dono = ApiApplication.pacientes.buscaPetDetalhes(selectedPet.getIdPet());
+
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/dono.fxml");
+
+		try {
+			Parent root = loader.load();
+			DonoController controller = loader.getController();
+			controller.setCliente(dono);
+
+			Stage stage = new Stage();
+			Scene scene = new Scene(root, 300,400);
+			VetCareApp.screens.addGlobalStyles(scene);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
