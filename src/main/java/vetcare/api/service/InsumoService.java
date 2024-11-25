@@ -17,6 +17,10 @@ public class InsumoService {
         return insumoRepository.findByCd(ean);
     }
 
+    public List<Insumo> getInsumoByNome(String nome) {
+        return insumoRepository.findInsumoByNameContaining(nome);
+    }
+
     public List<Insumo> getAllInsumos() {
         return insumoRepository.findAll();
     }
