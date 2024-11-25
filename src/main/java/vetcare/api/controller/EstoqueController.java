@@ -26,6 +26,14 @@ public class EstoqueController {
         return insumo;
     }
 
+    public List<Insumo> buscarInsumoPorNome(String nome) {
+        List<Insumo> insumo = insumoService.getInsumoByNome(nome);
+        if (insumo == null) {
+            System.out.println("Insumo " + nome + " não encontrado.");
+        }
+        return insumo;
+    }
+
     // Método para buscar todos os insumos
     public List<Insumo> buscarTodosInsumos() {
         List<Insumo> insumos = insumoService.getAllInsumos();

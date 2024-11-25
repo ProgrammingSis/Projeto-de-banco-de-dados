@@ -49,6 +49,10 @@ public class AnimalService {
     public int deleteAnimal(Integer id) {
         return animalRepository.deleteById(id);
     }
+    public boolean verificaVacinasPendentes(Integer animalId){
+        List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
+        return !(vacinasPendentes).isEmpty();
+    }
 
     public boolean notificarVacinasPendentes(Integer animalId) {
         List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
@@ -57,8 +61,6 @@ public class AnimalService {
 
         if (vacinasPendentes.isEmpty()) {
             System.out.println("O animal não possui vacinas pendentes.");
-            // Enviar e-mail informando que o animal não tem vacinas pendentes
-            mailConfig.enviarNotificacao(email, "Vacinas Pendentes", "O animal não possui vacinas pendentes.");
             return false;
         } else {
             StringBuilder corpoMensagemVeterinario = new StringBuilder();

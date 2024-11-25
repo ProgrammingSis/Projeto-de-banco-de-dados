@@ -1,4 +1,4 @@
-package vetcare.api.model.entities;
+package vetcare.api.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,11 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fatura {
+public class FaturaClienteDTO {
 
     Double valorTotal;
-    Date date;
+    Date data;
     String formaPagamento;
-    Integer idFatura;
-    String clienteCpf;
+    String clienteNome;
+    String clienteContato;
 }

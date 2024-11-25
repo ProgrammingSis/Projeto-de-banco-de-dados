@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import vetcare.api.model.entities.Fatura;
 import vetcare.api.service.FaturaService;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class FinanceiroController {
@@ -21,19 +19,8 @@ public class FinanceiroController {
         return faturaService.getFaturaByCpf(cpf);
     }
 
-    public List<Fatura> listarFaturas() {
-        return faturaService.getAllFaturas();
-    }
-
-    public int adicionarFatura(Fatura fatura) {
+    public String adicionarFatura(Fatura fatura) {
         return faturaService.addFatura(fatura);
     }
 
-    public int atualizarFatura(Fatura fatura) {
-        return faturaService.updateFatura(fatura);
-    }
-
-    public int deletarFatura(Long id) {
-        return faturaService.deleteFatura(id);
-    }
 }
