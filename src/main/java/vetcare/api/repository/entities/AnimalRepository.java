@@ -99,19 +99,20 @@ public class AnimalRepository {
 
     public List<VacinaPet> findVacinasByAnimalId(Integer animalId) {
         String sql = """
-            SELECT 
-                vp.fk_idVacina AS idVacina,
-                vp.fk_Atendimento_id AS idAtendimento,
-                a.data AS dataVacina,
-                 a.data + INTERVAL '1 year' AS dataReforco
-            FROM 
-                VacinaPet vp
-            JOIN 
-                Atendimento a ON vp.fk_Atendimento_id = a.id
-            JOIN 
-                AtendidoEm ae ON ae.fk_Atendimento_id = a.id
-            WHERE 
-                ae.fk_Animal_id = ?;
+            SELECT
+            tv.nome,
+            vp.fk_Atendimento_id,
+            a.data
+        FROM
+            TipoVacina tv
+        LEFT JOIN
+            VacinaPet vp ON tv.nome = vp.fk_idVacina
+        LEFT JOIN
+            Atendimento a ON vp.fk_Atendimento_id = a.id
+        LEFT JOIN
+            AtendidoEm ae ON ae.fk_Atendimento_id = a.id
+        WHERE
+            ae.fk_Animal_id = ?;
         """;
 
         return jdbcTemplate.query(sql, new VacinaPetRowMapper(), animalId);
