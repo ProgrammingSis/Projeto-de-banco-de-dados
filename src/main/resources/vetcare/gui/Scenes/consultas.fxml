@@ -53,25 +53,43 @@
 									</HBox>
 								</top>
 								<center>
-									<GridPane hgap="10" vgap="10">
-										<columnConstraints>
-											<ColumnConstraints percentWidth="0"/>
-											<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
-										</columnConstraints>
-										<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
-										<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="vetNameField"/>
-	<!--
-										<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
-										<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
+									<VBox spacing="10">
+										<GridPane hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+											<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+											<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="vetNameField"/>
 
-										<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
-										<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>-->
-									</GridPane>
+											<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Contato</Text>
+											<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="vetContato"/>
+											<!--
+																						<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
+																						<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>-->
+										</GridPane>
+										<HBox>
+											<DatePicker fx:id="dataInicio" promptText="Início"/>
+											<DatePicker fx:id="dataFim" promptText="Fim"/>
+										</HBox>
+										<ScrollPane fitToWidth="true">
+											<GridPane fx:id="tabConsultas" styleClass="table-grid" hgap="1" vgap="1" style="-fx-background-color: gray;">
+												<columnConstraints>
+													<ColumnConstraints percentWidth="30" hgrow="ALWAYS"/>
+													<ColumnConstraints percentWidth="30"/>
+													<ColumnConstraints percentWidth="20"/>
+													<ColumnConstraints percentWidth="20"/>
+												</columnConstraints>
+											</GridPane>
+										</ScrollPane>
+										<Region VBox.vgrow="ALWAYS"/>
+									</VBox>
 								</center>
 								<bottom>
 									<HBox alignment="CENTER_RIGHT" spacing="8">
 										<Button onAction="#saveData">Salvar Alterações</Button>
 										<Button onAction="#resetData">Descartar Alterações</Button>
+										<Button>+</Button>
 									</HBox>
 								</bottom>
 							</BorderPane>

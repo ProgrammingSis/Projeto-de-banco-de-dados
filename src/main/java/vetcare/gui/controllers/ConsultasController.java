@@ -3,19 +3,25 @@ package vetcare.gui.controllers;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import org.springframework.cglib.core.Local;
 import vetcare.api.ApiApplication;
+import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Veterinario;
 import vetcare.gui.BaseUserController;
 import vetcare.gui.CirclePictureFrame;
 import vetcare.gui.ListCard;
 import vetcare.gui.VetCareApp;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 public class ConsultasController extends BaseUserController {
 	@FXML private TextField searchField;
@@ -24,21 +30,33 @@ public class ConsultasController extends BaseUserController {
 	@FXML ImageView vetPhotoImage;
 	@FXML private Text vetName;
 	@FXML private Text vetKind, vetCRMV;
-	@FXML TextField vetNameField;
+	@FXML TextField vetNameField, vetContato;
 	Veterinario selectedVet;
+	@FXML
+	GridPane tabConsultas;
+	@FXML DatePicker dataInicio;
+	@FXML
+	DatePicker dataFim;
 
 	private static final String[] animalPictures = new String[] {
-			"turtle.jpeg", "cat1.png", "cat2.png", "dog1.png", "dog2.png", "fish.png"
+			"vetA.jpeg", "vetAsi.jpg", "vetPro.jpg", "vetTatuada.jpeg", "vetB.jpg", "vetC.jpg", "vetD.jpg"
 	};
 
 	public void initialize() {
 		doSearch();
+		dataInicio.setOnAction(ev -> {
+			selecionarVet(selectedVet);
+		});
+		dataFim.setOnAction(ev -> {
+			selecionarVet(selectedVet);
+		});
 	}
 
 	public static String getVetPicture(Veterinario vet) {
 
 		//int index = (int)(Math.random() * animalPictures.length);
-		int index = vet.getCrmvVet().charAt(0) % animalPictures.length;
+		String crmv = vet.getCrmvVet();
+		int index = crmv.substring(crmv.length() - 1).charAt(0) % animalPictures.length;
 		var pic = animalPictures[index];
 		var resource = PacientesController.class.getResource("/vetcare/gui/Images/" + pic).toExternalForm();
 		return resource;
@@ -58,7 +76,9 @@ public class ConsultasController extends BaseUserController {
 	}
 
 	private void selecionarVet(Veterinario vet) {
+		tabConsultas.getChildren().clear();
 		this.selectedVet = vet;
+		var crmv = vet.getCrmvVet();
 
 		// Card do veterinário
 		vetPhotoImage.setImage(new Image(getVetPicture(vet)));
@@ -68,8 +88,69 @@ public class ConsultasController extends BaseUserController {
 		vetKind.setText(vet.getTipoVet());
 
 		vetNameField.setText(vet.getNomeVet());
+		String contato = vet.getContato();
+		if (contato == null || contato.isEmpty()) {
+			vetContato.setText("veterinario@gmail.com");
+		} else {
+			vetContato.setText(contato);
+		}
+
 
 		fichaVeterinario.setVisible(true);
+
+		var inicio = dataInicio.getValue();
+		var fim = dataFim.getValue();
+
+		if (inicio == null) {
+			inicio = LocalDate.parse("1970-01-01");
+		}
+		if (fim == null) {
+			fim = LocalDate.parse("3000-01-01");
+		}
+
+		var consultas = ApiApplication.consultas.mostrarCalendarioVeterinario(crmv, inicio.toString(), fim.toString());
+
+		// Cabeçalho da tabela de vacinas
+
+		var tipoCab = new StackPane(new Text("Animal"));
+		tipoCab.getStyleClass().add("table-header-cell");
+		var dataCab = new StackPane(new Text("Data"));
+		dataCab.getStyleClass().add("table-header-cell");
+		var vetCab = new StackPane(new Text("Cliente"));
+		vetCab.getStyleClass().add("table-header-cell");
+		var empty = new StackPane();
+		empty.getStyleClass().add("table-header-cell");
+		tabConsultas.addRow(0, tipoCab, dataCab, vetCab, empty);
+
+		// Lista todos os atendimentos
+		int row = 1;
+
+		for (var co : consultas) {
+			var animalText = new Text(co.getNomeAnimal());
+			animalText.getStyleClass().add("link");
+			var tipo = new StackPane(animalText);
+			tipo.getStyleClass().addAll("table-cell");
+			tipo.setOnMouseClicked(ev -> {
+				//abrirAtendimento(co.getIdAtendimento());
+			});
+
+			var data = new StackPane(new Text(co.getData().toString()));
+			data.getStyleClass().add("table-cell");
+
+			var vetText = new Text(co.getNomeCliente());
+			vetText.getStyleClass().add("link");
+			var cli = new StackPane(vetText);
+			cli.getStyleClass().add("table-cell");
+
+			var notifT = new Button("Notificar");
+			var notif = new StackPane(notifT);
+			notif.getStyleClass().add("table-cell");
+			tabConsultas.addRow(row++, tipo, data, cli, notif);
+
+			notifT.setOnAction(ev -> {
+				ApiApplication.atendimentos.agendarNotificacoes();
+			});
+		}
 	}
 
 	@FXML
@@ -88,7 +169,9 @@ public class ConsultasController extends BaseUserController {
 
 	@FXML
 	void saveData() {
-
+		selectedVet.setNomeVet(vetNameField.getText());
+		selectedVet.setContato(vetContato.getText());
+		ApiApplication.consultas.atualizarVeterinario(selectedVet);
 	}
 
 	@FXML

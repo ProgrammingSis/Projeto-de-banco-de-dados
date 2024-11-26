@@ -51,14 +51,8 @@ public class AtendimentoService {
 
     // Notificar agendamentos
     public String agendarNotificacoes() {
-        try {
-            if (atendimentoRepository.criarNotificacoes()) {
-                return "Notificações agendadas com sucesso.";
-            } else {
-                return "Nenhum atendimento pendente para agendamento.";
-            }
-        } catch (Exception e) {
-            return "Erro ao agendar notificações. Tente novamente mais tarde.";
-        }
+        if (atendimentoRepository.criarNotificacoes()) {
+            return "Notificações agendadas com sucesso.";
+        } else return "Nenhum atendimento pendente para agendamento.";
     }
 }

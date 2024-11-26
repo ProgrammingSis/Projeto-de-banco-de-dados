@@ -14,7 +14,6 @@
 		<GridPane alignment="CENTER" hgap="70" vgap="70">
 			<Button id="button1menu" text="Pacientes"  GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="menuButton" onAction="#goPacientes" />
 			<Button id="button2menu" text="Consultas"  GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="menuButton" onAction="#goConsultas"/>
-
 			<!--
 			<Button id="button3menu" text="Estoque"    GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="menuButton"/>
 			<Button id="button4menu" text="Financeiro" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="menuButton"/>

@@ -155,7 +155,7 @@ Text {
 	-fx-fill: #290;
 }
 
-#tabVacinas StackPane {
+.table-grid StackPane {
 	-fx-background-color: white;
 }
 

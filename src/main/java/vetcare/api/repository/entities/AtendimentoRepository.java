@@ -149,7 +149,8 @@ public class AtendimentoRepository {
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ConsultaDTO consulta = new ConsultaDTO();
             consulta.setData(rs.getDate("data").toLocalDate());
-            consulta.setHorario(rs.getTime("horario").toLocalTime());
+            var time = rs.getTime("horario");
+            if (time != null) consulta.setHorario(time.toLocalTime());
             consulta.setNomeAnimal(rs.getString("nomeAnimal"));
             consulta.setRaca(rs.getString("raca"));
             consulta.setNomeCliente(rs.getString("nomeCliente"));
@@ -174,8 +175,9 @@ public class AtendimentoRepository {
         JOIN Animal an ON an.id = ae.fk_Animal_id
         JOIN Cliente c ON c.cpf = an.fk_Cliente_cpf
         JOIN Veterinario v ON v.crmv = ae.fk_Veterinario_crmv
-        WHERE a.data = ?
+        WHERE a.data = ?;
     """;
+
 
         LocalDate amanha = LocalDate.now().plusDays(1);
 
@@ -183,7 +185,7 @@ public class AtendimentoRepository {
             NotificacaoDTO notificacao = new NotificacaoDTO();
             notificacao.setIdAtendimento(rs.getInt("id"));
             notificacao.setData(rs.getDate("data").toLocalDate());
-            notificacao.setHorario(rs.getTime("horario").toLocalTime());
+            notificacao.setHorario(rs.getTime("horario"));
             notificacao.setNomeCliente(rs.getString("nomeCliente"));
             notificacao.setContatoCliente(rs.getString("contatoCliente"));
             notificacao.setNomeVeterinario(rs.getString("nomeVeterinario"));

@@ -24,5 +24,9 @@ public class ApiApplication {
 		pacientes = context.getBean(PacientesController.class);
 		clientes = context.getBean(ClienteService.class);
 		atendimentos = context.getBean(AtendimentoService.class);
+
+
+		//String s = consultas.notificarConsulta();
+		//System.out.println(s);
 	}
 }

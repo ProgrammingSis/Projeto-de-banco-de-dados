@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,12 +18,10 @@ import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.Cliente;
 import vetcare.gui.BaseUserController;
-import vetcare.gui.CirclePictureFrame;
 import vetcare.gui.ListCard;
 import vetcare.gui.VetCareApp;
 
 import java.util.Stack;
-
 
 public class PacientesController extends BaseUserController {
 	@FXML private TextField searchField;
@@ -82,7 +81,7 @@ public class PacientesController extends BaseUserController {
 		petRaceField.setText((pet.getRacaPet()));
 		fichaPaciente.setVisible(true);
 
-		// Cabeçalho da tabela de vacinas
+		// Cabeçalho da tabela de atendimentos
 		tabVacinas.getChildren().clear();
 		var tipoCab = new StackPane(new Text("Descrição"));
 		tipoCab.getStyleClass().add("table-header-cell");
@@ -90,13 +89,20 @@ public class PacientesController extends BaseUserController {
 		dataCab.getStyleClass().add("table-header-cell");
 		var vetCab = new StackPane(new Text("Veterinário"));
 		vetCab.getStyleClass().add("table-header-cell");
-		tabVacinas.addRow(0, tipoCab, dataCab, vetCab);
+		var empty = new StackPane();
+		empty.getStyleClass().add("table-header-cell");
+		tabVacinas.addRow(0, tipoCab, dataCab, vetCab, empty);
 
 		// Lista todos os atendimentos
 		var atendimentos = ApiApplication.atendimentos.getAllAtendimentosPet(pet.getIdPet());
 		int row = 1;
 
 		for (var at : atendimentos) {
+			var atHora = at.getHorario();
+			String atHoraStr = "";
+			if (atHora != null)
+				atHoraStr = " - " + atHora.toString();
+
 			var tipoText = new Text(at.getTipoAtendimento());
 			tipoText.getStyleClass().add("link");
 			var tipo = new StackPane(tipoText);
@@ -105,7 +111,7 @@ public class PacientesController extends BaseUserController {
 				abrirAtendimento(at.getIdAtendimento());
 			});
 
-			var data = new StackPane(new Text(at.getDate().toString()));
+			var data = new StackPane(new Text(at.getDate().toString() + atHoraStr));
 			data.getStyleClass().add("table-cell");
 
 			var vetText = new Text(at.getCrmvVet());
@@ -113,7 +119,15 @@ public class PacientesController extends BaseUserController {
 			var vet = new StackPane(vetText);
 			vet.getStyleClass().add("table-cell");
 
-			tabVacinas.addRow(row++, tipo, data, vet);
+			var notifBtn = new Button("Avisar");
+			var notif = new StackPane(notifBtn);
+
+			notifBtn.setOnAction(ev -> {
+				System.out.println(ApiApplication.consultas.notificarConsulta());
+				System.out.println(ApiApplication.atendimentos.agendarNotificacoes());
+			});
+
+			tabVacinas.addRow(row++, tipo, data, vet, notif);
 		}
 	}
 
@@ -127,7 +141,6 @@ public class PacientesController extends BaseUserController {
 			this.selecionarPet(pet);
 		});
 		card.getStyleClass().add("paciente");
-
 		return card;
 	}
 
