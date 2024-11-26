@@ -13,7 +13,7 @@
 <?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
 		   xmlns:fx="http://javafx.com/fxml"
-		   fx:controller="vetcare.gui.CarteirinhaController"
+		   fx:controller="vetcare.gui.controllers.CarteirinhaController"
 		   prefHeight="400.0" prefWidth="600.0">
 	<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="8">
 		<StackPane.margin>
@@ -31,16 +31,18 @@
 				<Text fx:id="animalName"/>
 				<Text fx:id="animalKind"/>
 				<TextFlow>
-					<Text>Dono: </Text>
-					<Text fx:id="animalOwner"/>
+					<Text text="Dono: "/>
+					<Text fx:id="animalOwner" styleClass="link"/>
 				</TextFlow>
 			</VBox>
 		</HBox>
 		<Text fx:id="statusText" textAlignment="CENTER">
 			Esse animal não tem pendências.
 		</Text>
-		<Region VBox.vgrow="ALWAYS"/>
-		<Button>Enviar notificação</Button>
-		<CheckBox>Notificar automaticamente o dono</CheckBox>
+		<ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+			<VBox fx:id="listaVacinas"/>
+		</ScrollPane>
+		<Button fx:id="sendNotificationBtn" onAction="#sendNotification">Enviar notificação</Button>
+		<CheckBox>Notificar automaticamente o dono sobre vacinas</CheckBox>
 	</VBox>
 </StackPane>

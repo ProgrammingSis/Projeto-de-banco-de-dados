@@ -2,18 +2,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.geometry.Insets?>
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.PacientesController" styleClass="user-screen" >
+<?import vetcare.gui.CirclePictureFrame?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.PacientesController" styleClass="user-screen" >
 	<Pane styleClass="decorated-background"/>
 	<BorderPane>
 		<top>
-			<ImageView fx:id="logoBtn" fitHeight="64" preserveRatio="true" onMouseClicked="#goHome">
-				<Image url="@../Images/logo.png"/>
-			</ImageView>
+			<HBox>
+				<CirclePictureFrame imageUrl="@/vetcare/gui/Images/fundo.png" radius="48" onMouseClicked="#abrirMenuLateral"/>
+				<ImageView fitHeight="48" preserveRatio="true" onMouseClicked="#goHome">
+					<Image url="@../Images/logo.png"/>
+				</ImageView>
+			</HBox>
 		</top>
 		<center>
 			<BorderPane>
@@ -21,21 +25,21 @@
 					<TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome do paciente..."/>
 				</top>
 				<center>
-					<SplitPane>
-						<ScrollPane>
+					<SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
+						<ScrollPane fitToWidth="true">
 							<VBox fx:id="pacientes"/>
 						</ScrollPane>
 						<StackPane>
 							<StackPane.margin>
 								<Insets left="8" top="8" right="8" bottom="8"/>
 							</StackPane.margin>
-							<BorderPane>
+							<Text>O paciente aparecerá aqui.</Text>
+							<BorderPane fx:id="fichaPaciente" visible="false" style="-fx-background-color: white;">
 								<top>
 									<HBox styleClass="petCard">
 										<StackPane id="animalPhoto">
 											<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
-
-											<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" >
+											<ImageView fx:id="petPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" styleClass="cardPhoto" >
 												<Image url="@../Images/cat1.png"/>
 											</ImageView>
 										</StackPane>
@@ -44,32 +48,42 @@
 											<Text fx:id="animalKind"/>
 											<TextFlow>
 												<Text text="Dono: "/>
-												<Text fx:id="animalOwner" onMouseClicked="#abrirDono"/>
+												<Text fx:id="animalOwner" styleClass="link" onMouseClicked="#abrirDono"/>
 											</TextFlow>
 										</VBox>
 										<Button onMouseClicked="#abrirCarteirinha">Carteirinha</Button>
 									</HBox>
 								</top>
 								<center>
-									<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" hgap="10">
-										<columnConstraints>
-											<ColumnConstraints percentWidth="0"/>
-											<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
-										</columnConstraints>
-										<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
-										<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="petNameField"/>
+									<VBox>
+										<GridPane hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+											<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+											<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="petNameField"/>
 
-										<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
-										<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
+											<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
+											<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
 
-										<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
-										<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
-									</GridPane>
+											<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
+											<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
+										</GridPane>
+										<GridPane fx:id="tabVacinas" hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+
+										</GridPane>
+									</VBox>
 								</center>
 								<bottom>
 									<HBox alignment="CENTER_RIGHT" spacing="8">
-										<Button>Salvar Alterações</Button>
-										<Button>Descartar Alterações</Button>
+										<Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
+										<Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
+										<Button styleClass="botao-ok" onAction="#novoPet">+</Button>
 									</HBox>
 								</bottom>
 							</BorderPane>
@@ -79,4 +93,8 @@
 			</BorderPane>
 		</center>
 	</BorderPane>
+	<HBox fx:id="menuLateral" visible="false">
+		<VBox style="-fx-background-color: white;"/>
+		<Region HBox.hgrow="ALWAYS" onMouseClicked="#fecharMenuLateral"/>
+	</HBox>
 </StackPane>
