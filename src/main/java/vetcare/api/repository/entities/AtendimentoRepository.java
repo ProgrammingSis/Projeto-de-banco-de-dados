@@ -55,15 +55,15 @@ public class AtendimentoRepository {
                     Atendimento.data,
                     Atendimento.horario,
                     Atendimento.fk_tipo,
-                    AtendidoEm.fk_Animal_id,
-                    AtendidoEm.fk_Veterinario_crmv 
+                    AtendidoEm.fk_animal_id,
+                    AtendidoEm.fk_veterinario_crmv 
                             FROM
                     Atendimento
                             JOIN
                     AtendidoEm
                             ON
-                    Atendimento.id = AtendidoEm.fk_Atendimento_id 
-                            WHERE  AtendidoEm.fk_Animal_id = ?;
+                    Atendimento.id = AtendidoEm.fk_atendimento_id 
+                            WHERE  AtendidoEm.fk_animal_id = ?;
                 """;
         return jdbcTemplate.query(sql, new AtentimentoPetDTORowMapper(), animalId);
     }

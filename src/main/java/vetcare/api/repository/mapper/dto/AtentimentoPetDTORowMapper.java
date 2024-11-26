@@ -10,12 +10,12 @@ public class AtentimentoPetDTORowMapper implements RowMapper<AtendimentoPetDTO> 
     @Override
     public AtendimentoPetDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         AtendimentoPetDTO atendimentoPetDTO = new AtendimentoPetDTO();
-        atendimentoPetDTO.setCrmvVet(rs.getString("fk_Veterinario_crmv"));
+        atendimentoPetDTO.setCrmvVet(rs.getString("fk_veterinario_crmv"));
         atendimentoPetDTO.setIdAtendimento(rs.getInt("id"));
-        atendimentoPetDTO.setIdPet(rs.getInt("fk_Animal_id"));
+        atendimentoPetDTO.setIdPet(rs.getInt("fk_animal_id"));
         atendimentoPetDTO.setDate(rs.getDate("data"));
         atendimentoPetDTO.setTipoAtendimento(rs.getString("fk_tipo"));
         atendimentoPetDTO.setHorario(rs.getTime("horario"));
-        return null;
+        return atendimentoPetDTO;
     }
 }
