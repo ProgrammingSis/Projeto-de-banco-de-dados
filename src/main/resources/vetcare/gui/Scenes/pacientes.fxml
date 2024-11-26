@@ -55,7 +55,7 @@
 									</HBox>
 								</top>
 								<center>
-									<VBox>
+									<VBox spacing="16">
 										<GridPane hgap="10" vgap="10">
 											<columnConstraints>
 												<ColumnConstraints percentWidth="0"/>
@@ -70,12 +70,13 @@
 											<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
 											<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
 										</GridPane>
-										<GridPane fx:id="tabVacinas" hgap="10" vgap="10">
+										<Text style="-fx-font-size: 16pt; -fx-font-style: italic; -fx-font-weight: bold;">:: Atendimentos</Text>
+										<GridPane fx:id="tabVacinas" hgap="1" vgap="1" style="-fx-background-color: gray;">
 											<columnConstraints>
-												<ColumnConstraints percentWidth="0"/>
-												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+												<ColumnConstraints percentWidth="40" hgrow="ALWAYS"/>
+												<ColumnConstraints percentWidth="20"/>
+												<ColumnConstraints percentWidth="40"/>
 											</columnConstraints>
-
 										</GridPane>
 									</VBox>
 								</center>

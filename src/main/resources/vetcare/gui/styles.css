@@ -151,5 +151,19 @@ Text {
 }
 
 .link {
-	-fx-fill: #1B75D0;
+	/*-fx-fill: #1B75D0;*/
+	-fx-fill: #290;
+}
+
+#tabVacinas StackPane {
+	-fx-background-color: white;
+}
+
+.table-header-cell {
+	-fx-font-weight: bold;
+	-fx-padding: 4;
+}
+
+.table-cell {
+	-fx-padding: 4;
 }

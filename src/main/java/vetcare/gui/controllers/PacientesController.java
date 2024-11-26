@@ -1,6 +1,7 @@
 package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
@@ -18,6 +20,8 @@ import vetcare.gui.BaseUserController;
 import vetcare.gui.CirclePictureFrame;
 import vetcare.gui.ListCard;
 import vetcare.gui.VetCareApp;
+
+import java.util.Stack;
 
 
 public class PacientesController extends BaseUserController {
@@ -78,16 +82,39 @@ public class PacientesController extends BaseUserController {
 		petRaceField.setText((pet.getRacaPet()));
 		fichaPaciente.setVisible(true);
 
+		// Cabeçalho da tabela de vacinas
+		tabVacinas.getChildren().clear();
+		var tipoCab = new StackPane(new Text("Descrição"));
+		tipoCab.getStyleClass().add("table-header-cell");
+		var dataCab = new StackPane(new Text("Data"));
+		dataCab.getStyleClass().add("table-header-cell");
+		var vetCab = new StackPane(new Text("Veterinário"));
+		vetCab.getStyleClass().add("table-header-cell");
+		tabVacinas.addRow(0, tipoCab, dataCab, vetCab);
+
 		// Lista todos os atendimentos
-		/*var atendimentos = ApiApplication.atendimentos.getAllAtendimentosPet(pet.getIdPet());
-		int row = 0;
+		var atendimentos = ApiApplication.atendimentos.getAllAtendimentosPet(pet.getIdPet());
+		int row = 1;
+
 		for (var at : atendimentos) {
-			var tipo = new Text(at.getTipoAtendimento());
-			var data = new Text(at.getDate().toString());
-			tabVacinas.add(tipo, row, 0);
-			tabVacinas.add(tipo, row, 1);
-			row++;
-		}*/
+			var tipoText = new Text(at.getTipoAtendimento());
+			tipoText.getStyleClass().add("link");
+			var tipo = new StackPane(tipoText);
+			tipo.getStyleClass().addAll("table-cell");
+			tipo.setOnMouseClicked(ev -> {
+				abrirAtendimento(at.getIdAtendimento());
+			});
+
+			var data = new StackPane(new Text(at.getDate().toString()));
+			data.getStyleClass().add("table-cell");
+
+			var vetText = new Text(at.getCrmvVet());
+			vetText.getStyleClass().add("link");
+			var vet = new StackPane(vetText);
+			vet.getStyleClass().add("table-cell");
+
+			tabVacinas.addRow(row++, tipo, data, vet);
+		}
 	}
 
 	private Node criarPet(Animal pet) {

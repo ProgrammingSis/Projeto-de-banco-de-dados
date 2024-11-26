@@ -14,12 +14,13 @@ import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.VacinaPet;
+import vetcare.gui.BaseUserController;
 import vetcare.gui.VetCareApp;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-public class CarteirinhaController {
+public class CarteirinhaController extends BaseUserController {
 	Animal pet;
 
 	@FXML Text animalName;
@@ -62,28 +63,6 @@ public class CarteirinhaController {
 			}
 
 			listaVacinas.getChildren().add(text);
-		}
-	}
-
-	private void abrirAtendimento(long atendimentoId) {
-		var atendimento = ApiApplication.atendimentos.getAtendimentoById(atendimentoId);
-		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/atendimento.fxml");
-
-		try {
-			Parent root = loader.load();
-			AtendimentoController controller = loader.getController();
-			controller.defAtendimento(atendimento);
-
-			Stage stage = new Stage();
-			stage.setTitle("Atendimento");
-			stage.setWidth(300);
-			stage.setHeight(400);
-			Scene scene = new Scene(root);
-			VetCareApp.screens.addGlobalStyles(scene);
-			stage.setScene(scene);
-			stage.show();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
 		}
 	}
 
