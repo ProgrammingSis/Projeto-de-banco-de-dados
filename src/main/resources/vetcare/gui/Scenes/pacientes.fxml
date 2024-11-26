@@ -48,27 +48,36 @@
 											<Text fx:id="animalKind"/>
 											<TextFlow>
 												<Text text="Dono: "/>
-												<Text fx:id="animalOwner" onMouseClicked="#abrirDono"/>
+												<Text fx:id="animalOwner" styleClass="link" onMouseClicked="#abrirDono"/>
 											</TextFlow>
 										</VBox>
 										<Button onMouseClicked="#abrirCarteirinha">Carteirinha</Button>
 									</HBox>
 								</top>
 								<center>
-									<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
-										<columnConstraints>
-											<ColumnConstraints percentWidth="0"/>
-											<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
-										</columnConstraints>
-										<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
-										<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="petNameField"/>
+									<VBox>
+										<GridPane hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+											<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+											<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="petNameField"/>
 
-										<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
-										<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
+											<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Peso</Text>
+											<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="petWeightField"/>
 
-										<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
-										<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
-									</GridPane>
+											<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
+											<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>
+										</GridPane>
+										<GridPane fx:id="tabVacinas" hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+
+										</GridPane>
+									</VBox>
 								</center>
 								<bottom>
 									<HBox alignment="CENTER_RIGHT" spacing="8">

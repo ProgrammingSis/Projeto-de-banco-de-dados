@@ -1,6 +1,8 @@
 package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,9 +10,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.VacinaPet;
+import vetcare.gui.VetCareApp;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -48,10 +52,38 @@ public class CarteirinhaController {
 		for (var vec : vacinas) {
 			var data = vec.getDataVacina();
 			var text = new Text(vec.getIdVacina() + " - " + data.toString());
+			text.getStyleClass().add("link");
+			text.setOnMouseClicked(ev -> {
+				abrirAtendimento(vec.getIdAtendimento());
+			});
+
 			if (vacinaExpirada(vec)) {
-				text.setFill(Color.RED);
+				text.setStyle("-fx-fill: red");
 			}
+
 			listaVacinas.getChildren().add(text);
+		}
+	}
+
+	private void abrirAtendimento(long atendimentoId) {
+		var atendimento = ApiApplication.atendimentos.getAtendimentoById(atendimentoId);
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/atendimento.fxml");
+
+		try {
+			Parent root = loader.load();
+			AtendimentoController controller = loader.getController();
+			controller.defAtendimento(atendimento);
+
+			Stage stage = new Stage();
+			stage.setTitle("Atendimento");
+			stage.setWidth(300);
+			stage.setHeight(400);
+			Scene scene = new Scene(root);
+			VetCareApp.screens.addGlobalStyles(scene);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 

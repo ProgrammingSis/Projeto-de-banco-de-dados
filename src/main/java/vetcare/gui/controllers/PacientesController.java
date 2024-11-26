@@ -33,6 +33,7 @@ public class PacientesController extends BaseUserController {
 	@FXML private TextField petWeightField;
 	@FXML private TextField petRaceField;
 
+	@FXML private GridPane tabVacinas;
 	private Animal selectedPet;
 	private Cliente selectedPetOwner;
 
@@ -71,10 +72,22 @@ public class PacientesController extends BaseUserController {
 		animalOwner.setText(getOwnerString(owner));
 		petPhotoImage.setImage(new Image(getPetPicture(pet)));
 
+		// Propriedades editáveis
 		petNameField.setText(pet.getNomePet());
 		petWeightField.setText(pet.getPesoPet().toString());
 		petRaceField.setText((pet.getRacaPet()));
 		fichaPaciente.setVisible(true);
+
+		// Lista todos os atendimentos
+		/*var atendimentos = ApiApplication.atendimentos.getAllAtendimentosPet(pet.getIdPet());
+		int row = 0;
+		for (var at : atendimentos) {
+			var tipo = new Text(at.getTipoAtendimento());
+			var data = new Text(at.getDate().toString());
+			tabVacinas.add(tipo, row, 0);
+			tabVacinas.add(tipo, row, 1);
+			row++;
+		}*/
 	}
 
 	private Node criarPet(Animal pet) {

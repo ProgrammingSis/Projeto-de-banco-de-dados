@@ -32,7 +32,7 @@
 				<Text fx:id="animalKind"/>
 				<TextFlow>
 					<Text text="Dono: "/>
-					<Text fx:id="animalOwner"/>
+					<Text fx:id="animalOwner" styleClass="link"/>
 				</TextFlow>
 			</VBox>
 		</HBox>
