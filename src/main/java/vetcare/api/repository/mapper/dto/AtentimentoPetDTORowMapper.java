@@ -11,7 +11,7 @@ public class AtentimentoPetDTORowMapper implements RowMapper<AtendimentoPetDTO> 
     public AtendimentoPetDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         AtendimentoPetDTO atendimentoPetDTO = new AtendimentoPetDTO();
         atendimentoPetDTO.setCrmvVet(rs.getString("fk_Veterinario_crmv"));
-        atendimentoPetDTO.setIdAtendimento(rs.getInt("fk_Atendimento_id"));
+        atendimentoPetDTO.setIdAtendimento(rs.getInt("id"));
         atendimentoPetDTO.setIdPet(rs.getInt("fk_Animal_id"));
         atendimentoPetDTO.setDate(rs.getDate("data"));
         atendimentoPetDTO.setTipoAtendimento(rs.getString("fk_tipo"));
