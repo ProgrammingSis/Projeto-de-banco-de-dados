@@ -2,6 +2,7 @@ package vetcare.api.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import vetcare.api.model.dto.AtendimentoPetDTO;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Atendimento;
 import vetcare.api.repository.entities.AtendimentoRepository;
@@ -22,6 +23,10 @@ public class AtendimentoService {
 
     public List<Atendimento> getAllAtendimentos() {
         return atendimentoRepository.findAll();
+    }
+
+    public List<AtendimentoPetDTO> getAllAtendimentosPet(Integer animalId) {
+        return atendimentoRepository.findAllPetAtendimentos(animalId);
     }
 
     public int addAtendimento(Atendimento atendimento) {
