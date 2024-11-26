@@ -2,6 +2,7 @@ package vetcare.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import vetcare.api.model.dto.AtendimentoPetDTO;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Veterinario;
 import vetcare.api.service.AtendimentoService;
@@ -117,5 +118,9 @@ public class ConsultasController {
 
     public String notificarConsulta(){
         return atendimentoService.agendarNotificacoes();
+    }
+
+    public List<AtendimentoPetDTO> buscaAtendimentosPet(Integer animalId){
+        return atendimentoService.getAllAtendimentosPet(animalId);
     }
 }

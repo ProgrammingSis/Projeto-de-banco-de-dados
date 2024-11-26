@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import vetcare.api.config.MailConfig;
+import vetcare.api.model.dto.AtendimentoPetDTO;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.dto.NotificacaoDTO;
 import vetcare.api.model.entities.Atendimento;
+import vetcare.api.repository.mapper.dto.AtentimentoPetDTORowMapper;
 import vetcare.api.repository.mapper.entities.AtendimentoRowMapper;
 
 import java.sql.Date;
@@ -44,6 +46,25 @@ public class AtendimentoRepository {
     public List<Atendimento> findAll() {
         String sql = "SELECT * FROM Atendimento";
         return jdbcTemplate.query(sql, new AtendimentoRowMapper());
+    }
+
+    public List<AtendimentoPetDTO> findAllPetAtendimentos(Integer animalId) {
+        String sql = """
+                SELECT
+                    Atendimento.id,
+                    Atendimento.data,
+                    Atendimento.horario,
+                    Atendimento.fk_tipo,
+                    AtendidoEm.fk_Veterinario_crmv 
+                            FROM
+                    Atendimento
+                            JOIN
+                    AtendidoEm
+                            ON
+                    Atendimento.id = AtendidoEm.fk_Atendimento_id
+                            WHERE  AtendidoEm.fk_Animal_id = ?;
+                """;
+        return jdbcTemplate.query(sql, new AtentimentoPetDTORowMapper(), animalId);
     }
 
     // UPDATE
