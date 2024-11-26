@@ -5,9 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
+import vetcare.api.model.entities.VacinaPet;
+
+import java.time.LocalDate;
+import java.time.Period;
 
 public class CarteirinhaController {
 	Animal pet;
@@ -40,9 +46,23 @@ public class CarteirinhaController {
 		// Preenche a lista de vacinas
 		var vacinas = ApiApplication.pacientes.buscarVacinasPet(pet.getIdPet());
 		for (var vec : vacinas) {
-			var text = new Text(vec.getIdVacina());
+			var data = vec.getDataVacina();
+			var text = new Text(vec.getIdVacina() + " - " + data.toString());
+			if (vacinaExpirada(vec)) {
+				text.setFill(Color.RED);
+			}
 			listaVacinas.getChildren().add(text);
 		}
+	}
+
+	private boolean vacinaExpirada(VacinaPet vacina) {
+		var data = vacina.getDataVacina();
+		var pass = data.toLocalDate();
+		var agora = LocalDate.now();
+		var tempo = Period.between(pass, agora);
+		var anos = tempo.getYears();
+		System.out.println(anos);
+		return anos >= 1;
 	}
 
 	@FXML
