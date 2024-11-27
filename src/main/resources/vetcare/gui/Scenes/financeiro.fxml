@@ -75,12 +75,22 @@
                                             <Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Cpf</Text>
                                             <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="clienteId"/>
                                         </GridPane>
+                                        <Text style="-fx-font-size: 16pt; -fx-font-style: italic; -fx-font-weight: bold;">:: Faturas anteriores</Text>
+                                        <GridPane fx:id="tabFaturas" styleClass="table-grid" hgap="1" vgap="1" style="-fx-background-color: gray;">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="30" hgrow="ALWAYS"/>
+                                                <ColumnConstraints percentWidth="30"/>
+                                                <ColumnConstraints percentWidth="20"/>
+                                                <ColumnConstraints percentWidth="20"/>
+                                            </columnConstraints>
+                                        </GridPane>
                                     </VBox>
                                 </center>
 
 
                                 <bottom>
                                     <HBox alignment="CENTER_RIGHT" spacing="8">
+                                        <Button styleClass="botao-nova fatura" onAction="#addFatura">Adicionar Fatura</Button>
                                         <Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
                                         <Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
                                         <Button styleClass="botao-ok" onAction="#novoPet">+</Button>

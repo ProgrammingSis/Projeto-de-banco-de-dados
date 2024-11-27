@@ -2,15 +2,21 @@ package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Cliente;
+import vetcare.api.model.entities.Fatura;
 import vetcare.gui.BaseUserController;
 import vetcare.gui.ListCard;
+import vetcare.gui.VetCareApp;
 
 public class FinanceiroController extends BaseUserController {
     @FXML private TextField searchField;
@@ -25,7 +31,10 @@ public class FinanceiroController extends BaseUserController {
     @FXML private TextField clienteId;
     @FXML private TextField contatoCliente;
 
+    @FXML private GridPane tabFaturas;
+
     private Cliente cliente;
+    private Fatura fatura;
 
     private static final String[] clientesPictures = new String[] {
             "a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg"
@@ -58,6 +67,42 @@ public class FinanceiroController extends BaseUserController {
         contatoCliente.setText(String.valueOf((cliente.getContatoCliente())));
         fichaCliente.setVisible(true);
 
+        // Cabeçalho da tabela de faturas
+        tabFaturas.getChildren().clear();
+        var tipoCab = new StackPane(new Text("Id"));
+        tipoCab.getStyleClass().add("table-header-cell");
+        var dataCab = new StackPane(new Text("Data"));
+        dataCab.getStyleClass().add("table-header-cell");
+        var valor = new StackPane(new Text("Valor"));
+        valor.getStyleClass().add("table-header-cell");
+        var formaPgto = new StackPane(new Text("Forma de Pagamento"));
+        formaPgto.getStyleClass().add("table-header-cell");
+        var empty = new StackPane();
+        empty.getStyleClass().add("table-header-cell");
+        tabFaturas.addRow(0, tipoCab, dataCab, valor, formaPgto, empty);
+
+        // Lista todos as faturas
+        var faturas = ApiApplication.financeiro.buscarFaturaPorCliente(cliente.getCpfCliente());
+        int row = 1;
+
+        for (var at : faturas) {
+
+            var id = new StackPane(new Text(at.getIdFatura().toString()));
+            id.getStyleClass().add("table-cell");
+
+            var data = new StackPane(new Text(at.getDate().toString()));
+            data.getStyleClass().add("table-cell");
+
+            var a = new Text(at.getValorTotal().toString());
+            var valort = new StackPane(a);
+            valort.getStyleClass().add("table-cell");
+
+            var b = new Text(at.getFormaPagamento());
+            var formapg = new StackPane(b);
+            formapg.getStyleClass().add("table-cell");
+
+            tabFaturas.addRow(row++, id, data, valort, formapg);
+        }
     }
 
 
@@ -85,6 +130,29 @@ public class FinanceiroController extends BaseUserController {
         for (Cliente cliente : client) {
             var elem = criarCliente(cliente);
             clientes.getChildren().add(elem);
+        }
+    }
+
+    @FXML
+    private void addFatura() {
+        // chamar pop up
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarfatura.fxml");
+
+        try {
+            // Carregar o FXML e obter o controlador associado
+            Parent root = loader.load();
+            AdicionarFaturaController controller = loader.getController();
+
+            // Configurar o CPF do cliente no controlador
+            controller.initialize(cliente.getCpfCliente());
+
+            // Configurar e exibir o pop-up
+            Stage stage = new Stage();
+            stage.setTitle("Adicionar Fatura");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao carregar o popup de Adicionar Fatura", e);
         }
     }
 

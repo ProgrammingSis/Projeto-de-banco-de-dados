@@ -41,8 +41,8 @@ public class AtendimentoService {
         return atendimentoRepository.deletarConsulta(id);
     }
 
-    public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
-        return atendimentoRepository.agendarConsulta(idAtendimento, data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
+    public boolean agendarConsulta(AtendimentoPetDTO atendimentoPetDTO){
+        return atendimentoRepository.agendarConsulta(atendimentoPetDTO);
     }
 
     public List<ConsultaDTO> geraCalendarioVeterinario(String crmv, LocalDate dataInicio, LocalDate dataFim) {

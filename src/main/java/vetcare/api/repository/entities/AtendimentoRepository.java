@@ -85,16 +85,16 @@ public class AtendimentoRepository {
     }
 
     // CRIAR NOVA CONSULTA
-    public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento) {
+    public boolean agendarConsulta(AtendimentoPetDTO atendimentoPetDTO) {
         String sqlAtendimento = "INSERT INTO Atendimento (data, id, fk_tipo, horario) VALUES (?, ?, ?, ?)";
         String sqlAtendidoEm = "INSERT INTO AtendidoEm (fk_Veterinario_crmv, fk_Atendimento_id, fk_Animal_id) VALUES (?, ?, ?)";
 
         try {
             // Inserir na tabela Atendimento
-            jdbcTemplate.update(sqlAtendimento, data, idAtendimento, tipoAtendimento, horario);
+            jdbcTemplate.update(sqlAtendimento, atendimentoPetDTO.getDate(), atendimentoPetDTO.getIdAtendimento(), atendimentoPetDTO.getTipoAtendimento(), atendimentoPetDTO.getHorario());
 
             // Inserir na tabela AtendidoEm
-            jdbcTemplate.update(sqlAtendidoEm, crmvVeterinario, idAtendimento, idAnimal);
+            jdbcTemplate.update(sqlAtendidoEm, atendimentoPetDTO.getCrmvVet(), atendimentoPetDTO.getIdAtendimento(), atendimentoPetDTO.getIdPet());
 
             System.out.println("Consulta agendada com sucesso!");
             return true;
@@ -148,7 +148,7 @@ public class AtendimentoRepository {
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ConsultaDTO consulta = new ConsultaDTO();
-            consulta.setData(rs.getDate("data").toLocalDate());
+            consulta.setData((rs.getDate("data").toLocalDate()));
             var time = rs.getTime("horario");
             if (time != null) consulta.setHorario(time.toLocalTime());
             consulta.setNomeAnimal(rs.getString("nomeAnimal"));

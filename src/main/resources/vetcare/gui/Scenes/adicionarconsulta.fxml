@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="vetcare.gui.controllers.AdicionarConsultaController"
+      alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+
+    <Label text="Agendar Consulta" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="idAtendimentoField" promptText="ID Atendimento"/>
+    <DatePicker fx:id="dataPicker"/>
+    <TextField fx:id="horarioField" promptText="Horário (hh:mm:ss)"/>
+    <TextField fx:id="idAnimalField" promptText="ID Animal" editable="false"/>
+    <TextField fx:id="crmvVeterinarioField" promptText="CRMV do Veterinário"/>
+    <ComboBox fx:id="tipoAtendimentoBox" promptText="Tipo de Atendimento"/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="salvarButton" text="Salvar"/>
+        <Button fx:id="cancelarButton" text="Cancelar"/>
+    </HBox>
+</VBox>

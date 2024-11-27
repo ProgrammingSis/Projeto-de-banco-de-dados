@@ -83,6 +83,7 @@
 								</center>
 								<bottom>
 									<HBox alignment="CENTER_RIGHT" spacing="8">
+										<Button styleClass="botao-aviso" onAction="#addConsulta">Adicionar consulta</Button>
 										<Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
 										<Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
 										<Button styleClass="botao-ok" onAction="#novoPet">+</Button>

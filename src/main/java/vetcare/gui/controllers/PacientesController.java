@@ -219,4 +219,28 @@ public class PacientesController extends BaseUserController {
 		petNameField.setText("");
 		petRaceField.setText("");
 	}
+
+	@FXML
+	private void addConsulta() {
+		// chamar pop up
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarconsulta.fxml");
+
+		try {
+			// Carregar o FXML e obter o controlador associado
+			Parent root = loader.load();
+			AdicionarConsultaController controller = loader.getController();
+
+			// Configurar o CPF do cliente no controlador
+			controller.initialize(selectedPet.getIdPet());
+
+			// Configurar e exibir o pop-up
+			Stage stage = new Stage();
+			stage.setTitle("Adicionar Fatura");
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao carregar o popup de Adicionar Consulta", e);
+		}
+	}
+
 }

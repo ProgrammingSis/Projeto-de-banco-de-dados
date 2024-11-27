@@ -104,8 +104,8 @@ public class ConsultasController {
        return atendimentoService.deletarConsulta(id);
     }
 
-    public boolean criarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
-        return atendimentoService.agendarConsulta(idAtendimento, data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
+    public boolean criarConsulta(AtendimentoPetDTO atendimentoPetDTO){
+        return atendimentoService.agendarConsulta(atendimentoPetDTO);
     }
 
     public List<ConsultaDTO> mostrarCalendarioVeterinario(String crmv, String dataInicioStr, String dataFimStr) {
