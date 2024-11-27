@@ -19,7 +19,7 @@ public class FaturaService {
     public Fatura getFaturaById(Long id) {
         return faturaRepository.findById(id);
     }
-    public Fatura getFaturaByCpf(String cpf) {
+    public List<Fatura> getFaturaByCpf(String cpf) {
         return faturaRepository.findByCpf(cpf);
     }
 

@@ -43,9 +43,9 @@ public class FaturaRepository {
         return jdbcTemplate.queryForObject(sql, new FaturaRowMapper(), id);
     }
 
-    public Fatura findByCpf(String cpf) {
+    public List<Fatura> findByCpf(String cpf) {
         String sql = "SELECT * FROM Fatura WHERE fk_Cliente_cpf = ?";
-        return jdbcTemplate.queryForObject(sql, new FaturaRowMapper(), cpf);
+        return jdbcTemplate.query(sql, new FaturaRowMapper(), cpf);
     }
 
     public List<Fatura> findAll() {

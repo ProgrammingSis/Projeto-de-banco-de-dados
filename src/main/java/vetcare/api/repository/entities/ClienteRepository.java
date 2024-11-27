@@ -3,6 +3,7 @@ package vetcare.api.repository.entities;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import vetcare.api.model.entities.Cliente;
+import vetcare.api.repository.mapper.entities.AnimalRowMapper;
 import vetcare.api.repository.mapper.entities.ClienteRowMapper;
 
 import java.util.List;
@@ -36,9 +37,11 @@ public class ClienteRepository {
         return jdbcTemplate.queryForObject(sql, new ClienteRowMapper(), cpf);
     }
 
-    public List<Cliente> findAll() {
-        String sql = "SELECT * FROM Cliente";
-        return jdbcTemplate.query(sql, new ClienteRowMapper());
+    public List<Cliente> findAll(String nome) {
+        String sql = "SELECT * FROM Cliente WHERE nome ILIKE ?";
+        String namePattern = "%" + nome + "%"; // Adiciona os curingas para busca parcial
+
+        return jdbcTemplate.query(sql, new ClienteRowMapper(), namePattern);
     }
 
     // UPDATE

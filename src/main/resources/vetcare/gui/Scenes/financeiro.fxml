@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.geometry.Insets?>
+<?import vetcare.gui.CirclePictureFrame?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.FinanceiroController" styleClass="user-screen" >
+    <Pane styleClass="decorated-background"/>
+    <BorderPane>
+        <top>
+            <HBox>
+                <CirclePictureFrame imageUrl="@/vetcare/gui/Images/fundo.png" radius="48" onMouseClicked="#abrirMenuLateral"/>
+                <ImageView fitHeight="48" preserveRatio="true" onMouseClicked="#goHome">
+                    <Image url="@../Images/logo.png"/>
+                </ImageView>
+            </HBox>
+        </top>
+
+
+        <center>
+            <BorderPane>
+
+                <top>
+                    <TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome do cliente..."/>
+                </top>
+
+                <center>
+                    <SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
+                        <ScrollPane fitToWidth="true">
+                            <VBox fx:id="clientes"/>
+                        </ScrollPane>
+                        <StackPane>
+                            <StackPane.margin>
+                                <Insets left="8" top="8" right="8" bottom="8"/>
+                            </StackPane.margin>
+                            <Text>O cliente aparecerá aqui.</Text>
+
+                            <BorderPane fx:id="fichaCliente" visible="false" style="-fx-background-color: white;">
+
+
+                                <top>
+                                    <HBox styleClass="clienteCard">
+                                        <StackPane id="clientePhoto">
+                                            <HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
+                                            <ImageView fx:id="clientePhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" styleClass="cardPhoto" >
+                                                <Image url="@../Images/clientes/a.jpeg"/>
+                                            </ImageView>
+                                        </StackPane>
+                                        <VBox HBox.hgrow="ALWAYS">
+                                            <Text fx:id="clienteNome"/>
+                                            <Text fx:id="clienteContato"/>
+                                            <Text fx:id="clienteCpf"/>
+                                        </VBox>
+                                    </HBox>
+                                </top>
+
+
+                                <center>
+                                    <VBox spacing="16">
+                                        <GridPane hgap="10" vgap="10">
+                                            <columnConstraints>
+                                                <ColumnConstraints percentWidth="0"/>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+                                            </columnConstraints>
+                                            <Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+                                            <TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="clienteNomeField"/>
+
+                                            <Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Contato</Text>
+                                            <TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="contatoCliente"/>
+
+                                            <Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Cpf</Text>
+                                            <TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="clienteId"/>
+                                        </GridPane>
+                                    </VBox>
+                                </center>
+
+
+                                <bottom>
+                                    <HBox alignment="CENTER_RIGHT" spacing="8">
+                                        <Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
+                                        <Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
+                                        <Button styleClass="botao-ok" onAction="#novoPet">+</Button>
+                                    </HBox>
+                                </bottom>
+
+
+                            </BorderPane>
+                        </StackPane>
+                    </SplitPane>
+                </center>
+            </BorderPane>
+        </center>
+
+
+    </BorderPane>
+    <HBox fx:id="menuLateral" visible="false">
+        <VBox style="-fx-background-color: white;"/>
+        <Region HBox.hgrow="ALWAYS" onMouseClicked="#fecharMenuLateral"/>
+    </HBox>
+</StackPane>
