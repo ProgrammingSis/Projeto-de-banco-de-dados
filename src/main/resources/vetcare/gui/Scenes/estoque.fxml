@@ -28,8 +28,12 @@
                     <TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome do insumo..."/>
                 </top>
                 <bottom>
-                    <Button styleClass="botao-novo insumo" onAction="#abrirAdicionarInsumo">+</Button>
+                    <Pane>
+                        <Button styleClass="botao-novo insumo" onAction="#abrirAdicionarInsumo" text="+" layoutX="10" layoutY="10"/>
+                        <Button styleClass="botao-aviso" onAction="#abrirValidadeInsumo" text="!" layoutX="50" layoutY="10"/>
+                    </Pane>
                 </bottom>
+
 
                 <center>
                     <SplitPane style="-fx-background-color: white;" dividerPositions="0.25">

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.InsumosVencidosController"
+      spacing="20" alignment="TOP_CENTER" style="-fx-padding: 20;">
+
+    <!-- Botão para visualizar os itens -->
+    <Button fx:id="visualizarButton" text="ATENÇÃO: Insumos Próximos a Vencer" onAction="#visualizarProximosAVencer"
+            style="-fx-font-size: 16px; -fx-background-color: #FF0000; -fx-text-fill: #FFFFFF; -fx-font-weight: bold;"/>
+
+    <!-- Caixa de rolagem onde os insumos serão listados -->
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true" style="-fx-pref-height: 300px; -fx-border-color: gray; -fx-border-width: 1;">
+        <VBox fx:id="insumosVBox" spacing="10" style="-fx-padding: 10;">
+            <!-- Os itens serão adicionados dinamicamente aqui -->
+        </VBox>
+    </ScrollPane>
+</VBox>

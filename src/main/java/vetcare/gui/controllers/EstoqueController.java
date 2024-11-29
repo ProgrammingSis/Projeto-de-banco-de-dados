@@ -134,6 +134,27 @@ public class EstoqueController extends BaseUserController {
     }
 
     @FXML
+    private void abrirValidadeInsumo() {
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/insumosvencidos.fxml");
+
+        try {
+            Parent root = loader.load();
+            InsumosVencidosController controller = loader.getController();
+
+            controller.visualizarProximosAVencer();
+
+            // Exibir o popup
+            Stage stage = new Stage();
+            stage.setTitle("Validades dos Insumos");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao abrir o popup de insumo.", e);
+        }
+    }
+
+    @FXML
     private void excluirInsumo() {
         var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/excluirinsumo.fxml");
 
