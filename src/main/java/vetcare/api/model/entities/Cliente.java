@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cliente {
 
-    String cpfCliente;
-    String nomeCliente;
-    String endCliente;
-    String contatoCliente;
+    public String cpfCliente;
+    public String nomeCliente;
+    public String endCliente;
+    public String contatoCliente;
 }

@@ -25,6 +25,9 @@
 				<top>
 					<TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome ou CRMV do veterinário..."/>
 				</top>
+				<bottom>
+					<Button onAction="#cadastrar">+</Button>
+				</bottom>
 				<center>
 					<SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
 						<ScrollPane fitToWidth="true">
@@ -89,7 +92,6 @@
 									<HBox alignment="CENTER_RIGHT" spacing="8">
 										<Button onAction="#saveData">Salvar Alterações</Button>
 										<Button onAction="#resetData">Descartar Alterações</Button>
-										<Button>+</Button>
 									</HBox>
 								</bottom>
 							</BorderPane>
@@ -100,3 +102,4 @@
 		</center>
 	</BorderPane>
 </StackPane>
+
