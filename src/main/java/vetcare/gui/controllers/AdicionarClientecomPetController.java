@@ -41,7 +41,9 @@ public class AdicionarClientecomPetController extends BaseUserController {
     @FXML
     void initialize() {
         // Preencher o ComboBox com opções de tipo de pet
-        tipoPetCombo.getItems().addAll("Cachorro", "Gato", "Pássaro", "Outro");
+        tipoPetCombo.getItems().clear();
+        tipoPetCombo.getItems().addAll("Cão", "Gato", "Coelho",
+                "Hamster", "Porquinho-da-Índia", "Papagaio", "Calopsita", "Tartaruga", "Iguana");
         salvarButton.setOnAction(e -> salvarDados());
         cancelarButton.setOnAction(e -> fecharJanela());
     }

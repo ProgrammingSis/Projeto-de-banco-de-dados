@@ -1,7 +1,9 @@
 package vetcare.api.repository.entities;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import vetcare.api.controller.PacientesController;
 import vetcare.api.model.entities.Cliente;
 import vetcare.api.repository.mapper.entities.AnimalRowMapper;
 import vetcare.api.repository.mapper.entities.ClienteRowMapper;
@@ -57,7 +59,27 @@ public class ClienteRepository {
 
     // DELETE
     public int deleteByCpf(String cpf) {
+        String sqle = "DELETE FROM AtendimentosFaturas" +
+                " WHERE fk_Fatura_id IN (" +
+                "SELECT id FROM Fatura WHERE fk_Cliente_cpf = ?" +
+                ");";
+
+        String sqld = "DELETE FROM Item_Fatura " +
+                "WHERE fk_idFatura IN (" +
+                "SELECT id FROM Fatura WHERE fk_Cliente_cpf = ?" +
+                ");";
+        String sqlc = "DELETE FROM AtendidoEm " +
+                "WHERE fk_Animal_id IN (" +
+                "SELECT id FROM Animal WHERE fk_Cliente_cpf = ?" +
+                ");";
+        String sqla = "DELETE FROM Animal WHERE fk_Cliente_cpf = ?";
+        String sqlb = "DELETE FROM Fatura WHERE fk_Cliente_cpf = ?";
         String sql = "DELETE FROM Cliente WHERE cpf = ?";
+        jdbcTemplate.update(sqle, cpf);
+        jdbcTemplate.update(sqld, cpf);
+        jdbcTemplate.update(sqlc, cpf);
+        jdbcTemplate.update(sqla, cpf);
+        jdbcTemplate.update(sqlb, cpf);
         return jdbcTemplate.update(sql, cpf);
     }
 

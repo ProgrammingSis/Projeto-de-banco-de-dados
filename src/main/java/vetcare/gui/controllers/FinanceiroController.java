@@ -227,4 +227,34 @@ public class FinanceiroController extends BaseUserController {
         }
     }
 
+    @FXML
+    private void excluirCliente() {
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/excluircliente.fxml");
+
+        try {
+            // Carregar o popup de confirmação
+            Parent root = loader.load();
+            ExcluirClienteController controller = loader.getController();
+            controller.initialize("Tem certeza que deseja excluir o cliente \"" + cliente.getNomeCliente() + "\"?");
+
+            // Exibir o popup
+            Stage stage = new Stage();
+            stage.setTitle("Confirmação de Exclusão");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Verificar a resposta do usuário
+            if (controller.isConfirmado()) {
+                // Lógica para excluir o insumo do banco de dados
+                System.out.println("Excluindo cliente: " + cliente.getNomeCliente());
+                ApiApplication.clientes.deleteCliente(cliente.getCpfCliente());
+                // insumoDao.excluir(insumo.getCdInsumo());
+            } else {
+                System.out.println("Exclusão cancelada.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao abrir o popup de confirmação de exclusão.", e);
+        }
+    }
+
 }
