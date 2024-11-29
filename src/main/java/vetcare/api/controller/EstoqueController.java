@@ -76,9 +76,6 @@ public class EstoqueController {
     // Método que verifica quais insumos estão próximos a vencer
     public List<Insumo> buscarTodosInsumosAVencer() {
         List<Insumo> insumos = insumoService.getInsumosProximosDeVencer();
-        if (insumos.isEmpty()) {
-            System.out.println("Nenhum insumo à vencer encontrado.");
-        }
         return insumos;
     }
 }

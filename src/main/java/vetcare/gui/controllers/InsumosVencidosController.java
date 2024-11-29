@@ -16,6 +16,14 @@ public class InsumosVencidosController {
         // Busca insumos no banco de dados que estão próximos a vencer
         var insumos = ApiApplication.estoque.buscarTodosInsumosAVencer();
 
+        // Verifica se a lista de insumos é null ou vazia
+        if (insumos == null) {
+            var mensagemLabel = new javafx.scene.control.Label("Não existem insumos próximos a vencer nos próximos 7 dias.");
+            insumosVBox.getChildren().clear(); // Limpa a lista para garantir que não há outros itens
+            insumosVBox.getChildren().add(mensagemLabel); // Adiciona a mensagem
+            return;
+        }
+
         // Limpa a lista antes de preenchê-la
         insumosVBox.getChildren().clear();
 
@@ -25,6 +33,8 @@ public class InsumosVencidosController {
             insumosVBox.getChildren().add(elem);
         }
     }
+
+
 
     private VBox criarInsumo(Insumo insumo) {
         // Cria um elemento para exibir o insumo
