@@ -1,6 +1,7 @@
 package vetcare.gui;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class VetCareApp extends Application {
@@ -13,6 +14,8 @@ public class VetCareApp extends Application {
 		stage.setTitle("VetCare");
 		screens = new ScreenManager(stage);
 		screens.switchScreen("/vetcare/gui/Scenes/startScreen.fxml");
+		Image appIcon = new Image(getClass().getResourceAsStream("/vetcare/gui/Images/a.jpg"));
+		stage.getIcons().add(appIcon);
 	}
 
 	//starts the gui application
