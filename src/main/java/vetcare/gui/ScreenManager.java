@@ -39,7 +39,7 @@ public class ScreenManager {
         Scene scene = getSceneFor(fxmlFile);
         stage.setScene(scene);
         stage.setWidth(1200);
-        stage.setHeight(650);
+        stage.setHeight(800);
         stage.show();
     }
 }

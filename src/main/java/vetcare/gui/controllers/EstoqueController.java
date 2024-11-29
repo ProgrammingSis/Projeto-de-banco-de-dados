@@ -17,6 +17,8 @@ import vetcare.gui.BaseUserController;
 import vetcare.gui.ListCard;
 import vetcare.gui.VetCareApp;
 
+import java.util.Random;
+
 public class EstoqueController extends BaseUserController {
     @FXML private TextField searchField;
     @FXML private VBox insumos;
@@ -43,7 +45,8 @@ public class EstoqueController extends BaseUserController {
     public static String getPicture(Insumo insumo) {
 
         //int index = (int)(Math.random() * insumosPictures.length);
-        int index = (int)(Math.random() % insumosPictures.length);
+        String a = insumo.getCdInsumo();
+        int index = a.substring(a.length() - 1).charAt(0) % insumosPictures.length;
         var pic = insumosPictures[index];
         var resource = PacientesController.class.getResource("/vetcare/gui/Images/insumos/" + pic).toExternalForm();
         return resource;

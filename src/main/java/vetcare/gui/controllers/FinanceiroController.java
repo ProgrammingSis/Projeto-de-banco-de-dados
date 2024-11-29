@@ -43,7 +43,7 @@ public class FinanceiroController extends BaseUserController {
     private Fatura fatura;
 
     private static final String[] clientesPictures = new String[] {
-            "a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg"
+            "b.jpeg", "c.jpeg", "d.jpeg", "f.jpg"
     };
 
     public void initialize() {
@@ -52,8 +52,8 @@ public class FinanceiroController extends BaseUserController {
 
     public static String getPicture(Cliente cliente) {
 
-        //int index = (int)(Math.random() * clientesPictures.length);
-        int index = (int)(Math.random() % clientesPictures.length);
+        String crmv = cliente.getCpfCliente();
+        int index = crmv.substring(crmv.length() - 1).charAt(0) % clientesPictures.length;
         var pic = clientesPictures[index];
         var resource = PacientesController.class.getResource("/vetcare/gui/Images/clientes/" + pic).toExternalForm();
         return resource;
