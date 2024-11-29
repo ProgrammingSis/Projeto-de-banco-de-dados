@@ -75,7 +75,7 @@ public class AdicionarFaturaController extends BaseUserController {
                 fecharJanela();
             }
         } catch (Exception e) {
-            // Você pode adicionar um alerta ou log para tratar exceções.
+            // Você pode adicionar um alerta ou log para tratacccccr exceções.
             System.err.println("Erro ao salvar a fatura: " + e.getMessage());
         }
     }

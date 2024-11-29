@@ -2,16 +2,20 @@ package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Insumo;
 import vetcare.api.model.entities.Cliente;
 import vetcare.gui.BaseUserController;
 import vetcare.gui.ListCard;
+import vetcare.gui.VetCareApp;
 
 public class EstoqueController extends BaseUserController {
     @FXML private TextField searchField;
@@ -106,5 +110,56 @@ public class EstoqueController extends BaseUserController {
     void novoPet() {
         insumoNomeField.setText("");
         insumoQuantidadeField.setText("");
+    }
+
+    @FXML
+    private void abrirAdicionarInsumo() {
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarinsumo.fxml");
+
+        try {
+            Parent root = loader.load();
+            AdicionarInsumoController controller = loader.getController();
+
+            controller.initialize(insumo);
+
+            // Exibir o popup
+            Stage stage = new Stage();
+            stage.setTitle("Adicionar Insumo");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao abrir o popup de insumo.", e);
+        }
+    }
+
+    @FXML
+    private void excluirInsumo() {
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/excluirinsumo.fxml");
+
+        try {
+            // Carregar o popup de confirmação
+            Parent root = loader.load();
+            ExcluirInsumoController controller = loader.getController();
+            controller.initialize("Tem certeza que deseja excluir o insumo \"" + insumo.getNomeInsumo() + "\"?");
+
+            // Exibir o popup
+            Stage stage = new Stage();
+            stage.setTitle("Confirmação de Exclusão");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Verificar a resposta do usuário
+            if (controller.isConfirmado()) {
+                // Lógica para excluir o insumo do banco de dados
+                System.out.println("Excluindo insumo: " + insumo.getNomeInsumo());
+                ApiApplication.estoque.deletarInsumo(insumo.getCdInsumo());
+                // insumoDao.excluir(insumo.getCdInsumo());
+            } else {
+                System.out.println("Exclusão cancelada.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao abrir o popup de confirmação de exclusão.", e);
+        }
     }
 }

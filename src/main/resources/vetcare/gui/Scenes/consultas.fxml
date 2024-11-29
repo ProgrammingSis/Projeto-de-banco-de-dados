@@ -92,6 +92,7 @@
 									<HBox alignment="CENTER_RIGHT" spacing="8">
 										<Button onAction="#saveData">Salvar Alterações</Button>
 										<Button onAction="#resetData">Descartar Alterações</Button>
+										<Button styleClass="botao-aviso" onAction="#excluirVeterinario">Excluir</Button>
 									</HBox>
 								</bottom>
 							</BorderPane>

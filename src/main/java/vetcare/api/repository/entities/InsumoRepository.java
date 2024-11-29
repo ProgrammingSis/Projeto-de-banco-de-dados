@@ -65,7 +65,11 @@ public class InsumoRepository {
 
     // DELETE
     public int deleteByCd(String ean) {
+        String sqla = "DELETE FROM Fornecimento WHERE fk_Insumo_ean = ?";
+        String sqlItemFatura = "DELETE FROM Item_Fatura WHERE fk_Insumo_ean = ?";
         String sql = "DELETE FROM Insumo WHERE ean = ?";
+        jdbcTemplate.update(sqla, ean);
+        jdbcTemplate.update(sqlItemFatura, ean);
         return jdbcTemplate.update(sql, ean);
     }
 

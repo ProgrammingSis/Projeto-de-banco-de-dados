@@ -23,12 +23,16 @@
     <Label text="ID do Pet:"/>
     <TextField fx:id="textId"/>
 
+    <!-- Campo para o peso -->
+    <Label text="Peso do Pet:"/>
+    <TextField fx:id="textPeso"/>
+
     <Label text="Espécie:"/>
-    <ComboBox fx:id="comboEspeciePet"/>
+    <ComboBox fx:id="comboEspeciePet" promptText="Selecione a espécie"/>
 
     <!-- Botões Salvar e Cancelar -->
     <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button fx:id="salvarButton" text="Salvar"/>
+        <Button fx:id="salvarButton" text="Adicionar"/>
         <Button fx:id="cancelarButton" text="Cancelar"/>
     </HBox>
 </VBox>

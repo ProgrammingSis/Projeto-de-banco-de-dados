@@ -2,6 +2,7 @@ package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.Cliente;
@@ -41,6 +42,8 @@ public class AdicionarClientecomPetController extends BaseUserController {
     void initialize() {
         // Preencher o ComboBox com opções de tipo de pet
         tipoPetCombo.getItems().addAll("Cachorro", "Gato", "Pássaro", "Outro");
+        salvarButton.setOnAction(e -> salvarDados());
+        cancelarButton.setOnAction(e -> fecharJanela());
     }
 
     @FXML
@@ -64,19 +67,11 @@ public class AdicionarClientecomPetController extends BaseUserController {
         // Exemplo de saída (substitua pelo método de persistência ou outra lógica)
         ApiApplication.clientes.addCliente(cliente);
         ApiApplication.pacientes.adicionaPet(animal);
+        fecharJanela();
     }
 
-    @FXML
-    private void cancelar() {
-        // Limpar todos os campos
-        cpfClienteField.clear();
-        nomeClienteField.clear();
-        enderecoClienteField.clear();
-        contatoClienteField.clear();
-        idPetField.clear();
-        nomePetField.clear();
-        racaPetField.clear();
-        pesoPetField.clear();
-        tipoPetCombo.setValue(null);
+    private void fecharJanela() {
+        Stage stage = (Stage) salvarButton.getScene().getWindow();
+        stage.close();
     }
 }

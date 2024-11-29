@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="vetcare.gui.controllers.AdicionarInsumoController"
+      alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+
+    <Label text="Adicionar Insumo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="nomeInsumoField" promptText="Nome do Insumo"/>
+    <TextField fx:id="cdInsumoField" promptText="Código do Insumo"/>
+    <TextField fx:id="valorInsumoField" promptText="Valor do Insumo"/>
+    <ComboBox fx:id="tipoInsumoBox" promptText="Tipo do Insumo"/>
+    <TextField fx:id="quantInsumoField" promptText="Quantidade"/>
+    <DatePicker fx:id="datePicker" promptText="Data de Validade"/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="salvarButton" text="Salvar"/>
+        <Button fx:id="cancelarButton" text="Cancelar"/>
+    </HBox>
+</VBox>

@@ -37,8 +37,17 @@ public class AdicionarPetController extends BaseUserController {
      */
     @FXML
     public void initializePet(String cpfCliente) {
-        comboEspeciePet.getItems().addAll("Iguana", "Cão", "Gato", "Coelho", "Hamster",
-                "Porquinho-da-Índia", "Papagaio", "Calopsita","Tartaruga");
+        comboEspeciePet.getItems().clear();
+        comboEspeciePet.getItems().addAll(
+                "Iguana",
+                "Cão",
+                "Gato",
+                "Coelho",
+                "Hamster",
+                "Porquinho-da-Índia",
+                "Papagaio",
+                "Calopsita",
+                "Tartaruga");
         salvarButton.setOnAction(event -> salvarPet(cpfCliente));
         cancelarButton.setOnAction(event -> fecharJanela());
     }
@@ -52,8 +61,10 @@ public class AdicionarPetController extends BaseUserController {
                 Animal novoAnimal = new Animal();
                 novoAnimal.setNomePet(textNome.getText());
                 novoAnimal.setPesoPet(Double.valueOf(textPeso.getText()));
+                novoAnimal.setTipoPet(comboEspeciePet.getValue());
                 novoAnimal.setRacaPet(String.valueOf(textRaca.getText()));
                 novoAnimal.setIdPet(Integer.valueOf((textId.getText())));
+                novoAnimal.setCpfDonoPet(cpfCliente);
 
                 // Salvar a fatura usando a API
                 ApiApplication.pacientes.adicionaPet(novoAnimal);

@@ -16,9 +16,6 @@ public class AdicionarVeterinarioController extends BaseUserController {
     private TextField textNome;
 
     @FXML
-    private TextField textEspecialidade;
-
-    @FXML
     private TextField textContato;
 
     @FXML
@@ -37,8 +34,16 @@ public class AdicionarVeterinarioController extends BaseUserController {
     @FXML
     public void initialize() {
 
-        especialidade.getItems().addAll("Clínica Geral", "Cirurgia Geral", "Dermatologia", "Anestesiologia",
-                "Cardiologia", "Odontologia", "Ortopedia", "Radiologia Veterinária");
+        especialidade.getItems().clear();
+        especialidade.getItems().addAll(
+                "Clínica Geral",
+                "Cirurgia Geral",
+                "Dermatologia",
+                "Anestesiologia",
+                "Cardiologia",
+                "Odontologia",
+                "Ortopedia",
+                "Radiologia Veterinária");
         salvarButton.setOnAction(event -> salvarVeterinario());
         cancelarButton.setOnAction(event -> fecharJanela());
     }

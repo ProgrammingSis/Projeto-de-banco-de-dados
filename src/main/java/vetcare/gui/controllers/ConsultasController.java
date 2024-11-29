@@ -19,6 +19,7 @@ import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Veterinario;
 import vetcare.gui.*;
 
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +66,36 @@ public class ConsultasController extends BaseUserController {
 			throw new RuntimeException("Erro ao carregar o popup de Adicionar Vet", e);
 		}
 	}
+
+	@FXML
+	private void excluirVeterinario() {
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/scenes/excluirveterinario.fxml");
+
+		try {
+			Stage popupStage = new Stage();
+			popupStage.setScene(new Scene(loader.load()));
+			popupStage.setTitle("Confirmar Exclusão");
+
+			ExcluirVeterinarioController controller = loader.getController();
+			controller.initialize("Tem certeza que deseja excluir o veterinário \"" + selectedVet.getCrmvVet() + "\"?");
+
+
+			popupStage.showAndWait();
+
+			// Verificar a resposta do usuário
+			if (controller.isConfirmado()) {
+				// Lógica para excluir do banco de dados
+				System.out.println("Excluindo veterinário: " + selectedVet.getNomeVet());
+				ApiApplication.consultas.removerVeterinario(selectedVet.getCrmvVet());
+			} else {
+				System.out.println("Exclusão cancelada.");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	private static final String[] animalPictures = new String[] {
 			"vetA.jpeg", "vetAsi.jpg", "vetPro.jpg", "vetTatuada.jpeg", "vetB.jpg", "vetC.jpg", "vetD.jpg"

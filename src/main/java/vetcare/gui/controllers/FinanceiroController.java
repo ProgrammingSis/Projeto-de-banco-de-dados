@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Cliente;
 import vetcare.api.model.entities.Fatura;
+import vetcare.api.model.entities.Insumo;
 import vetcare.gui.BaseUserController;
 import vetcare.gui.ListCard;
 import vetcare.gui.ScreenManager;
@@ -176,7 +177,7 @@ public class FinanceiroController extends BaseUserController {
 
             // Configurar e exibir o pop-up
             Stage stage = new Stage();
-            stage.setTitle("Adicionar Fatura");
+            stage.setTitle("Adicionar Cliente com Pet");
             stage.setScene(new Scene(root));
             stage.showAndWait();
         } catch (Exception e) {
@@ -206,11 +207,24 @@ public class FinanceiroController extends BaseUserController {
 
     @FXML
     public void abrirJanelaAddPet(){
-        Stage stage = new Stage();
-        ScreenManager screenManager = new ScreenManager(stage);
-        screenManager.switchMiniScreen("/vetcare/gui/Scenes/adicionarPet.fxml");
 
-        AdicionarPetController controller = new AdicionarPetController();
-        controller.initializePet(this.cliente.getCpfCliente());
+        // chamar pop up
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarpet.fxml");
+
+        try {
+            // Carregar o FXML e obter o controlador associado
+            Parent root = loader.load();
+            AdicionarPetController controller = loader.getController();
+            controller.initializePet(this.cliente.getCpfCliente());
+
+            // Configurar e exibir o pop-up
+            Stage stage = new Stage();
+            stage.setTitle("Adicionar Pet");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao carregar o popup de Adicionar Vet", e);
+        }
     }
+
 }

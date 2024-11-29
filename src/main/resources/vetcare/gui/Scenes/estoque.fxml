@@ -27,6 +27,9 @@
                 <top>
                     <TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome do insumo..."/>
                 </top>
+                <bottom>
+                    <Button styleClass="botao-novo insumo" onAction="#abrirAdicionarInsumo">+</Button>
+                </bottom>
 
                 <center>
                     <SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
@@ -83,6 +86,7 @@
                                     <HBox alignment="CENTER_RIGHT" spacing="8">
                                         <Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
                                         <Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
+                                        <Button styleClass="botao-aviso" onAction="#excluirInsumo">Excluir</Button>
                                         <Button styleClass="botao-ok" onAction="#novoPet">+</Button>
                                     </HBox>
                                 </bottom>
