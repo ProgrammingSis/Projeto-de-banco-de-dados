@@ -3,6 +3,8 @@ package vetcare.gui.controllers;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -10,15 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.springframework.cglib.core.Local;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Veterinario;
-import vetcare.gui.BaseUserController;
-import vetcare.gui.CirclePictureFrame;
-import vetcare.gui.ListCard;
-import vetcare.gui.VetCareApp;
-
+import vetcare.gui.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -40,6 +39,32 @@ public class ConsultasController extends BaseUserController {
 	@FXML
 	DatePicker dataFim;
 
+	@FXML
+	private Button cadastro;
+
+	@FXML
+	void cadastrar(){
+
+		// chamar pop up
+		var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarVeterinario.fxml");
+
+		try {
+			// Carregar o FXML e obter o controlador associado
+			Parent root = loader.load();
+			AdicionarVeterinarioController controller = loader.getController();
+
+			// Configurar o CPF do cliente no controlador
+			controller.initialize();
+
+			// Configurar e exibir o pop-up
+			Stage stage = new Stage();
+			stage.setTitle("Adicionar Vet");
+			stage.setScene(new Scene(root));
+			stage.showAndWait();
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao carregar o popup de Adicionar Vet", e);
+		}
+	}
 
 	private static final String[] animalPictures = new String[] {
 			"vetA.jpeg", "vetAsi.jpg", "vetPro.jpg", "vetTatuada.jpeg", "vetB.jpg", "vetC.jpg", "vetD.jpg"
@@ -54,6 +79,8 @@ public class ConsultasController extends BaseUserController {
 			selecionarVet(selectedVet);
 		});
 	}
+
+
 
 	public static String getVetPicture(Veterinario vet) {
 
@@ -182,3 +209,6 @@ public class ConsultasController extends BaseUserController {
 
 	}
 }
+
+
+

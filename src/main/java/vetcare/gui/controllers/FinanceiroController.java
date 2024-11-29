@@ -162,6 +162,29 @@ public class FinanceiroController extends BaseUserController {
     }
 
     @FXML
+    private void addCliente() {
+        // chamar pop up
+        var loader = VetCareApp.screens.getLoaderFor("/vetcare/gui/Scenes/adicionarclientecompet.fxml");
+
+        try {
+            // Carregar o FXML e obter o controlador associado
+            Parent root = loader.load();
+            AdicionarClientecomPetController controller = loader.getController();
+
+            // Configurar o CPF do cliente no controlador
+            controller.initialize();
+
+            // Configurar e exibir o pop-up
+            Stage stage = new Stage();
+            stage.setTitle("Adicionar Fatura");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao carregar o popup de Adicionar Fatura", e);
+        }
+    }
+
+    @FXML
     private void saveData() {
         this.cliente.setNomeCliente(clienteNomeField.getText());
         this.cliente.setContatoCliente((clienteId.getText()));

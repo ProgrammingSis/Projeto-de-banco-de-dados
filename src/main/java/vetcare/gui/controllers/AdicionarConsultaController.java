@@ -22,8 +22,6 @@ public class AdicionarConsultaController {
     @FXML private Button salvarButton;
     @FXML private Button cancelarButton;
 
-    private AtendimentoPetDTO atendimentoPetDTO;
-
     public void initialize(Integer animalId) {
         // Configurar ComboBox com opções para tipo de atendimento
         tipoAtendimentoBox.getItems().addAll("Consulta de rotina", "Vacinação", "Castração", "Procedimento Odontológico",
@@ -46,7 +44,7 @@ public class AdicionarConsultaController {
             String tipoAtendimento = tipoAtendimentoBox.getValue();
 
             // Criar a consulta e preencher os dados
-            atendimentoPetDTO = new AtendimentoPetDTO();
+            AtendimentoPetDTO atendimentoPetDTO = new AtendimentoPetDTO();
             atendimentoPetDTO.setIdAtendimento(idAtendimento);
             atendimentoPetDTO.setDate(Date.valueOf(data));
             atendimentoPetDTO.setHorario(Time.valueOf(horario));

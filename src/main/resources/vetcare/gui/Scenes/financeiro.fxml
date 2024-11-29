@@ -19,7 +19,9 @@
                 </ImageView>
             </HBox>
         </top>
-
+        <bottom>
+            <Button onAction="#addCliente">+</Button>
+        </bottom>
 
         <center>
             <BorderPane>
