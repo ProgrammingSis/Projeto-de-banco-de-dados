@@ -19,11 +19,13 @@ import vetcare.gui.CirclePictureFrame;
 import vetcare.gui.ListCard;
 import vetcare.gui.VetCareApp;
 
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public class ConsultasController extends BaseUserController {
+
 	@FXML private TextField searchField;
 	@FXML private VBox veterinarios;
 	@FXML private BorderPane fichaVeterinario;
@@ -37,6 +39,7 @@ public class ConsultasController extends BaseUserController {
 	@FXML DatePicker dataInicio;
 	@FXML
 	DatePicker dataFim;
+
 
 	private static final String[] animalPictures = new String[] {
 			"vetA.jpeg", "vetAsi.jpg", "vetPro.jpg", "vetTatuada.jpeg", "vetB.jpg", "vetC.jpg", "vetD.jpg"

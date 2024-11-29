@@ -42,4 +42,9 @@ public class ScreenManager {
         stage.setHeight(650);
         stage.show();
     }
+    public void switchMiniScreen(String fxmlFile) {
+        Scene scene = getSceneFor(fxmlFile);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

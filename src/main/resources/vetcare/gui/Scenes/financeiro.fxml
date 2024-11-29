@@ -93,7 +93,7 @@
                                         <Button styleClass="botao-nova fatura" onAction="#addFatura">Adicionar Fatura</Button>
                                         <Button styleClass="botao-aviso" onAction="#resetData">Descartar Alterações</Button>
                                         <Button styleClass="botao-ok" onAction="#saveData">Salvar Alterações</Button>
-                                        <Button styleClass="botao-ok" onAction="#novoPet">+</Button>
+                                        <Button styleClass="botao-ok" onAction="#abrirJanelaAddPet">+</Button>
                                     </HBox>
                                 </bottom>
 

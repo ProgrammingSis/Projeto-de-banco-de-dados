@@ -16,7 +16,11 @@ import vetcare.api.model.entities.Cliente;
 import vetcare.api.model.entities.Fatura;
 import vetcare.gui.BaseUserController;
 import vetcare.gui.ListCard;
+import vetcare.gui.ScreenManager;
 import vetcare.gui.VetCareApp;
+import javafx.stage.Stage;
+import vetcare.gui.ScreenManager;
+import vetcare.gui.controllers.AdicionarPetController;
 
 public class FinanceiroController extends BaseUserController {
     @FXML private TextField searchField;
@@ -32,6 +36,7 @@ public class FinanceiroController extends BaseUserController {
     @FXML private TextField contatoCliente;
 
     @FXML private GridPane tabFaturas;
+
 
     private Cliente cliente;
     private Fatura fatura;
@@ -173,5 +178,16 @@ public class FinanceiroController extends BaseUserController {
     void novoPet() {
         clienteNomeField.setText("");
         contatoCliente.setText("");
+    }
+
+
+    @FXML
+    public void abrirJanelaAddPet(){
+        Stage stage = new Stage();
+        ScreenManager screenManager = new ScreenManager(stage);
+        screenManager.switchMiniScreen("/vetcare/gui/Scenes/adicionarPet.fxml");
+
+        AdicionarPetController controller = new AdicionarPetController();
+        controller.initializePet(this.cliente.getCpfCliente());
     }
 }
