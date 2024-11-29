@@ -93,7 +93,9 @@ public class AnimalRepository {
 
     // DELETE
     public int deleteById(Integer id) {
+        String sqla = "DELETE FROM AtendidoEm WHERE fk_Animal_id = ?";
         String sql = "DELETE FROM Animal WHERE id = ?";
+        jdbcTemplate.update(sqla, id);
         return jdbcTemplate.update(sql, id);
     }
 
