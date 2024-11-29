@@ -45,7 +45,9 @@ public class AdicionarVeterinarioController extends BaseUserController {
                 "Ortopedia",
                 "Radiologia Veterinária");
         salvarButton.setOnAction(event -> salvarVeterinario());
-        cancelarButton.setOnAction(event -> fecharJanela());
+        cancelarButton.setOnAction(e -> {
+            fecharJanela();
+        });
     }
 
     /**
@@ -62,6 +64,8 @@ public class AdicionarVeterinarioController extends BaseUserController {
 
                 // Salvar o veterinário usando a API
                 boolean sucesso = ApiApplication.consultas.adicionarVeterinario(novoVeterinario);
+
+                fecharJanela();
             }
         } catch (Exception e) {
             mostrarErro("Erro ao salvar o veterinário: " + e.getMessage());

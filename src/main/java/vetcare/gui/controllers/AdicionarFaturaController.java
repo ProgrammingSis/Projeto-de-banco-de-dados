@@ -56,6 +56,14 @@ public class AdicionarFaturaController extends BaseUserController {
         cancelarButton.setOnAction(event -> fecharJanela());
     }
 
+    private void mostrarErro(String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro");
+        alerta.setHeaderText("Erro ao salvar ClientePet");
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+
     /**
      * Salva uma nova fatura com os dados preenchidos no formulário.
      */
@@ -76,7 +84,8 @@ public class AdicionarFaturaController extends BaseUserController {
             }
         } catch (Exception e) {
             // Você pode adicionar um alerta ou log para tratacccccr exceções.
-            System.err.println("Erro ao salvar a fatura: " + e.getMessage());
+            mostrarErro("Erro ao salvar fatura: " + e.getMessage());
+
         }
     }
 
@@ -87,13 +96,14 @@ public class AdicionarFaturaController extends BaseUserController {
      */
     private boolean validarCampos() {
         if (textValor.getText().isEmpty() || datePicker.getValue() == null || comboPagamento.getValue() == null) {
-            System.err.println("Preencha todos os campos!");
+            mostrarErro("Preencha todos os campos!");
             return false;
         }
         try {
             Double.parseDouble(textValor.getText());
         } catch (NumberFormatException e) {
-            System.err.println("O valor total deve ser numérico!");
+            mostrarErro("O valor total deve ser numérico!");
+
             return false;
         }
         return true;

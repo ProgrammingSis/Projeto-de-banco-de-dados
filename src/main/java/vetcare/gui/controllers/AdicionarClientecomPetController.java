@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import vetcare.api.ApiApplication;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.Cliente;
+import vetcare.api.model.entities.Veterinario;
 import vetcare.gui.BaseUserController;
 
 public class AdicionarClientecomPetController extends BaseUserController {
@@ -48,28 +49,50 @@ public class AdicionarClientecomPetController extends BaseUserController {
         cancelarButton.setOnAction(e -> fecharJanela());
     }
 
-    @FXML
     private void salvarDados() {
-        // Recuperar informações do cliente
-        Cliente cliente = new Cliente();
-        cliente.cpfCliente = cpfClienteField.getText();
-        cliente.nomeCliente = nomeClienteField.getText();
-        cliente.endCliente = enderecoClienteField.getText();
-        cliente.contatoCliente = contatoClienteField.getText();
+        try {
+            if (validarCampos()) {
+                // Recuperar informações do cliente
+                Cliente cliente = new Cliente();
+                cliente.cpfCliente = cpfClienteField.getText();
+                cliente.nomeCliente = nomeClienteField.getText();
+                cliente.endCliente = enderecoClienteField.getText();
+                cliente.contatoCliente = contatoClienteField.getText();
 
-        // Recuperar informações do animal
-        Animal animal = new Animal();
-        animal.idPet = Integer.parseInt(idPetField.getText());
-        animal.nomePet = nomePetField.getText();
-        animal.racaPet = racaPetField.getText();
-        animal.pesoPet = Double.parseDouble(pesoPetField.getText());
-        animal.cpfDonoPet = cliente.cpfCliente; // Associar o animal ao dono
-        animal.tipoPet = tipoPetCombo.getValue();
+                // Recuperar informações do animal
+                Animal animal = new Animal();
+                animal.idPet = Integer.parseInt(idPetField.getText());
+                animal.nomePet = nomePetField.getText();
+                animal.racaPet = racaPetField.getText();
+                animal.pesoPet = Double.parseDouble(pesoPetField.getText());
+                animal.cpfDonoPet = cliente.cpfCliente; // Associar o animal ao dono
+                animal.tipoPet = tipoPetCombo.getValue();
 
-        // Exemplo de saída (substitua pelo método de persistência ou outra lógica)
-        ApiApplication.clientes.addCliente(cliente);
-        ApiApplication.pacientes.adicionaPet(animal);
-        fecharJanela();
+                // Exemplo de saída (substitua pelo método de persistência ou outra lógica)
+                ApiApplication.clientes.addCliente(cliente);
+                ApiApplication.pacientes.adicionaPet(animal);
+                fecharJanela();
+            }
+        } catch (Exception e) {
+            mostrarErro("Erro ao salvar o Cliente Pet: " + e.getMessage());
+        }
+    }
+
+    private void mostrarErro(String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro");
+        alerta.setHeaderText("Erro ao salvar ClientePet");
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+
+    private boolean validarCampos() {
+        if (cpfClienteField.getText().isEmpty() || nomeClienteField.getText().isEmpty() ||
+                enderecoClienteField.getText().isEmpty() || contatoClienteField.getText().isEmpty()) {
+            mostrarErro("Preencha todos os campos!");
+            return false;
+        }
+        return true;
     }
 
     private void fecharJanela() {

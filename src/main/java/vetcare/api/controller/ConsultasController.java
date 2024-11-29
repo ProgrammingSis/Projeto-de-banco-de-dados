@@ -39,9 +39,9 @@ public class ConsultasController {
         }
     }
 
-    public List<Veterinario> listarTodosVeterinarios() {
+    public List<Veterinario> listarTodosVeterinarios(String nome) {
         try {
-            List<Veterinario> veterinarios = veterinarioService.getAllVeterinarios();
+            List<Veterinario> veterinarios = veterinarioService.getAllVeterinarios(nome);
             if (veterinarios.isEmpty()) {
                 System.out.println("Nenhum veterinário encontrado.");
             }

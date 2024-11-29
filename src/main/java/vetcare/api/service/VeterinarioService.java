@@ -17,8 +17,8 @@ public class VeterinarioService {
         return veterinarioRepository.findByCrmv(crmv);
     }
 
-    public List<Veterinario> getAllVeterinarios() {
-        return veterinarioRepository.findAll();
+    public List<Veterinario> getAllVeterinarios(String nome) {
+        return veterinarioRepository.findByNameContaining(nome);
     }
 
     public int addVeterinario(Veterinario veterinario) {

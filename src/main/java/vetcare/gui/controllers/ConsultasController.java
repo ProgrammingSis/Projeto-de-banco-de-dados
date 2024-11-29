@@ -218,7 +218,7 @@ public class ConsultasController extends BaseUserController {
 	private void doSearch() {
 		// Busca no banco de dados os pets com esse nome
 		var query = searchField.getText();
-		var vets = ApiApplication.consultas.listarTodosVeterinarios();
+		var vets = ApiApplication.consultas.listarTodosVeterinarios(query);
 
 		// Limpa a lista de pets, e para cada pet no resultado, crie um elemento na lista de pets
 		veterinarios.getChildren().clear();

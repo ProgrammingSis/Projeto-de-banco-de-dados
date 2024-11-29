@@ -38,7 +38,7 @@ public class VeterinarioRepository {
     }
 
     public List<Veterinario> findByNameContaining(String nomeVet) {
-        String sql = "SELECT * FROM Animal WHERE nome ILIKE ?";
+        String sql = "SELECT * FROM Veterinario WHERE nome ILIKE ?";
         String namePattern = "%" + nomeVet + "%";
         return jdbcTemplate.query(sql, new VeterinarioRowMapper(), namePattern);
     }
