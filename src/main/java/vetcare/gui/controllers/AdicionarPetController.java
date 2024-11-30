@@ -19,9 +19,6 @@ public class AdicionarPetController extends BaseUserController {
     private TextField textRaca;
 
     @FXML
-    private TextField textId;
-
-    @FXML
     private ComboBox<String> comboEspeciePet;
 
     @FXML
@@ -53,7 +50,7 @@ public class AdicionarPetController extends BaseUserController {
     }
 
     /**
-     * Salva uma nova fatura com os dados preenchidos no formulário.
+     * Salva uma novo pet com os dados preenchidos no formulário.
      */
     private void salvarPet(String cpfCliente) {
         try {
@@ -63,7 +60,6 @@ public class AdicionarPetController extends BaseUserController {
                 novoAnimal.setPesoPet(Double.valueOf(textPeso.getText()));
                 novoAnimal.setTipoPet(comboEspeciePet.getValue());
                 novoAnimal.setRacaPet(String.valueOf(textRaca.getText()));
-                novoAnimal.setIdPet(Integer.valueOf((textId.getText())));
                 novoAnimal.setCpfDonoPet(cpfCliente);
 
                 // Salvar a fatura usando a API
@@ -74,6 +70,7 @@ public class AdicionarPetController extends BaseUserController {
         } catch (Exception e) {
             // Você pode adicionar um alerta ou log para tratar exceções.
             System.err.println("Erro ao salvar a fatura: " + e.getMessage());
+            fecharJanela();
         }
     }
 
@@ -82,10 +79,19 @@ public class AdicionarPetController extends BaseUserController {
      *
      * @return true se todos os campos forem válidos; false caso contrário.
      */
+
+    private void mostrarErro(String mensagem) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro");
+        alerta.setHeaderText("Erro ao salvar ClientePet");
+        alerta.setContentText(mensagem);
+        alerta.showAndWait();
+    }
+
     private boolean validarCampos() {
         if (textPeso.getText().isEmpty() || textRaca.getText() == null
-                || textId.getText() == null || textNome.getText() == null) {
-
+                 || textNome.getText() == null) {
+            mostrarErro("Erro ao salvar pet: ");
             System.err.println("Preencha todos os campos!");
             return false;
         }
@@ -103,7 +109,7 @@ public class AdicionarPetController extends BaseUserController {
      */
     @FXML
     private void fecharJanela() {
-        Stage stage = (Stage) textId.getScene().getWindow();
+        Stage stage = (Stage) textNome.getScene().getWindow();
         stage.close();
     }
 

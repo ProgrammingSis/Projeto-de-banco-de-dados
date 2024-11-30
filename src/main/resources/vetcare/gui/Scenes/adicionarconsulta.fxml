@@ -13,10 +13,8 @@
 
     <Label text="Agendar Consulta" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-    <TextField fx:id="idAtendimentoField" promptText="ID Atendimento"/>
     <DatePicker fx:id="dataPicker"/>
     <TextField fx:id="horarioField" promptText="Horário (hh:mm:ss)"/>
-    <TextField fx:id="idAnimalField" promptText="ID Animal" editable="false"/>
     <TextField fx:id="crmvVeterinarioField" promptText="CRMV do Veterinário"/>
     <ComboBox fx:id="tipoAtendimentoBox" promptText="Tipo de Atendimento"/>
 

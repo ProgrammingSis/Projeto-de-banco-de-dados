@@ -22,22 +22,6 @@ public class ConsultasController {
     /*
      *   PRINCIPAIS MÉTODOS DO FLUXO DE CONSULTAS
      * */
-    public List<Veterinario> buscaVetNome(String nomeVet){
-        return veterinarioService.getVetPorNome(nomeVet);
-    }
-
-    public Veterinario buscarVeterinarioPorCrmv(String crmv) {
-        try {
-            Veterinario veterinario = veterinarioService.getVeterinarioByCrmv(crmv);
-            if (veterinario == null) {
-                System.out.println("Nenhum veterinário encontrado com o CRMV: " + crmv);
-            }
-            return veterinario;
-        } catch (Exception e) {
-            System.err.println("Erro ao buscar veterinário: " + e.getMessage());
-            return null;
-        }
-    }
 
     public List<Veterinario> listarTodosVeterinarios(String nome) {
         try {

@@ -28,9 +28,9 @@ public class FaturaService {
     }
 
     public String addFatura(Fatura fatura) {
-        faturaRepository.save(fatura);
+        var faturaId = faturaRepository.save(fatura);
 
-        return notificarFatura(fatura.getIdFatura());
+        return notificarFatura(faturaId);
     }
     public String notificarFatura(Integer faturaId) {
         FaturaClienteDTO fatura = faturaRepository.enviarComprovanteFatura(faturaId);

@@ -25,9 +25,8 @@ public class AnimalRepository {
 
     // CREATE
     public int save(Animal animal) {
-        String sql = "INSERT INTO Animal (id, nome, raca, peso, fk_cliente_cpf, fk_tipo) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Animal (nome, raca, peso, fk_cliente_cpf, fk_tipo) VALUES (?, ?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
-                animal.getIdPet(),
                 animal.getNomePet(),
                 animal.getRacaPet(),
                 animal.getPesoPet(),

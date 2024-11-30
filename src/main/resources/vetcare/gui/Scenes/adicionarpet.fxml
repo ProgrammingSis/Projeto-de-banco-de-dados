@@ -19,10 +19,6 @@
     <Label text="Raça:"/>
     <TextField fx:id="textRaca"/>
 
-    <!-- Campo para o ID -->
-    <Label text="ID do Pet:"/>
-    <TextField fx:id="textId"/>
-
     <!-- Campo para o peso -->
     <Label text="Peso do Pet:"/>
     <TextField fx:id="textPeso"/>

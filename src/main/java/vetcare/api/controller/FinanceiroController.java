@@ -19,10 +19,6 @@ public class FinanceiroController {
     private final ClienteService clienteService;
     private final InsumoService insumoService;
 
-    public Fatura buscarFaturaById(Long id) {
-        return faturaService.getFaturaById(id);
-    }
-
     public List<Fatura> buscarFaturaPorCliente(String cpf) {
         return faturaService.getFaturaByCpf(cpf);
     }

@@ -11,7 +11,6 @@ import java.sql.Date;
 
 public class AdicionarInsumoController extends BaseUserController {
     @FXML private TextField nomeInsumoField;
-    @FXML private TextField cdInsumoField;
     @FXML private TextField valorInsumoField;
     @FXML private ComboBox<String> tipoInsumoBox;
     @FXML private TextField quantInsumoField;
@@ -42,7 +41,6 @@ public class AdicionarInsumoController extends BaseUserController {
     private void salvarInsumo(Insumo insumo) {
         try {
             String nomeInsumo = nomeInsumoField.getText();
-            String cdInsumo = cdInsumoField.getText();
             Double valorInsumo = Double.parseDouble(valorInsumoField.getText());
             String tipoInsumo = tipoInsumoBox.getValue();
             Long quantInsumo = Long.parseLong(quantInsumoField.getText());
@@ -51,7 +49,6 @@ public class AdicionarInsumoController extends BaseUserController {
             // Criar o objeto Insumo e preencher os dados
             insumo = new Insumo();
             insumo.setNomeInsumo(nomeInsumo);
-            insumo.setCdInsumo(cdInsumo);
             insumo.setValorInsumo(valorInsumo);
             insumo.setTipoInsumo(tipoInsumo);
             insumo.setQuantInsumo(quantInsumo);

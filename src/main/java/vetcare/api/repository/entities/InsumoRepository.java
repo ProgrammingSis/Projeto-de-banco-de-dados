@@ -22,10 +22,9 @@ public class InsumoRepository {
 
     // CREATE
     public int save(Insumo insumo) {
-        String sql = "INSERT INTO Insumo (nome, ean, preco, quantidade, fk_tipo, data) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Insumo (nome, preco, quantidade, fk_tipo, data) VALUES (?, ?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
                 insumo.getNomeInsumo(),
-                insumo.getCdInsumo(),
                 insumo.getValorInsumo(),
                 insumo.getQuantInsumo(),
                 insumo.getTipoInsumo(),

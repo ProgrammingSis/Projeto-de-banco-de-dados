@@ -13,10 +13,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AdicionarConsultaController {
-    @FXML private TextField idAtendimentoField;
+
     @FXML private DatePicker dataPicker;
     @FXML private TextField horarioField;
-    @FXML private TextField idAnimalField;
     @FXML private TextField crmvVeterinarioField;
     @FXML private ComboBox<String> tipoAtendimentoBox;
     @FXML private Button salvarButton;
@@ -36,16 +35,13 @@ public class AdicionarConsultaController {
 
     private void salvarConsulta(Integer animalId) {
         try {
-            Integer idAtendimento = Integer.valueOf((idAtendimentoField.getText()));
             LocalDate data = dataPicker.getValue();
             LocalTime horario = LocalTime.parse(horarioField.getText());
-//            int idAnimal = Integer.parseInt(idAnimalField.getText());
             String crmvVeterinario = crmvVeterinarioField.getText();
             String tipoAtendimento = tipoAtendimentoBox.getValue();
 
             // Criar a consulta e preencher os dados
             AtendimentoPetDTO atendimentoPetDTO = new AtendimentoPetDTO();
-            atendimentoPetDTO.setIdAtendimento(idAtendimento);
             atendimentoPetDTO.setDate(Date.valueOf(data));
             atendimentoPetDTO.setHorario(Time.valueOf(horario));
             atendimentoPetDTO.setIdPet(animalId);

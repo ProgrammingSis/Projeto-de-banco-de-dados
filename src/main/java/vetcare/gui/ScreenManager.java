@@ -38,8 +38,8 @@ public class ScreenManager {
     public void switchScreen(String fxmlFile) {
         Scene scene = getSceneFor(fxmlFile);
         stage.setScene(scene);
-        stage.setWidth(1200);
-        stage.setHeight(800);
+        stage.setWidth(1600);
+        stage.setHeight(830);
         stage.show();
     }
 }

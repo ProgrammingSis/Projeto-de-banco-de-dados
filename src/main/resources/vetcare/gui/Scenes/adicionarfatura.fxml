@@ -11,10 +11,6 @@
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
 
-    <!-- Campo para o CPF do Cliente -->
-    <Label text="CPF do Cliente:"/>
-    <TextField fx:id="textCpf" editable="false"/>
-
     <!-- Campo para o Valor Total -->
     <Label text="Valor Total:"/>
     <TextField fx:id="textValor"/>
@@ -22,10 +18,6 @@
     <!-- Campo para a Data -->
     <Label text="Data:"/>
     <DatePicker fx:id="datePicker"/>
-
-    <!-- Campo para O ID -->
-    <Label text="ID:"/>
-    <TextField fx:id="id"/>
 
     <!-- Campo para a Forma de Pagamento -->
     <Label text="Forma de Pagamento:"/>

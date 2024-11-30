@@ -15,7 +15,6 @@
     <Label text="Adicionar Insumo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
     <TextField fx:id="nomeInsumoField" promptText="Nome do Insumo"/>
-    <TextField fx:id="cdInsumoField" promptText="Código do Insumo"/>
     <TextField fx:id="valorInsumoField" promptText="Valor do Insumo"/>
     <ComboBox fx:id="tipoInsumoBox" promptText="Tipo do Insumo"/>
     <TextField fx:id="quantInsumoField" promptText="Quantidade"/>

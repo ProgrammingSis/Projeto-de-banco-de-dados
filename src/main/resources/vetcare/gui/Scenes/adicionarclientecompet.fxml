@@ -27,8 +27,6 @@
 
     <!-- Informações do Animal -->
     <Label text="Informações do Animal" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-    <Label text="ID do Pet:"/>
-    <TextField fx:id="idPetField" promptText="Digite o ID do pet"/>
 
     <Label text="Nome do Pet:"/>
     <TextField fx:id="nomePetField" promptText="Digite o nome do pet"/>

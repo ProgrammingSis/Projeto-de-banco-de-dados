@@ -24,16 +24,10 @@ import java.time.Period;
 public class AdicionarFaturaController extends BaseUserController {
 
     @FXML
-    private TextField textCpf;
-
-    @FXML
     private TextField textValor;
 
     @FXML
     private DatePicker datePicker;
-
-    @FXML
-    private TextField id;
 
     @FXML
     private ComboBox<String> comboPagamento;
@@ -44,7 +38,6 @@ public class AdicionarFaturaController extends BaseUserController {
     @FXML
     private Button cancelarButton;
 
-    private String clienteCpf;
 
     /**
      * Inicializa o controlador e define as opções do ComboBox.
@@ -74,7 +67,6 @@ public class AdicionarFaturaController extends BaseUserController {
                 novaFatura.setClienteCpf(clienteCpf);
                 novaFatura.setValorTotal(Double.parseDouble(textValor.getText()));
                 novaFatura.setDate(Date.valueOf(datePicker.getValue()));
-                novaFatura.setIdFatura(Integer.valueOf((id.getText())));
                 novaFatura.setFormaPagamento(comboPagamento.getValue());
 
                 // Salvar a fatura usando a API
@@ -83,7 +75,7 @@ public class AdicionarFaturaController extends BaseUserController {
                 fecharJanela();
             }
         } catch (Exception e) {
-            // Você pode adicionar um alerta ou log para tratacccccr exceções.
+            // Você pode adicionar um alerta ou log para tratar exceções.
             mostrarErro("Erro ao salvar fatura: " + e.getMessage());
 
         }
@@ -113,7 +105,7 @@ public class AdicionarFaturaController extends BaseUserController {
      * Fecha a janela atual.
      */
     private void fecharJanela() {
-        Stage stage = (Stage) textCpf.getScene().getWindow();
+        Stage stage = (Stage) textValor.getScene().getWindow();
         stage.close();
     }
 

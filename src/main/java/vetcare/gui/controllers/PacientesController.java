@@ -246,7 +246,7 @@ public class PacientesController extends BaseUserController {
 			// Carregar o popup de confirmação
 			Parent root = loader.load();
 			ExcluirPet controller = loader.getController();
-			controller.initialize("Tem certeza que deseja excluir o insumo \"" + selectedPet.getNomePet() + "\"?");
+			controller.initialize("Tem certeza que deseja excluir o pet \"" + selectedPet.getNomePet() + "\"?");
 
 			// Exibir o popup
 			Stage stage = new Stage();

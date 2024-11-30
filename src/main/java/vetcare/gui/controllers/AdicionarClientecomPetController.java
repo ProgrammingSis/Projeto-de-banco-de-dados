@@ -23,8 +23,6 @@ public class AdicionarClientecomPetController extends BaseUserController {
 
     // Campos do Animal
     @FXML
-    private TextField idPetField;
-    @FXML
     private TextField nomePetField;
     @FXML
     private TextField racaPetField;
@@ -61,7 +59,6 @@ public class AdicionarClientecomPetController extends BaseUserController {
 
                 // Recuperar informações do animal
                 Animal animal = new Animal();
-                animal.idPet = Integer.parseInt(idPetField.getText());
                 animal.nomePet = nomePetField.getText();
                 animal.racaPet = racaPetField.getText();
                 animal.pesoPet = Double.parseDouble(pesoPetField.getText());
