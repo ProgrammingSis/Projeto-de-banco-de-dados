@@ -1,54 +1,58 @@
-# projeto-bd
+# Projeto BD: VetCare 🐾
 
-<h1> Um trabalho de planejamento e criação de um banco de dados </h1>
+Este repositório contém o projeto Sistema Gerenciador de Banco de Dados, um trabalho de planejamento e criação de um banco de dados para uma clínica veterinária, realizado na disciplina de Banco de Dados I - ACH200, da EACH-USP.
 
-# Justificativa:
-  A criação de um banco de dados para uma clínica veterinária é essencial para organizar e centralizar informações dos pacientes (animais) e seus tutores, além de ser um fator facilitador para a criação de clientes de longo prazo na clínica. VetCare tem especificamente essa proposta, auxiliando  na gestão do atendimento e melhoria da qualidade dos serviços, permitindo que funcionários obtenham rapidamente informações importantes para o negócio. 
-  
-  Com esse sistema, também é possível fazer  controle financeiro, de estoque de insumos (com aba de avisos de validade próxima do vencimento), emails de aviso de consulta para clientes e médicos, além de emails para aviso de renovação de vacinas de pets, contribuindo para a eficiência da clínica ao analisar os registros gerados pelo banco de dados.
+---
 
-  Todas essas características visam agregar valor à clínica veterinária ao diminuir os custos de transação, facilitando processos repetitivos, visando o foco em tarefas mais importantes para o negócio.
+## 📋 Justificativa
+A criação de um banco de dados para uma clínica veterinária é essencial para organizar e centralizar informações sobre os pacientes (animais) e seus tutores. Além disso, é um diferencial estratégico para fidelizar clientes de longo prazo. 
 
-## Passo a passo do projeto:
+O sistema **VetCare** foi desenvolvido com esse propósito, oferecendo funcionalidades que auxiliam na gestão de atendimentos e na melhoria da qualidade dos serviços. Ele permite que os funcionários acessem rapidamente informações importantes, como:
 
-### Definição de Requisitos:
-  1- Listagem de todas as informações que precisam ser armazenadas, como dados dos clientes (tutores), informações dos animais, consultas, tratamentos, vacinas, funcionários e fornecedores.
-  
-  2- Identificação das funcionalidades desejadas, como agendamento de consultas, histórico de tratamentos, controle de estoque de medicamentos e relatórios financeiros.
-  
-### Modelagem do Banco de Dados:
+- Controle financeiro;
+- Gestão de estoque com alertas de validade próxima ao vencimento;
+- Envio de e-mails de avisos de consulta para clientes e médicos;
+- Notificações de renovação de vacinas dos pets.
 
-  3 - Definição do minimundo representando as principais entidades e relações do sistema.
-  
-  4 - Elaboração de um diagrama ER (entidade-relacionamento) para visualizar as entidades, atributos e relações, como a relação “atendido por” que conecta “Animais” com “Veterinários”.
-  
-  5 - Elaboração de um esquema de banco de dados.
+Todas essas funcionalidades agregam valor à clínica ao reduzir custos operacionais, facilitar tarefas repetitivas e permitir que a equipe se concentre nas atividades mais importantes para o negócio.
 
-### Elaboração do back-end e front-end
+---
 
-  6 - Elaboração da API do back-end usando Java e as dependências em pom.xml.
- 
-  7 - Elaboração das primeiras telas do front-end e conexão com um stylesheets de CSS.
- 
-  8 - Criação das telas e botões do front-end usando arquivos .fxml junto de arquivos de JavaFX (que foi escolhido para facilitar a integração)
-  
-  9 - Conexão entre APIs do back-end com botões e áreas certas do front-end
-  
-## Ferramentas e construção do banco de dados:
+## 🛠️ Passo a Passo do Projeto
 
-   Ferramenta usada para a construção do banco de dados: Postgres.
+### 1. Definição de Requisitos
+- Listar todas as informações que precisam ser armazenadas: dados dos tutores, informações dos animais, consultas, tratamentos, vacinas, funcionários e fornecedores.
+- Identificar as funcionalidades desejadas: agendamento de consultas, histórico de tratamentos, controle de estoque de medicamentos e geração de relatórios financeiros.
 
-   - Todas as dependências usadas estão contidas no arquivo pom.xml. Foi usado o Spring Boot, Lombok, entre outros (como as bibliotecas do JavaFX).
+### 2. Modelagem do Banco de Dados
+- Definir o **minimundo**, representando as principais entidades e relações do sistema.
+- Elaborar o diagrama ER (entidade-relacionamento), destacando conexões como "Animais" sendo "atendidos por" "Veterinários".
+- Criar o esquema do banco de dados.
 
-# Como rodar?
-    - Para rodar o projeto com facilidade, o IntelliJ oferece todo o suporte, para que apenas um botão seja suficiente para fazer a aplicação funcionar ao abrir a classe main. 
+### 3. Desenvolvimento do Back-End e Front-End
+- Desenvolver a API do back-end em **Java**, utilizando dependências configuradas no `pom.xml`.
+- Criar as primeiras telas do front-end, estilizadas com CSS.
+- Implementar o front-end com arquivos `.fxml` e integração com **JavaFX**.
+- Conectar as APIs do back-end às funcionalidades do front-end, como botões e áreas específicas da interface.
 
-    - Tenha certeza de estar na pasta projeto-bd!!!
+### 4. Testes e Validação
+- Realizar testes no banco de dados para verificar a integridade e o funcionamento correto do sistema.
 
-    - Para rodar o projeto, basta executar a classe Main que está no pacote na pasta `src/main/vetcare
-  
-  9 - Testes e Validação - serão feitos testes no banco de dados para verificar sua integridade.
-  
-# Implementação de Interface Gráfica:
+---
 
-<h2> Usando JavaFX, escolhemos fazer uma solução desktop que fosse de fácil integração com Java. </h2
+## 🧰 Ferramentas Utilizadas
+- **Banco de Dados**: PostgreSQL
+- **Back-End**: Java com **Spring Boot**, **Lombok** e outras dependências (listadas no `pom.xml`).
+- **Front-End**: Optamos por uma solução desktop com **JavaFX**, que permite fácil integração com Java e oferece uma interface amigável e intuitiva para os usuários da clínica veterinária.
+
+---
+
+## 🚀 Como Rodar o Projeto?
+1. Certifique-se de estar na pasta raiz do projeto: `projeto-bd`.
+2. Abra o projeto no **IntelliJ IDEA** (ou qualquer IDE compatível).
+3. Execute a classe `Main` localizada em `src/main/vetcare` para iniciar a aplicação.
+4. Pronto! A aplicação estará rodando.
+
+---
+
+Com esse projeto, esperamos fornecer uma solução robusta e eficiente para as demandas da clínica veterinária, contribuindo para a melhoria de seus processos e serviços.
