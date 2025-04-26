@@ -6,12 +6,15 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import vetcare.api.config.MailConfig;
+import vetcare.api.model.dto.AtendimentoPetDTO;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.dto.NotificacaoDTO;
 import vetcare.api.model.entities.Atendimento;
+import vetcare.api.repository.mapper.dto.AtentimentoPetDTORowMapper;
 import vetcare.api.repository.mapper.entities.AtendimentoRowMapper;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -48,6 +51,26 @@ public class AtendimentoRepository {
         return jdbcTemplate.query(sql, new AtendimentoRowMapper());
     }
 
+    public List<AtendimentoPetDTO> findAllPetAtendimentos(Integer animalId) {
+        String sql = """
+                SELECT
+                    Atendimento.id,
+                    Atendimento.data,
+                    Atendimento.horario,
+                    Atendimento.fk_tipo,
+                    AtendidoEm.fk_animal_id,
+                    AtendidoEm.fk_veterinario_crmv 
+                            FROM
+                    Atendimento
+                            JOIN
+                    AtendidoEm
+                            ON
+                    Atendimento.id = AtendidoEm.fk_atendimento_id 
+                            WHERE  AtendidoEm.fk_animal_id = ?;
+                """;
+        return jdbcTemplate.query(sql, new AtentimentoPetDTORowMapper(), animalId);
+    }
+
     // UPDATE
     public int update(Atendimento atendimento) {
         String sql = "UPDATE Atendimento SET data = ?, fk_tipo = ? WHERE id = ?";
@@ -65,17 +88,32 @@ public class AtendimentoRepository {
     }
 
     // CRIAR NOVA CONSULTA
-    public boolean agendarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento) {
-        String sqlAtendimento = "INSERT INTO Atendimento (data, id, fk_tipo, horario) VALUES (?, ?, ?, ?)";
+    public boolean agendarConsulta(AtendimentoPetDTO atendimentoPetDTO) {
+        String sqlAtendimento = "INSERT INTO Atendimento (data, fk_tipo, horario) VALUES (?, ?, ?)";
         String sqlAtendidoEm = "INSERT INTO AtendidoEm (fk_Veterinario_crmv, fk_Atendimento_id, fk_Animal_id) VALUES (?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
 
         try {
-            // Inserir na tabela Atendimento
-            jdbcTemplate.update(sqlAtendimento, data, idAtendimento, tipoAtendimento, horario);
+            // KeyHolder para capturar o ID gerado automaticamente
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+
+            // Inserir na tabela Atendimento e capturar o ID gerado
+            jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(sqlAtendimento, new String[] { "id" });
+                ps.setDate(1, atendimentoPetDTO.getDate()); // Deve ser java.sql.Date
+                ps.setString(2, atendimentoPetDTO.getTipoAtendimento()); // fk_tipo
+                ps.setTime(3, atendimentoPetDTO.getHorario()); // Deve ser java.sql.Time
+                return ps;
+            }, keyHolder);
+
+            // Recuperar o ID gerado
+            int generatedId = keyHolder.getKey().intValue();
 
             // Inserir na tabela AtendidoEm
-            jdbcTemplate.update(sqlAtendidoEm, crmvVeterinario, idAtendimento, idAnimal);
+            jdbcTemplate.update(sqlAtendidoEm,
+                    atendimentoPetDTO.getCrmvVet(), // CRMV do veterinário
+                    generatedId, // ID do atendimento gerado
+                    atendimentoPetDTO.getIdPet() // ID do animal
+            );
 
             System.out.println("Consulta agendada com sucesso!");
             return true;
@@ -84,6 +122,9 @@ public class AtendimentoRepository {
             return false;
         }
     }
+
+
+
 
     public boolean deletarConsulta(Long idAtendimento) {
         String deleteDependentesSql = "DELETE FROM AtendimentosFaturas WHERE fk_Atendimento_id = ?";
@@ -129,8 +170,9 @@ public class AtendimentoRepository {
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ConsultaDTO consulta = new ConsultaDTO();
-            consulta.setData(rs.getDate("data").toLocalDate());
-            consulta.setHorario(rs.getTime("horario").toLocalTime());
+            consulta.setData((rs.getDate("data").toLocalDate()));
+            var time = rs.getTime("horario");
+            if (time != null) consulta.setHorario(time.toLocalTime());
             consulta.setNomeAnimal(rs.getString("nomeAnimal"));
             consulta.setRaca(rs.getString("raca"));
             consulta.setNomeCliente(rs.getString("nomeCliente"));
@@ -155,8 +197,9 @@ public class AtendimentoRepository {
         JOIN Animal an ON an.id = ae.fk_Animal_id
         JOIN Cliente c ON c.cpf = an.fk_Cliente_cpf
         JOIN Veterinario v ON v.crmv = ae.fk_Veterinario_crmv
-        WHERE a.data = ?
+        WHERE a.data = ?;
     """;
+
 
         LocalDate amanha = LocalDate.now().plusDays(1);
 
@@ -164,7 +207,7 @@ public class AtendimentoRepository {
             NotificacaoDTO notificacao = new NotificacaoDTO();
             notificacao.setIdAtendimento(rs.getInt("id"));
             notificacao.setData(rs.getDate("data").toLocalDate());
-            notificacao.setHorario(rs.getTime("horario").toLocalTime());
+            notificacao.setHorario(rs.getTime("horario"));
             notificacao.setNomeCliente(rs.getString("nomeCliente"));
             notificacao.setContatoCliente(rs.getString("contatoCliente"));
             notificacao.setNomeVeterinario(rs.getString("nomeVeterinario"));
@@ -187,7 +230,7 @@ public class AtendimentoRepository {
                 notificacao.getHorario() + ".\n\n" +
                 "Atenciosamente,\nClínica Veterinária";
 
-        String corpoMensagemVeterinario = "Olá Dr. " + notificacao.getNomeVeterinario() + ",\n\n" +
+        String corpoMensagemVeterinario = "Olá " + notificacao.getNomeVeterinario() + ",\n\n" +
                 "Lembrete: você tem uma consulta agendada para o animal " + notificacao.getNomeAnimal() +
                 " amanhã, às " + notificacao.getHorario() + ".\n\n" +
                 "Atenciosamente,\nClínica Veterinária";

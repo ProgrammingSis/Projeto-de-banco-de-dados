@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.geometry.Insets?>
+
+<?import vetcare.gui.CirclePictureFrame?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="vetcare.gui.controllers.ConsultasController" styleClass="user-screen" >
+	<Pane styleClass="decorated-background"/>
+	<BorderPane>
+		<top>
+			<HBox>
+				<CirclePictureFrame imageUrl="@/vetcare/gui/Images/fundo.png" radius="48" onMouseClicked="#abrirMenuLateral"/>
+				<ImageView fitHeight="48" preserveRatio="true" onMouseClicked="#goHome">
+					<Image url="@../Images/logo.png"/>
+				</ImageView>
+			</HBox>
+		</top>
+		<center>
+			<BorderPane>
+				<top>
+					<TextField fx:id="searchField" styleClass="text-fieldx" onKeyTyped="#doSearch" promptText="Digite aqui o nome ou CRMV do veterinário..."/>
+				</top>
+				<bottom>
+					<Button onAction="#cadastrar">+</Button>
+				</bottom>
+				<center>
+					<SplitPane style="-fx-background-color: white;" dividerPositions="0.25">
+						<ScrollPane fitToWidth="true">
+							<VBox fx:id="veterinarios"/>
+						</ScrollPane>
+						<StackPane>
+							<StackPane.margin>
+								<Insets left="8" top="8" right="8" bottom="8"/>
+							</StackPane.margin>
+							<Text>O paciente aparecerá aqui.</Text>
+							<BorderPane fx:id="fichaVeterinario" visible="false" style="-fx-background-color: white;">
+								<top>
+									<HBox styleClass="petCard">
+										<StackPane id="animalPhoto">
+											<HBox.margin><Insets right="4" bottom="4"/></HBox.margin>
+
+											<ImageView fx:id="vetPhotoImage" fitWidth="128" fitHeight="120" preserveRatio="true" styleClass="cardPhoto">
+												<Image url="@../Images/cat1.png"/>
+											</ImageView>
+										</StackPane>
+										<VBox HBox.hgrow="ALWAYS">
+											<Text fx:id="vetName" styleClass="cardName"/>
+											<Text fx:id="vetCRMV" styleClass="cardProp"/>
+											<Text fx:id="vetKind" styleClass="cardProp"/>
+										</VBox>
+									</HBox>
+								</top>
+								<center>
+									<VBox spacing="10">
+										<GridPane hgap="10" vgap="10">
+											<columnConstraints>
+												<ColumnConstraints percentWidth="0"/>
+												<ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+											</columnConstraints>
+											<Text      GridPane.rowIndex="0" GridPane.columnIndex="0">Nome</Text>
+											<TextField GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="vetNameField"/>
+
+											<Text      GridPane.rowIndex="1" GridPane.columnIndex="0">Contato</Text>
+											<TextField GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="vetContato"/>
+											<!--
+																						<Text      GridPane.rowIndex="2" GridPane.columnIndex="0">Raça</Text>
+																						<TextField GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="petRaceField"/>-->
+										</GridPane>
+										<HBox>
+											<DatePicker fx:id="dataInicio" promptText="Início"/>
+											<DatePicker fx:id="dataFim" promptText="Fim"/>
+										</HBox>
+										<ScrollPane fitToWidth="true">
+											<GridPane fx:id="tabConsultas" styleClass="table-grid" hgap="1" vgap="1" style="-fx-background-color: gray;">
+												<columnConstraints>
+													<ColumnConstraints percentWidth="30" hgrow="ALWAYS"/>
+													<ColumnConstraints percentWidth="30"/>
+													<ColumnConstraints percentWidth="20"/>
+													<ColumnConstraints percentWidth="20"/>
+												</columnConstraints>
+											</GridPane>
+										</ScrollPane>
+										<Region VBox.vgrow="ALWAYS"/>
+									</VBox>
+								</center>
+								<bottom>
+									<HBox alignment="CENTER_RIGHT" spacing="8">
+										<Button onAction="#saveData">Salvar Alterações</Button>
+										<Button onAction="#resetData">Descartar Alterações</Button>
+										<Button styleClass="botao-aviso" onAction="#excluirVeterinario">Excluir</Button>
+									</HBox>
+								</bottom>
+							</BorderPane>
+						</StackPane>
+					</SplitPane>
+				</center>
+			</BorderPane>
+		</center>
+	</BorderPane>
+</StackPane>
+

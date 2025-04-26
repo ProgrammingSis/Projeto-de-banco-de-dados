@@ -37,6 +37,12 @@ public class VeterinarioRepository {
         return jdbcTemplate.queryForObject(sql, new VeterinarioRowMapper(), crmv);
     }
 
+    public List<Veterinario> findByNameContaining(String nomeVet) {
+        String sql = "SELECT * FROM Veterinario WHERE nome ILIKE ?";
+        String namePattern = "%" + nomeVet + "%";
+        return jdbcTemplate.query(sql, new VeterinarioRowMapper(), namePattern);
+    }
+
     public List<Veterinario> findAll() {
         String sql = "SELECT * FROM Veterinario";
         return jdbcTemplate.query(sql, new VeterinarioRowMapper());
@@ -55,6 +61,8 @@ public class VeterinarioRepository {
 
     // DELETE
     public int deleteByCrmv(String crmv) {
+        String sqlAtendidoEm = "DELETE FROM AtendidoEm WHERE fk_Veterinario_crmv = ?";
+        jdbcTemplate.update(sqlAtendidoEm, crmv);
         String sql = "DELETE FROM Veterinario WHERE crmv = ?";
         return jdbcTemplate.update(sql, crmv);
     }

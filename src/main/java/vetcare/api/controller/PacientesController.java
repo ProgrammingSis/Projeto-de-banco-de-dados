@@ -23,8 +23,12 @@ public class PacientesController {
         return animalService.getAnimalById(id);
     }
 
-    public AnimalClienteDTO buscaPetDetalhes(Long id) {
+    public AnimalClienteDTO buscaPetDetalhes(Integer id) {
         return animalService.getAnimalClienteDTO(id);
+    }
+
+    public List<Animal> buscaPetNome(String nomePet){
+        return animalService.getAnimalPorNome(nomePet);
     }
 
     public List<Animal> listaPets(int pageNumber, int pageSize) {
@@ -41,16 +45,20 @@ public class PacientesController {
         return result > 0 ?  "Pet atualizado com sucesso!" : "Falha ao atualizar pet.";
     }
 
-    public String deletaPet(Long id) {
+    public String deletaPet(Integer id) {
         int result = animalService.deleteAnimal(id);
         return result > 0 ?  "Pet deletado com sucesso!" : "Falha ao deletar pet.";
     }
 
-    public List<VacinaPet> buscarVacinasPet(Long animalId) {
+    public List<VacinaPet> buscarVacinasPet(Integer animalId) {
         return animalService.getVacinasByAnimalId(animalId);
     }
 
-    public void notificarVacinas(Long animalId) {
-        animalService.notificarVacinasPendentes(animalId);
+    public boolean vacinasPendentes(Integer animalId){
+        return animalService.verificaVacinasPendentes(animalId);
+    }
+
+    public boolean notificarVacinasPendentes(Integer animalId){
+        return animalService.notificarVacinasPendentes(animalId);
     }
 }

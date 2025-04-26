@@ -2,6 +2,7 @@ package vetcare.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import vetcare.api.model.dto.AtendimentoPetDTO;
 import vetcare.api.model.dto.ConsultaDTO;
 import vetcare.api.model.entities.Veterinario;
 import vetcare.api.service.AtendimentoService;
@@ -22,22 +23,9 @@ public class ConsultasController {
      *   PRINCIPAIS MÉTODOS DO FLUXO DE CONSULTAS
      * */
 
-    public Veterinario buscarVeterinarioPorCrmv(String crmv) {
+    public List<Veterinario> listarTodosVeterinarios(String nome) {
         try {
-            Veterinario veterinario = veterinarioService.getVeterinarioByCrmv(crmv);
-            if (veterinario == null) {
-                System.out.println("Nenhum veterinário encontrado com o CRMV: " + crmv);
-            }
-            return veterinario;
-        } catch (Exception e) {
-            System.err.println("Erro ao buscar veterinário: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public List<Veterinario> listarTodosVeterinarios() {
-        try {
-            List<Veterinario> veterinarios = veterinarioService.getAllVeterinarios();
+            List<Veterinario> veterinarios = veterinarioService.getAllVeterinarios(nome);
             if (veterinarios.isEmpty()) {
                 System.out.println("Nenhum veterinário encontrado.");
             }
@@ -100,8 +88,8 @@ public class ConsultasController {
        return atendimentoService.deletarConsulta(id);
     }
 
-    public boolean criarConsulta(Long idAtendimento, LocalDate data, LocalTime horario, int idAnimal, String crmvVeterinario, String tipoAtendimento){
-        return atendimentoService.agendarConsulta(idAtendimento, data, horario, idAnimal, crmvVeterinario, tipoAtendimento);
+    public boolean criarConsulta(AtendimentoPetDTO atendimentoPetDTO){
+        return atendimentoService.agendarConsulta(atendimentoPetDTO);
     }
 
     public List<ConsultaDTO> mostrarCalendarioVeterinario(String crmv, String dataInicioStr, String dataFimStr) {
@@ -114,5 +102,9 @@ public class ConsultasController {
 
     public String notificarConsulta(){
         return atendimentoService.agendarNotificacoes();
+    }
+
+    public List<AtendimentoPetDTO> buscaAtendimentosPet(Integer animalId){
+        return atendimentoService.getAllAtendimentosPet(animalId);
     }
 }

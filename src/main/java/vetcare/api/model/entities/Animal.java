@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor      // Gera um construtor com todos os atributos
 public class Animal {
 
-    Long idPet;
-    String nomePet;
-    String racaPet;
-    Double pesoPet;
-    String cpfDonoPet;
-    String tipoPet;
+    public Integer idPet;
+    public String nomePet;
+    public String racaPet;
+    public Double pesoPet;
+    public String cpfDonoPet;
+    public String tipoPet;
 }

@@ -10,8 +10,9 @@ public class VacinaPetRowMapper implements RowMapper<VacinaPet> {
     @Override
     public VacinaPet mapRow(ResultSet rs, int rowNum) throws SQLException {
         VacinaPet vacinaPet = new VacinaPet();
-        vacinaPet.setIdVacina(rs.getLong("fk_idVacina"));
-        vacinaPet.setIdAtendimento(rs.getLong("fk_Atendimento_id"));
+        vacinaPet.setIdVacina(rs.getString("nome"));
+        vacinaPet.setIdAtendimento(rs.getInt("fk_Atendimento_id"));
+        vacinaPet.setDataVacina(rs.getDate("data"));
 
         return vacinaPet;
     }

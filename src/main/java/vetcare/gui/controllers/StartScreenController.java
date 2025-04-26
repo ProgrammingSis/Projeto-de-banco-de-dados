@@ -1,10 +1,10 @@
-package vetcare.gui;
+package vetcare.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import vetcare.gui.VetCareApp;
 
-public class HelloController {
+public class StartScreenController {
     @FXML
     private Button iniciarSessaoButton;
 
@@ -14,8 +14,7 @@ public class HelloController {
 
     //Switches the scene as soon as the button "Iniciar Sessão" is clicked
     @FXML
-    public void switchToAnotherScene(){
-        ScreenManager screenManager = new ScreenManager(new Stage());
-        screenManager.switchScreen("/vetcare/gui/hello-view.fxml");
+    public void switchToAnotherScene() {
+        VetCareApp.screens.switchScreen("/vetcare/gui/Scenes/mainMenu.fxml");
     }
 }

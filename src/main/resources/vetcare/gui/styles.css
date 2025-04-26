@@ -1,30 +1,169 @@
-.root {
-    -fx-background-color: #badab1;
-    -fx-pref-height: 600;
-    -fx-pref-width: 800;
+* {
+	-fx-focus-color: transparent;
 }
 
-.telaInicio {
-    -fx-background-size: cover;
-    -fx-font-size: 20px;
-    -fx-text-fill: #98e48c;
-    -fx-font-family :"Arial Black";
-    -fx-font-size: 20.0;
+TextField, TextField:focused {
+	-fx-border-width: 0;
+	-fx-border-color: transparent;
+	-fx-text-box-border: transparent;
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
 }
 
-.button{
+Text {
+	-fx-font-size: 11pt;
+}
+
+/* Styles for the initialScreen  */
+#telaInicio {
+	-fx-background-color: #badab1;
+}
+
+#mainMenu {
+	-fx-background-color: #badab1;
+}
+
+/* Styles for button in the initialScreen are right below */
+.button {
     -fx-background-color: #4CAF50;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-pref-height: 80;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #388E3C;
+}
+
+.buttonStart {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-pref-height: 60;
     -fx-pref-width: 180;
     -fx-text-fill: white;
     -fx-font-size: 22px;
     -fx-font-weight: bold;
 }
 
-.button:pressed {
-    -fx-background-color: #388E3C;
-    -fx-pref-height: 85;
-    -fx-pref-width: 185;
+.menuButton {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-pref-height: 150;
+    -fx-pref-width: 250;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.decorated-background {
+	-fx-background-image: url('Images/fundo.png'), url('Images/footer_loop.png');
+	-fx-background-repeat: no-repeat no-repeat, repeat no-repeat;
+	-fx-background-position: center center, center bottom;
+	-fx-background-size: 20% auto, auto 48px;
+	-fx-opacity: 0.3;
+}
+
+.alt-footer {
+	-fx-background-image: url('Images/patinhas.png');
+	-fx-background-repeat: repeat no-repeat;
+	-fx-background-position: center bottom;
+}
+
+.text-fieldx {
+	-fx-border-color: #BBB;
+	-fx-border-width: 3px;
+	-fx-border-radius: 8px;
+	-fx-font-size: 14pt;
+}
+
+.text-fieldx:focused {
+	-fx-border-color: #666;
+}
+
+.user-screen {
+	-fx-padding: 4px;
+}
+
+.paciente {
+	-fx-padding: 0;
+}
+
+.paciente ImageView {
+	-fx-fit-height: 64px;
+}
+
+#animalName, .cardName {
+	-fx-padding: 20px;
+	-fx-font-size: 14pt;
+	-fx-font-weight: bold;
+}
+
+#animalPhoto {
+	-fx-border-width: 2px;
+	-fx-border-radius: 1px;
+	-fx-border-color: #888;
+}
+
+.user-screen TextField {
+	-fx-border-color: #BBB;
+	-fx-border-width: 2px;
+	-fx-border-radius: 6px;
+	-fx-font-size: 11pt;
+}
+
+.user-screen TextField:focused {
+	-fx-border-color: #666;
+}
+
+/* List cards */
+.list-card:hover {
+	-fx-background-color: #DDD;
+}
+
+.list-card-name {
+	-fx-font-weight: bold;
+	-fx-font-size: 14pt;
+}
+
+.user-screen Button {
+	-fx-font-size: 14pt;
+}
+
+/* Botões */
+.botao-ok {
+	-fx-background-color: #4CAF50;
+}
+
+.botao-aviso {
+	-fx-text-fill: #444;
+	-fx-background-color: #FFC107;
+}
+
+.split-pane {
+	-fx-background-color: transparent;
+}
+
+.link {
+	/*-fx-fill: #1B75D0;*/
+	-fx-fill: #290;
+}
+
+.table-grid StackPane {
+	-fx-background-color: white;
+}
+
+.table-header-cell {
+	-fx-font-weight: bold;
+	-fx-padding: 4;
+}
+
+.table-cell {
+	-fx-padding: 4;
 }

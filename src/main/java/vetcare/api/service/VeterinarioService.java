@@ -13,12 +13,8 @@ public class VeterinarioService {
 
     private final VeterinarioRepository veterinarioRepository;
 
-    public Veterinario getVeterinarioByCrmv(String crmv) {
-        return veterinarioRepository.findByCrmv(crmv);
-    }
-
-    public List<Veterinario> getAllVeterinarios() {
-        return veterinarioRepository.findAll();
+    public List<Veterinario> getAllVeterinarios(String nome) {
+        return veterinarioRepository.findByNameContaining(nome);
     }
 
     public int addVeterinario(Veterinario veterinario) {
@@ -32,4 +28,5 @@ public class VeterinarioService {
     public int deleteVeterinario(String crmv) {
         return veterinarioRepository.deleteByCrmv(crmv);
     }
+
 }

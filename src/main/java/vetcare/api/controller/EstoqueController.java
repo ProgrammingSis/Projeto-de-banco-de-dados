@@ -26,6 +26,14 @@ public class EstoqueController {
         return insumo;
     }
 
+    public List<Insumo> buscarInsumoPorNome(String nome) {
+        List<Insumo> insumo = insumoService.getInsumoByNome(nome);
+        if (insumo == null) {
+            System.out.println("Insumo " + nome + " não encontrado.");
+        }
+        return insumo;
+    }
+
     // Método para buscar todos os insumos
     public List<Insumo> buscarTodosInsumos() {
         List<Insumo> insumos = insumoService.getAllInsumos();
@@ -68,9 +76,6 @@ public class EstoqueController {
     // Método que verifica quais insumos estão próximos a vencer
     public List<Insumo> buscarTodosInsumosAVencer() {
         List<Insumo> insumos = insumoService.getInsumosProximosDeVencer();
-        if (insumos.isEmpty()) {
-            System.out.println("Nenhum insumo à vencer encontrado.");
-        }
         return insumos;
     }
 }

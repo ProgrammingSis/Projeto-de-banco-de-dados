@@ -17,8 +17,8 @@ public class ClienteService {
         return clienteRepository.findByCpf(cpf);
     }
 
-    public List<Cliente> getAllClientes() {
-        return clienteRepository.findAll();
+    public List<Cliente> getAllClientes(String nome) {
+        return clienteRepository.findAll(nome);
     }
 
     public int addCliente(Cliente cliente) {

@@ -10,7 +10,7 @@ public class AtendimentoRowMapper implements RowMapper<Atendimento> {
     @Override
     public Atendimento mapRow(ResultSet rs, int rowNum) throws SQLException {
         Atendimento atendimento = new Atendimento();
-        atendimento.setDate(rs.getDate("date"));
+        atendimento.setDate(rs.getDate("data"));
         atendimento.setTipoAtendimento(rs.getString("fk_tipo"));
         atendimento.setIdAtendimento(rs.getLong("id"));
         atendimento.setHorario(rs.getTime("horario"));

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="vetcare.gui.controllers.AdicionarClientecomPetController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Informações do Cliente -->
+    <Label text="Informações do Cliente" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <Label text="CPF do Cliente:"/>
+    <TextField fx:id="cpfClienteField" promptText="Digite o CPF do cliente"/>
+
+    <Label text="Nome do Cliente:"/>
+    <TextField fx:id="nomeClienteField" promptText="Digite o nome do cliente"/>
+
+    <Label text="Endereço:"/>
+    <TextField fx:id="enderecoClienteField" promptText="Digite o endereço"/>
+
+    <Label text="Contato:"/>
+    <TextField fx:id="contatoClienteField" promptText="Digite o telefone ou email"/>
+
+    <!-- Informações do Animal -->
+    <Label text="Informações do Animal" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <Label text="Nome do Pet:"/>
+    <TextField fx:id="nomePetField" promptText="Digite o nome do pet"/>
+
+    <Label text="Raça:"/>
+    <TextField fx:id="racaPetField" promptText="Digite a raça do pet"/>
+
+    <Label text="Peso (kg):"/>
+    <TextField fx:id="pesoPetField" promptText="Digite o peso do pet"/>
+
+    <Label text="Tipo do Pet:"/>
+    <ComboBox fx:id="tipoPetCombo" promptText="Selecione o tipo do pet"/>
+
+    <!-- Botões -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="salvarButton" text="Salvar"/>
+        <Button fx:id="cancelarButton" text="Cancelar"/>
+    </HBox>
+
+</VBox>

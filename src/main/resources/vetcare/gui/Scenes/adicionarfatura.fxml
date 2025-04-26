@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="vetcare.gui.controllers.AdicionarFaturaController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Campo para o Valor Total -->
+    <Label text="Valor Total:"/>
+    <TextField fx:id="textValor"/>
+
+    <!-- Campo para a Data -->
+    <Label text="Data:"/>
+    <DatePicker fx:id="datePicker"/>
+
+    <!-- Campo para a Forma de Pagamento -->
+    <Label text="Forma de Pagamento:"/>
+    <ComboBox fx:id="comboPagamento"/>
+
+    <!-- Botões Salvar e Cancelar -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="salvarButton" text="Salvar"/>
+        <Button fx:id="cancelarButton" text="Cancelar"/>
+    </HBox>
+
+</VBox>

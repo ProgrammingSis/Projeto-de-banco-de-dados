@@ -14,6 +14,6 @@ public class Fatura {
     Double valorTotal;
     Date date;
     String formaPagamento;
-    Long idFatura;
+    Integer idFatura;
     String clienteCpf;
 }

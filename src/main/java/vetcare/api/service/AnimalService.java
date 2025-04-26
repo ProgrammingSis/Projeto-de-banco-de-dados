@@ -1,14 +1,12 @@
 package vetcare.api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import vetcare.api.config.MailConfig;
 import vetcare.api.model.dto.AnimalClienteDTO;
 import vetcare.api.model.entities.Animal;
 import vetcare.api.model.entities.VacinaPet;
 import vetcare.api.repository.entities.AnimalRepository;
-import vetcare.api.repository.entities.ClienteRepository;
 
 import java.util.List;
 
@@ -17,14 +15,18 @@ import java.util.List;
 public class AnimalService {
 
     private final AnimalRepository animalRepository;
-    private final ClienteRepository cliente;
-    private final JavaMailSender mailSender;
+    private final MailConfig mailConfig;
 
 
     public Animal getAnimalById(Long id) {
         return animalRepository.findById(id);
     }
-    public AnimalClienteDTO getAnimalClienteDTO(Long id) {
+
+    public List<Animal> getAnimalPorNome(String nomePet){
+        return animalRepository.findByNameContaining(nomePet);
+    }
+
+    public AnimalClienteDTO getAnimalClienteDTO(Integer id) {
         return animalRepository.findAnimalClienteById(id);
     }
 
@@ -32,7 +34,7 @@ public class AnimalService {
         return animalRepository.findAll(pageNumber, pageSize);
     }
 
-    public List<VacinaPet> getVacinasByAnimalId(Long animalId) {
+    public List<VacinaPet> getVacinasByAnimalId(Integer animalId) {
         return animalRepository.findVacinasByAnimalId(animalId);
     }
 
@@ -44,40 +46,40 @@ public class AnimalService {
         return animalRepository.update(animal);
     }
 
-    public int deleteAnimal(Long id) {
+    public int deleteAnimal(Integer id) {
         return animalRepository.deleteById(id);
     }
-
-    public void notificarVacinasPendentes(Long animalId) {
+    public boolean verificaVacinasPendentes(Integer animalId){
         List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
-
-        if (vacinasPendentes.isEmpty()) {
-            System.out.println("Não há vacinas pendentes para esse animal.");
-            return;
-        }
-
-        String emailCliente = cliente.buscarEmailClientePorAnimalId(animalId);
-
-        StringBuilder conteudoEmail = new StringBuilder("Olá,\n\n")
-                .append("O seu pet possui vacinas pendentes a serem aplicadas:\n");
-
-        for (VacinaPet vacina : vacinasPendentes) {
-            conteudoEmail.append("Vacina: ").append(vacina.getIdVacina())
-                    .append("\nData Vacina: ").append(vacina.getDataVacina())
-                    .append("\nData de Reforço: ").append(vacina.getDataReforco())
-                    .append("\n\n");
-        }
-
-        enviarEmail(emailCliente, conteudoEmail.toString());
+        return !(vacinasPendentes).isEmpty();
     }
 
-    private void enviarEmail(String destinatario, String conteudo) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(destinatario);
-        message.setSubject("Vacinas Pendentes para seu Pet");
-        message.setText(conteudo);
+    public boolean notificarVacinasPendentes(Integer animalId) {
+        List<VacinaPet> vacinasPendentes = animalRepository.findVacinasPendentesByAnimalId(animalId);
+        AnimalClienteDTO petDono = animalRepository.findAnimalClienteById(animalId);
+        String email = petDono.getContatoCliente();
 
-        mailSender.send(message);
-        System.out.println("E-mail enviado para: " + destinatario);
+        if (vacinasPendentes.isEmpty()) {
+            System.out.println("O animal não possui vacinas pendentes.");
+            return false;
+        } else {
+            StringBuilder corpoMensagemVeterinario = new StringBuilder();
+            corpoMensagemVeterinario.append("Olá, \n\n")
+                    .append("Existem vacinas pendentes para o animal ").append(petDono.getNomePet()).append(":\n\n")
+                    .append("As vacinas pendentes são as seguintes:\n");
+
+            for (VacinaPet vacina : vacinasPendentes) {
+                corpoMensagemVeterinario.append("- ").append(vacina.getIdVacina())
+                        .append(" (Reforço: ").append(vacina.getIdVacina()).append(")\n");
+            }
+
+            corpoMensagemVeterinario.append("\n")
+                    .append("Por favor, não deixe de comparecer à nossa Clínica e garantir a saúde do seu pet.\n\n")
+                    .append("Atenciosamente,\nClínica Veterinária");
+
+            mailConfig.enviarNotificacao(email, "Vacinas Pendentes para " + petDono.getNomePet(), corpoMensagemVeterinario.toString());
+            return true;
+
+        }
     }
 }
